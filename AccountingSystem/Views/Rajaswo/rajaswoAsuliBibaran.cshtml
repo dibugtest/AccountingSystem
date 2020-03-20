@@ -1,0 +1,333 @@
+﻿@model List<AccountingSystem.Models.rajaswoAsuli>
+
+
+@{
+    ViewBag.Title = "Rajaswo Asuli";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    #tbl {
+        border-collapse: collapse;
+        width: 100%;
+        font-size:10px;
+    }
+
+        #tbl td, #tbl th {
+            border: 1px solid black;
+            padding: 1px;
+        }
+</style>
+<div class="row">
+<div id="printDiv" style="width:845px;font-size:12px;">
+    <div style="width:100%;text-align:center">
+        राष्ट्रिय अभिलेखालय<br />
+        @Model[0].year @Model.FirstOrDefault(m => m.monthIndex == (int)ViewBag.monthIndex).month महिनाको राजश्व असूली विवरण
+    </div>
+
+    <table id="tbl">
+        <tr>
+            <th rowspan="2">मिति</th>
+            <th rowspan="2">रसिद नम्बर</th>
+            <th rowspan="2">बुझाउनेको नाम</th>
+            <th rowspan="2">१४१५१ सरकारी सम्पतिको बहाल तथा अन्य आय</th>
+            <th colspan="6">१४२२३ शिक्षा क्षेत्रको आम्दानी</th>
+            <th rowspan="2">१४२१३ अन्य बिक्रीबाट प्राप्त रकम(पुस्तक)</th>
+            <th rowspan="2">अन्य प्रशासनिक सेवा शुल्क १४२२७ (टेण्डर)</th>
+            <th rowspan="2">जम्मा रकम</th>
+        </tr>
+        <tr>
+
+            <th>जन्म मिति</th>
+            <th>रि-प्रिन्ट</th>
+            <th>माइक्रो फिल्म</th>
+            <th>प्रतिलिपि</th>
+            <th>भाष्यान्तर वा लिप्यन्तर</th>
+            <th>डिजिटल इमेज</th>
+
+        </tr>
+
+        @if (Model.Count > 0)
+        {
+            foreach (var item in Model)
+            {
+                if (item.monthIndex == (int)ViewBag.monthIndex)
+                {
+                    <tr>
+                        <td>@StringToUnicode(item.nepDateStr.Replace('-','/'))</td>
+                        <td>
+                            @item.rasidNo
+                        </td>
+                        <td>@item.bhujauneKoNaam</td>
+                        <td>
+                            @CheckZero(item.kha14151)
+                        </td>
+                        <td>
+                            @CheckZero(item.janmaMiti)
+                        </td>
+                        <td>
+                            @CheckZero(item.rePrint)
+                        </td>
+                        <td>
+                            @CheckZero(item.microFilm)
+                        </td>
+                        <td>
+                            @CheckZero(item.pratilipi)
+                        </td>
+                        <td>
+                            @CheckZero(item.lipyantar)
+                        </td>
+                        <td>
+                            @CheckZero(item.digitalImage)
+                        </td>
+                        <td>
+                            @CheckZero(item.kha14213)
+                        </td>
+                        <td>
+                            @CheckZero(item.kha14227)
+                        </td>
+                        <td>
+                            @CheckZero(item.kha14151 + item.janmaMiti + item.rePrint +
+                            item.microFilm + item.pratilipi + item.lipyantar + item.digitalImage
+                            + item.kha14213 + item.kha14227)
+                        </td>
+                    </tr>
+                }
+            }
+            <tr>
+                <td colspan="3">महिनाको जम्मा</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.kha14151))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.janmaMiti))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.rePrint))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.microFilm))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.pratilipi))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.lipyantar))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.digitalImage))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.kha14213))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.kha14227))</td>
+                <td>
+                    @CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.kha14151) +
+                Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.janmaMiti) +
+                Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.rePrint) +
+                Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.microFilm) +
+                Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.pratilipi) +
+                Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.lipyantar) +
+                Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.digitalImage) +
+                Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.kha14213) +
+                Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.kha14227))
+            </td>
+        </tr>
+            <tr>
+                <td colspan="3">अल्या</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.kha14151))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.janmaMiti))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.rePrint))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.microFilm))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.pratilipi))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.lipyantar))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.digitalImage))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.kha14213))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.kha14227))</td>
+                <td>
+                    @CheckZero(Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.kha14151) +
+                Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.janmaMiti) +
+                Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.rePrint) +
+                Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.microFilm) +
+                Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.pratilipi) +
+                Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.digitalImage) +
+              Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.lipyantar) +
+                Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.kha14213) +
+                Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.kha14227))
+            </td>
+        </tr>
+            <tr>
+                <td colspan="3">जम्मा रकम</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.kha14151))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.janmaMiti))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.rePrint))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.microFilm))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.pratilipi))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.lipyantar))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.digitalImage))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.kha14213))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.kha14227))</td>
+                <td>
+                    @CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.kha14151) +
+                Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.janmaMiti) +
+                Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.rePrint) +
+                Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.microFilm) +
+                Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.pratilipi) +
+                Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.lipyantar) +
+                Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.digitalImage) +
+                Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.kha14213) +
+                Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.kha14227))
+            </td>
+        </tr>
+            <tr>
+                <td colspan="3">शिर्षक अनुसार यो महिनाको जम्मा</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.kha14151))</td>
+                <td colspan="6">
+                    @CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.janmaMiti) +
+                Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.rePrint) +
+                Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.microFilm) +
+                Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.pratilipi) +
+                Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.lipyantar) +
+                Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.digitalImage)
+               )
+                </td>
+
+                <td>@CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.kha14213))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.kha14227))</td>
+                <td>
+                    @CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.kha14151) +
+                Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.janmaMiti) +
+                Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.rePrint) +
+                Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.microFilm) +
+                Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.pratilipi) +
+                Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.lipyantar) +
+                Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.digitalImage) +
+                Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.kha14213) +
+                Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.kha14227))
+            </td>
+        </tr>
+            <tr>
+                <td colspan="3">शिर्षक अनुसार हालसम्मको जम्मा</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.kha14151))</td>
+                <td colspan="6">
+                    @CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.janmaMiti) +
+                Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.rePrint) +
+                Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.microFilm) +
+                Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.pratilipi) +
+                Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.lipyantar) +
+                Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.digitalImage)
+               )
+                </td>
+
+                <td>@CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.kha14213))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.kha14227))</td>
+                <td>
+                    @CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.kha14151) +
+                Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.janmaMiti) +
+                Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.rePrint) +
+                Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.microFilm) +
+                Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.pratilipi) +
+                Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.lipyantar) +
+                Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.digitalImage) +
+                Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.kha14213) +
+                Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.kha14227))
+            </td>
+        </tr>
+        }
+    </table>
+    <div style="width:100%;">
+        <span style="float:left;">पेश गर्ने</span>
+        <span style="float:right;padding-right:100px;">सदर गर्ने</span>
+    </div>
+</div>
+</div>
+<div class="row">
+    <div class="col-md-12 text-center">
+        @*@Html.ActionLink("Create New", "Fantwari", null, new { @class = "btn btn-primary" })*@
+        <input type="submit" class="btn btn-primary" id="btnPrint" value="Print" />
+        <input type="submit" class="btn btn-primary" id="btnConvertWord" value="Download Word">
+    </div>
+</div>
+@helper StringToUnicode(string data)
+{
+    string uni = "";
+    foreach (char c in data)
+    {
+        var charCode = "U+" + ((int)c).ToString("X4");
+        switch (charCode)
+        {
+            case "U+0030":
+                uni += "०";
+                break;
+            case "U+0031":
+                uni += "१";
+                break;
+            case "U+0032":
+                uni += "२";
+                break;
+            case "U+0033":
+                uni += "३";
+                break;
+            case "U+0034":
+                uni += "४";
+                break;
+            case "U+0035":
+                uni += "५";
+                break;
+            case "U+0036":
+                uni += "६";
+                break;
+            case "U+0037":
+                uni += "७";
+                break;
+            case "U+0038":
+                uni += "८";
+                break;
+            case "U+0039":
+                uni += "९";
+                break;
+            default:
+                uni += c;
+                break;
+        }
+    }
+    @uni
+}
+@helper CheckZero(decimal data)
+{
+    if (data == 0)
+    {
+        @StringToUnicode("(")
+    }
+    else
+    {
+        @StringToUnicode(data.ToString())
+    }
+}
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+    <script src="~/Scripts/googoose.js"></script>
+    <script language="javascript">
+        $(document).ready(function () {
+
+            $("#btnPrint").click(function (e) {
+                PrintElem("printDiv");
+            });
+
+
+            function PrintElem(elem) {
+                var mywindow = window.open('', 'PRINT', 'height=590,width=842');
+
+                mywindow.document.write('<html><head><style>body {font-size:12px;}#tbl {border-collapse: collapse !important;width: 100%;font-size: 12px;}#tbl td, #tbl th {border: 1px solid black !important;padding: 1px !important;} .alignleft {float: left;text-align: left;width: 33.33333%;}.aligncenter {float: left;text-align: center;width: 33.33333%;}.alignright {float: left;text-align: right;width: 33.33333%;}</style><title></title>');
+                mywindow.document.write('</head><body >');
+                mywindow.document.write(document.getElementById(elem).innerHTML);
+                mywindow.document.write('</body></html>');
+
+                mywindow.document.close(); // necessary for IE >= 10
+                mywindow.focus(); // necessary for IE >= 10*/
+
+                mywindow.print();
+                mywindow.close();
+
+                return true;
+            }
+
+            $("#btnConvertWord").click(function (event) {
+                var now = new Date();
+                $(document).googoose({
+                    area: '#printDiv',
+                    filename: 'राजश्व असूली' + now.getDate() + '/' + parseInt(now.getMonth() + 1) + '/' + now.getFullYear() + '.doc',
+                    size: '11.69in 8.26in',
+                    headermargin: '.01in',
+                    footermargin: '.01in',
+                });
+            });
+        });
+    </script>
+}

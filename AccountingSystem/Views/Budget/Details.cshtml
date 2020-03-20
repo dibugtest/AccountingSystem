@@ -1,0 +1,59 @@
+﻿@model AccountingSystem.Models.budget
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>budget</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.khaSiNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.khaSiNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.budgetAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.budgetAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nepFy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nepFy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.enFy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.enFy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.remarks)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.budgetId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,401 @@
+﻿@model List<AccountingSystem.Models.bhuktaniAdeshTalabi>
+
+
+@{
+    ViewBag.Title = "Bhuktani Adesh";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    #tbl {
+        border-collapse: collapse !important;
+        width: 100%;
+        font-size: 10px;
+    }
+
+        #tbl td, #tbl th {
+            border: 1px solid black !important;
+            padding: 1px !important;
+        }
+
+    #printDiv {
+        font-size: 11px;
+    }
+
+    .alignleft {
+        float: left;
+        text-align: left;
+        width: 33.33333%;
+    }
+
+    .aligncenter {
+        float: left;
+        text-align: center;
+        width: 33.33333%;
+    }
+
+    .alignright {
+        float: right;
+        text-align: right;
+        width: 33.33333%;
+    }
+</style>
+
+@if(Request.HttpMethod.ToString()=="GET")
+{ 
+<div class="row">
+    <h2 class="text-center"> भुक्तानी आदेशको लागि वर्ष र महिना छान्नुहोस्</h2>
+    @using (Html.BeginForm("BhuktaniAdeshBibaran", "bhuktaniAdesh", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.ValidationSummary()
+        if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+        <div class="col-md-12 ">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>आ.ब.</label>
+                    @Html.DropDownList("fyId", null, new { @class = "form-control", id = "ddlFyId" })
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>महिना </label>
+                    @Html.DropDownList("month", EnumHelper.GetSelectList(typeof(AccountingSystem.Models.month)), new { @class = "form-control", id = "txtMonth" })
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+          <div class="col-md-12">
+            <div class="col-md-4"></div>
+              <div class="col-md-4">
+                  <div class="form-group">
+                      <label>ब.उ.शि.नं.</label>
+                      @Html.DropDownList("baUSiNaId", new SelectList(ViewBag.baUSiNaId, "value", "text"), "--ब.उ.शि.नं.--", new { @class = "form-control", id = "txtBaUSiNa" })
+                  </div>
+              </div>
+            <div class="col-md-4"></div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>भुक्तानी आदेश नं</label><label class="text-danger" id="lblError"></label>
+                    @Html.DropDownList("bhuktaniAdeshNo", new SelectList(ViewBag.bhuktaniAdeshNo, "text", "value"), "--छान्नुहोस्--", new { @class = "form-control", id = "ddlBhuktaniNo" })
+                </div>
+            </div>
+            </div>
+        <div class="col-md-12">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 text-center">
+                <input type="submit" value="Submit" id="btnSubmit" class="btn btn-primary" />
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+    }
+</div>
+}
+else if(Request.HttpMethod.ToString()=="POST")
+{ 
+
+<div class="row">
+    <div class="col-md-12 text-center">
+        <div style="width:842px;font-size:12px;" id="printDiv">
+            <div style="width:100%;">
+                <div class="alignleft"> भुक्तानी आदेश नं. @Model[0].bhuktaniAdeshNo<br />कार्यालय कोड नं.:२७-३२५-१३</div>
+                <div class="aligncenter">नेपाल सरकार<br />संकृति, पर्यटन तथा उड्ययन मन्त्रालय<br /> राष्ट्रिय अभिलेखालय रामशाहपथ काठमाडौँ<br />विषय : भुक्तानी आदेश (@ViewBag.shirshak) |<br />@Model[0].year वर्ष @Model[0].month महिना</div>
+                <div class="alignright">मिति: @StringToUnicode(Model[0].nepDateStr)</div>
+            </div>
+            <div style="width:100%; text-align:left;float:left;">
+                श्री कोष तथा लेखा नियन्त्रण कार्यालय, काठमाडौँ<br />
+                समन्वय कार्यालय, बबरमहल<br />
+                चालु आ.ब. @ViewBag.nepFy को @ViewBag.chaluKharcha बाट निम्न बमोजिम रु @CheckZero(Model.Sum(m => m.rakam)) ( अक्षरुपी @(ViewBag.totalInWords) मात्र |) भुक्तानी दिनुहुन अनुरोध छ |
+            </div>
+            <div style="width:100%;">
+                <p class="alignleft"></p>
+                <p class="aligncenter">भुक्तानी आदेशको विवरण</p>
+                <p class="alignright"></p>
+            </div>
+            <div style="clear: both;"></div>
+            <table id="tbl">
+                <tr>
+                    <th rowspan="2">सि.नं.</th>
+                    <th rowspan="2">विवरण</th>
+                    <th rowspan="2">गो.भौ.नं.</th>
+                    <th rowspan="2">खर्च शिर्षक नम्बर</th>
+                    <th>श्रोत</th>
+                    <th colspan="2">भुक्तानी रकम</th>
+                    <th rowspan="2">भुक्तानी पाउनेको नाम</th>
+                    <th rowspan="2">प्यान नं.</th>
+                    <th rowspan="2">भुक्तानी प्र.नं.</th>
+                    <th rowspan="2">भुक्तानी पाउनेको कोड नं.</th>
+                    <th rowspan="2">कैफियत</th>
+                </tr>
+                <tr>
+                    <th>नेपाल सरकार क.४.१</th>
+                    <th>अंकमा</th>
+                    <th>अक्षरमा रु</th>
+
+                </tr>
+                @if (Model.Count > 0)
+                {
+                    int i = 0;
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@StringToUnicode((++i).ToString())</td>
+                            <td>
+                                @item.bibaran
+                            </td>
+                            <td>@item.jornalNo</td>
+                            <td>
+                                @item.khaSiNo
+                            </td>
+                            <td>
+                                @CheckZero(item.rakam)
+                            </td>
+                            <td>
+                                @CheckZero(item.rakam)
+                            </td>
+                            <td>
+                                @(item.rakamInWords + " मात्र |")
+                            </td>
+                            <td>
+                                @item.pauneKoNaam
+                            </td>
+                            <td>@item.panNo</td>
+                            <td>@item.BhuPraNo</td>
+                            <td>
+                                @item.pauneKoCode
+                            </td>
+                            <td>
+                                @item.reamrks
+                            </td>
+                        </tr>
+
+                    }
+                    <tr>
+                        <td></td>
+                        <td>जम्मा</td>
+                        <td></td>
+                        <td></td>
+                        <td>@CheckZero(Model.Sum(m => m.rakam))</td>
+                        <td>@CheckZero(Model.Sum(m => m.rakam))</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="5">कोष तथा लेखा नियन्त्रण कार्यालय प्रयोजनको लागि</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td colspan="5"><div style="text-align:center;"><span style="float:left;">दर्ता नं.<br /><br />पेश गर्ने</span><span style="float:right;">टोकन नं.<br /><br />सदर गर्ने</span><span>दर्ता मिति &nbsp;&nbsp;दर्ता समय<br /><br />सिफारिस गर्ने</span></div></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                }
+            </table>
+            <div style="width:100%">
+                <br /><br />
+                <p class="alignleft">पेश गर्ने</p>
+                <p class="aligncenter"></p>
+                <p class="alignright">सदर गर्ने</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div style="margin-left:300px;">
+        <input type="submit" class="btn btn-primary" id="btnPrint" value="Print" />
+        <input type="submit" class="btn btn-primary" id="btnConvertWord" value="Download Word">
+    </div>
+</div>
+}
+@helper StringToUnicode(string data)
+{
+    string uni = "";
+    foreach (char c in data)
+    {
+        var charCode = "U+" + ((int)c).ToString("X4");
+        switch (charCode)
+        {
+            case "U+0030":
+                uni += "०";
+                break;
+            case "U+0031":
+                uni += "१";
+                break;
+            case "U+0032":
+                uni += "२";
+                break;
+            case "U+0033":
+                uni += "३";
+                break;
+            case "U+0034":
+                uni += "४";
+                break;
+            case "U+0035":
+                uni += "५";
+                break;
+            case "U+0036":
+                uni += "६";
+                break;
+            case "U+0037":
+                uni += "७";
+                break;
+            case "U+0038":
+                uni += "८";
+                break;
+            case "U+0039":
+                uni += "९";
+                break;
+            default:
+                uni += c;
+                break;
+        }
+    }
+    @uni
+}
+@helper CheckZero(decimal data)
+{
+    if (data == 0)
+    {
+        @StringToUnicode("")
+    }
+    else
+    {
+        @StringToUnicode(data.ToString())
+    }
+}
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+    <script src="~/Scripts/googoose.js"></script>
+    <script language="javascript">
+        $(document).ready(function () {
+            var listBhuktaniNo;
+
+            function getBhuktaniNo() {
+                var fyId = $("#ddlFyId").val();
+                var monthIndex = $("#txtMonth").val();
+                var baUSiNaId = $("#txtBaUSiNa").val();
+                if (fyId == null || monthIndex == null || baUSiNaId == null) {
+                    alert("fiscal year, month and BaUSiNa is Required");
+                    listBhuktaniNo = null;
+                }
+                else {
+
+                    $.ajax({
+                        async: false,
+                        url: RootUrl + 'BhuktaniAdesh/getBhuktaniNo/',
+                        type: "POST",
+                        dataType: "json",
+                        data: "{'fyId':'" + fyId + "','monthIndex':'" + monthIndex + "','baUSiNaId':'" + baUSiNaId + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            listBhuktaniNo = data;
+                        }
+                    });
+                }
+            }
+
+            $("#txtMonth").change(function (e) {
+                changeFunction();
+            });
+            $("#ddlFyId").change(function (e) {
+                changeFunction();
+            });
+
+            $("#txtBaUSiNa").change(function (e) {
+                changeFunction();
+            });
+
+            function changeFunction() {
+                getBhuktaniNo();
+                var option = '';
+                $("#ddlBhuktaniNo").empty();
+                option += '<option value="">--छान्नुहोस्--</option>';
+                for (var i = 0; i < listBhuktaniNo.length; i++) {
+                    option += '<option value="' + listBhuktaniNo[i].value + '">' + listBhuktaniNo[i].label + '</option>';
+                }
+                $('#ddlBhuktaniNo').append(option);
+                if (listBhuktaniNo.length == 0) {
+                    $('#lblError').val("No भुक्तानी आदेश नं. found for selected for selected month and fiscal year.");
+                }
+                else {
+                    $('#lblError').val("");
+                }
+
+            }
+
+            $("#btnSubmit").click(function (e) {
+                if ($("#ddlBhuktaniNo").val() == "" || $("#ddlBhuktaniNo").val() == 0)
+                {
+                    alert("Bhuktani Adesh No is Required");
+                    e.preventDefault();
+                }
+            });
+
+
+            $("#btnPrint").click(function (e) {
+                PrintElem("printDiv");
+            });
+
+
+            function PrintElem(elem) {
+                var mywindow = window.open('', 'PRINT', 'height=590,width=842');
+
+                mywindow.document.write('<html><head><style>body {font-size:10px;}#tbl {border-collapse: collapse !important;width: 100%;font-size: 10px;}#tbl td, #tbl th {border: 1px solid black !important;padding: 1px !important;} .alignleft {float: left;text-align: left;width: 33.33333%;}.aligncenter {float: left;text-align: center;width: 33.33333%;}.alignright {float: left;text-align: right;width: 33.33333%;}</style><title></title>');
+                mywindow.document.write('</head><body >');
+                mywindow.document.write(document.getElementById(elem).innerHTML);
+                mywindow.document.write('</body></html>');
+
+                mywindow.document.close(); // necessary for IE >= 10
+                mywindow.focus(); // necessary for IE >= 10*/
+
+                mywindow.print();
+                mywindow.close();
+
+                return true;
+            }
+
+            $("#btnConvertWord").click(function (event) {
+                var now = new Date();
+                $(document).googoose({
+                    area: '#printDiv',
+                    filename: "तलबी भुक्तानी आदेश" + now.getDate() + '/' + parseInt(now.getMonth() + 1) + '/' + now.getFullYear() + '.doc',
+                    size: '11.69in 8.26in',
+                    headermargin: '.01in',
+                    footermargin: '.01in'
+                });
+            });
+        });
+    </script>
+}

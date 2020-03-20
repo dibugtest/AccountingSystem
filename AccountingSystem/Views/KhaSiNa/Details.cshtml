@@ -1,0 +1,51 @@
+﻿@model AccountingSystem.Models.khaSiNa
+
+@{
+    ViewBag.Title = "Details KhaSiNa";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>khaSiNa</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.baUSiNa.baUSi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.baUSiNa.baUSi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sirsak)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sirsak)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.khaSiNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.khaSiNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.remarks)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.khaSiNaId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

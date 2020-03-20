@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "backup";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        <input type="hidden" value="dir" name="directory" />
+        <div class="col-lg-4 col-md-4 col-xs-4"></div>
+        <div class="col-lg-4 col-md-4 col-xs-4 col- text-center">
+
+            <h2 class="text-center">BackUp Database</h2>
+            @if (ViewBag.Message != null)
+            {
+                <div class="alert alert-success">@ViewBag.Message</div>
+            }
+            else if (ViewBag.ErrorMessage != null)
+            {
+                <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+            }
+            <input type="submit" value="BackUp" class="btn btn-primary" />
+        </div>
+        <div class="col-lg-4 col-md-4 col-xs-4"></div>
+    }
+</div>

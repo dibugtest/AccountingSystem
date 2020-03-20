@@ -1,0 +1,48 @@
+﻿@model AccountingSystem.Models.bhuktaniPaune
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <h2 class="text-center">भुक्तानी पाउनेको विवरण प्रविष्टि</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    
+        @Html.ValidationSummary(true)
+
+       <div class="col-md-4">
+           <div class="form-group">
+               <label>पाउनेको नाम</label>
+                @Html.TextBoxFor(model => model.pauneKoNaam, new { @class="form-control"})
+                @Html.ValidationMessageFor(model => model.pauneKoNaam)
+            </div>
+        </div>
+
+         <div class="col-md-4">
+           <div class="form-group">
+               <label>कोड</label>
+                @Html.TextBoxFor(model => model.code, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.code)
+            </div>
+        </div>
+
+       
+
+         <div class="col-md-4">
+           <div class="form-group">
+               <label>कैफियत</label>
+                @Html.TextBoxFor(model => model.remarks, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.remarks)
+            </div>
+        </div>
+       
+            <div class="col-md-12 text-center">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                @Html.ActionLink("Back to List", "Index", null, new {@class="btn btn-default" })
+            </div>
+}
+</div>

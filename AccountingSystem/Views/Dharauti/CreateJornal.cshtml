@@ -1,0 +1,911 @@
+﻿@model List<AccountingSystem.Models.jornalEntries>
+
+@{
+    ViewBag.Title = "Create Dharauti Jornal";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@Styles.Render("~/Content/nepDate")
+
+<div class="row">
+    <h2 class="text-center">गोश्वारा भौचरको विवरण प्रविष्टि गर्नुहोस (धरौटी)</h2>
+    @using (Html.BeginForm("createJornal", "Dharauti", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.ValidationSummary()
+        if (ViewBag.Message != null)
+        {
+            <div style="border:solid 1px green">
+                @ViewBag.Message
+            </div>
+        }
+        if (ViewBag.ErrorMessage != null)
+        {
+            <div style="border:solid 1px green">
+                @ViewBag.ErrorMessage
+            </div>
+        }
+        <fieldset style="border:1px solid;">
+            <legend style="width:auto;">विवरण</legend>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>गोश्वारा भौचर नं.</label>
+                    @Html.TextBox("jornalNo", Session["jornalEntriesNo"], new { @class = "form-control", id = "txtJornalNo" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="for-group">
+                    <label>ब.उ.शि.नं.</label>
+                    @Html.DropDownList("baUSiNaId", null, new { @class = "form-control", id = "txtBaUSiNa" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="for-group">
+                    <label>आ.ब.</label>
+                    @Html.DropDownList("fyId", null, new { @class = "form-control", id = "ddlFyId" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>मिति</label>
+                    @Html.TextBox("nepDate", "", new { @class = "form-control", id = "txtNepDate" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>महिना</label><label id="ValMonth"></label>
+                    @Html.DropDownList("month", EnumHelper.GetSelectList(typeof(AccountingSystem.Models.month)), new { @class = "form-control", id = "txtMonth" })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>गो.भौ.किसिम</label>
+                    @Html.DropDownList("Type", new List<SelectListItem> { new SelectListItem { Value = "धरौटी आम्दानी", Text = "धरौटी आम्दानी" }, new SelectListItem { Value = "धरौटी फिर्ता", Text = "धरौटी फिर्ता" } }, "--छान्नुहोस्--", new { @class = "form-control", id = "ddlJornalType" })
+                </div>
+            </div>
+        </fieldset>
+        <table class="table table-bordered" id="dataTable" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <th>संकेत नं.</th>
+                <th>डेबिट/क्रेडिट</th>
+                <th>व्यहोरा</th>
+                <th>खाता नं.</th>
+                <th>हिसाब नं.</th>
+                <th>डेबिट </th>
+                <th>क्रेडिट</th>
+                <th></th>
+            </tr>
+            @if (Model != null && Model.Count > 0)
+            {
+                int j = 0;
+                foreach (var i in Model)
+                {
+                    <tr id="dataRow">
+                        <td>@Html.TextBoxFor(a => a[j].sanketNo, new { @class = "form-control", id = j + "txtSanketNo" })</td>
+                        <td>
+                            @Html.DropDownList("[" + j + "].deCre", new List<SelectListItem> { new SelectListItem { Text = "--डे/क्रे--",Value="", Selected = true },
+                         new SelectListItem { Text = "डेबिट", Value = "debit" },
+                         new SelectListItem { Text = "क्रेडिट", Value = "credit" } },
+                        new { @class = "form-control", id = j + "ddlDeCre", style = "width:100px;" })
+                        </td>
+                        <td>@Html.TextBoxFor(a => a[j].bibaran, "", new { @class = "form-control", id = j + "txtBibaran", style = "width:250px;" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].khaPaNo, "", new { @class = "form-control", id = j + "txtKhaPaNo" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].hisabNo, "", new { @class = "form-control", id = j + "txtHisabNo", style = "width:200px;" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].debit, new { @class = "form-control", id = j + "txtDebit", type = "decimal", style = "width:200px;" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].credit, new { @class = "form-control", id = j + "txtCredit", type = "decimal", style = "width:200px;" })</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].baUSiNaId, new { id = j + "txtByehoraId", value = 1 })</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].nepDate, new { id = j + "txtNepaliDate", value = DateTime.Now })</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].fyId, new { id = j + "txtFyId" })</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].chequeRakam, new { id = j + "txtChequeRakam", value = 0 })</td>
+                        <td>
+                            @*<a href="#" id="addNewRow">
+                                    <i class="fa fa-plus-circle" style="font-size:15px;"></i>
+                                </a>*@
+                            @if (j > 0)
+                            {
+                                <a href="#" id="remove">
+                                    <i class="fa fa-minus-circle text-danger" style="font-size:15px;"></i>
+                                </a>
+                            }
+                        </td>
+                    </tr>
+                            j++;
+                }
+            }
+        </table>
+        <div class="col-md-12 text-right"><a href="#" id="addNewRow" class="btn btn-default">Add New Row</a></div>
+        <div class="col-md-3">
+            <label>चेक रकम
+            </label>
+            @Html.TextBox("chequeRakam", 0, new {@class="form-control" , id="txtChequeRakam",type="number",step="0.01" })
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>नोट</label>
+                @Html.TextArea("note", "यसमा सलग्न गरेको लेखा |", new { @class = "form-control", id = "txtNote" })
+            </div>
+        </div>
+        <div id="divBhuktani">
+            <div class="col-md-12 text-center"><h3>भुक्तानी पाउनेको विवरण प्रविष्टि</h3></div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>भुक्तानी आदेश नं</label>
+                    @Html.TextBox("bhuktaniAdeshNo", (string)Session["BhuktaniAdeshNo"], new { @class = "form-control", id = "txtAdeshNo" })
+                </div>
+            </div>
+           @Html.TextBox("enDate", DateTime.Now, new { id = "txtEngDate", type = "datetime", style = "display:none;" })
+            @Html.Hidden("RowCount", 0, new { @class = "form-control", id = "txtRowCount" })
+            <table class="table table-bordered" id="dataTable2" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                    <th>विवरण</th>
+                    <th>खर्च शिर्षक नं</th>
+                    <th>पाउने रकम</th>
+                    <th>भुक्तानी पाउनेको नाम</th>
+                    <th>भुक्तानी पाउनेको कोड</th>
+                    <th>प्यान नं.</th>
+                    <th>कैफियत</th>
+                    <th></th>
+                </tr>
+                @if (Model != null && Model.Count > 0)
+                {
+                    int j = 0;
+                    foreach (var i in Model)
+                    {
+                        <tr id="dataRow">
+                            <td>@Html.TextBox(j + "khaSirsak", "", new { @class = "form-control", id = j + "txtKhaSirsak" })</td> @*kharchaSirsak as Bibaran*@
+                            <td>@Html.TextBox(j + "khaSiNo", "", new { @class = "form-control", id = j + "txtKhaSiNo" })</td>
+                            <td>@Html.TextBox(j + "rakam", "", new { @class = "form-control", id = j + "txtRakam" })</td>
+                            <td>@Html.TextBox(j + "pauneKoNaam", "", new { @class = "form-control", id = j + "txtPauneKoNaam", style = "width:200px;" })</td>
+                            <td>@Html.TextBox(j + "pauneKoCode", "", new { @class = "form-control", id = j + "txtPauneKoCode" })</td>
+                            <td>@Html.TextBox(j + "panNo", "", new { @class = "form-control", id = j + "txtPanNo" })</td> 
+                             <td>@Html.TextBox(j + "remarks", "", new { @class = "form-control", id = j + "txtRemarks" })</td>
+                            <td style="display:none;">@Html.Hidden(j + "RowNum", j, new { @class = "form-control", id = j + "txtRowNum" })</td>
+                          
+                            <td>
+                                @if (j > 0)
+                                {
+                                    <a href="#" id="remove2">
+                                        <i class="fa fa-minus-circle text-danger" style="font-size:15px;"></i>
+                                    </a>
+                                }
+                            </td>
+                        </tr>
+                                j++;
+                    }
+                }
+            </table>
+            <div class="col-md-12 text-right">
+                <a href="#" id="addNew2" class="btn btn-default">Add New Row</a>
+            </div>
+        </div>
+        <div id="divAmdani">
+            <div class="col-md-12 text-center"><h3>धरौटी राखेको विवरण</h3></div>
+            <div class="col-md-3">
+            </div>
+            @Html.Hidden("RowCount2", 0, new { @class = "form-control", id = "txtRowCount2" })
+            <table class="table table-bordered" id="dataTable3" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                    <th>मिति</th>
+                    <th>धरौटी राख्नेको विवरण</th>
+                    <th>बिल नं</th>
+                    <th>बिल रकम VAT बाहेक</th>
+                    <th>VAT रकम</th>
+                    <th>धरौटी रकम</th>
+                    <th>बापत</th>
+                    <th></th>
+                </tr>
+                @if (Model != null && Model.Count > 0)
+                {
+                    int j = 0;
+                    foreach (var i in Model)
+                    {
+                        <tr id="dataRow">
+                            <td>@Html.TextBox(j + "nepDate", "", new { @class = "form-control", id = j + "txtNepDate" })</td> @*kharchaSirsak as Bibaran*@
+                            <td>@Html.TextBox(j + "dharautiRakhne", "", new { @class = "form-control", id = j + "txtDharautiRakhne" })</td>
+                            <td>@Html.TextBox(j + "billNo", "", new { @class = "form-control", id = j + "txtBillNo" })</td>
+                            <td>@Html.TextBox(j + "billRakamNoVat", "", new { @class = "form-control", id = j + "txtBillRakamNoVat" })</td> @*पाउनेको कोड as प्यान नं.*@
+                            <td>@Html.TextBox(j + "vatRakam", "", new { @class = "form-control", id = j + "txtVatRakam" })</td>
+                            <td>@Html.TextBox(j + "dharautiRakam", "", new { @class = "form-control", id = j + "txtDharautiRakam" })</td>
+                            <td>@Html.TextBox(j + "bapat", "", new { @class = "form-control", id = j + "txtBapat"})</td>
+                            <td style="display:none;">@Html.Hidden(j + "fyId", "", new { @class = "form-control", id = j + "txtFyId" })</td>
+                            <td style="display:none;">@Html.Hidden(j + "RowNum2", j, new { @class = "form-control", id = j + "txtRowNum2" })</td>
+
+                            <td>
+                                @if (j > 0)
+                                {
+                                    <a href="#" id="remove3">
+                                        <i class="fa fa-minus-circle text-danger" style="font-size:15px;"></i>
+                                    </a>
+                                }
+                            </td>
+                        </tr>
+                                j++;
+                    }
+                }
+            </table>
+
+            <div class="col-md-12 text-right">
+                <a href="#" id="addNew3" class="btn btn-default">Add New Row</a>
+            </div>
+        </div>
+        <div class="col-md-12 text-center">
+            <input type="submit" value="Submit" class="btn btn-primary" id="btnSubmit" />
+            @Html.ActionLink("Back To List", "IndexJornal", null, new { @class = "btn btn-default" })
+        </div>
+
+    }
+</div>
+@* Here I will add Jquery Code for validation / dynamically add new rows / Remove rows etc*@
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+    @Scripts.Render("~/bundles/nepDate")
+    <script src="~/Scripts/NepaliUnicode.js"></script>
+ <script src="~/Transliteration/jsapi.js"></script>
+
+    <script language="javascript">
+        $(document).ready(function () {
+            $("#divAmdani").hide();
+            $("#divBhuktani").hide();
+            $("#0txtNepDate").nepaliDatePicker();
+
+            var ele1 = $("#0txtBibaran");
+            var ele2 = $("#0txtSanketNo");
+            var ele3 = $("#0txtHisabNo");
+            var ele4 = $("#0txtKhaPaNo");
+            var ele5 = $("#0txtPauneKoNaam");
+            var ele6 = $("#0txtPauneKoCode");
+            var ele7 = $("#0txtKhaSirsak");
+            var ele8 = $("#0txtKhaSiNo");
+            var ele9 = $("#0txtRemarks");
+            var ele10 = $("#txtNote");
+            var ele11 = $("#txtJornalNo");
+            var ele12 = $("#0txtBillNo");
+            var ele13 = $("#0txtDharautiRakhne");
+            var ele14 = $("#0txtBapat");
+            var ele15 = $("#0txtPanNo");
+
+            AddUnicode(ele1);
+            AddUnicode(ele2);
+            AddUnicode(ele3);
+            AddUnicode(ele4);
+            AddUnicode(ele5);
+            AddUnicode(ele6);
+            AddUnicode(ele7);
+            AddUnicode(ele8);
+            AddUnicode(ele9);
+            AddUnicode(ele10);
+            AddUnicode(ele11);
+            AddUnicode(ele12);
+            AddUnicode(ele13);
+            AddUnicode(ele14);
+            AddUnicode(ele15);
+
+             
+ 
+ 
+            $('#txtNepDate', 'body').nepaliDatePicker({
+                onChange: function () {
+                    // var unicodeText = StringToUnicode($("#txtNepDate").val());
+                    $('#txtNepDate').val();
+                    $('#txtEngDate').val(BS2AD($('#txtNepDate').val()));
+                }
+            });
+
+            $("#ddlJornalType").change(function (e) {
+                if (this.value == "धरौटी आम्दानी") {
+                    $("#divBhuktani").hide();
+                    $("#divAmdani").show();
+                }
+                if (this.value == "धरौटी फिर्ता") {
+                    $("#divBhuktani").show();
+                    $("#divAmdani").hide();
+                }
+                if (this.value == "")
+                {
+                    $("#divBhuktani").hide();
+                    $("#divAmdani").hide();
+                }
+
+            });
+
+
+            // 2. Remove
+            $('body').on("click", 'a#remove', function (e) {
+                e.preventDefault();
+                $(this).parent().parent().remove();
+            });
+
+
+            //Add new col
+            $('body').on("click", 'a#addNewRow', function (e) {
+                e.preventDefault();
+                var $tableBody = $("#dataTable");
+                // var $trRowclicked = $(this).closest('tr');
+                var $trLast = $tableBody.find("tr:last");
+                var $trNew = $trLast.clone();
+
+                var suffix = $trNew.find(':input:first').attr('name').match(/\d+/);
+                $trNew.find("td:last").html('<a href="#" id ="remove"><i class="fa fa-minus-circle text-danger" style="font-size:15px;"></i></a>');
+                $.each($trNew.find(':input'), function (i, val) {
+                    // Replaced Name
+                    var oldN = $(this).attr('name');
+                    var newN = oldN.replace('[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']');
+                    $(this).attr('name', newN);
+
+                    var oldId = $(this).attr('id');
+                    var newId = oldId.replace(suffix, (parseInt(suffix) + 1));
+                    $(this).attr('id', newId);
+
+                    //Replaced value
+                    var type = $(this).attr('type');
+                    if (type == "text") {
+                        $(this).val('');
+                    }
+
+                    else if (type == "number") {
+                        $(this).val('');
+                    }
+                    else if (type == "decimal") {
+                        $(this).val(0);
+                    }
+                    // If you have another Type then replace with default value
+                    $(this).removeClass("input-validation-error");
+
+                });
+                $trLast.after($trNew);
+                $("#" + (parseInt(suffix) + 1) + "txtBibaran").autocomplete(autoCompOption);
+                var ele1 = $("#" + (parseInt(suffix) + 1) + "txtBibaran");
+                var ele2 = $("#" + (parseInt(suffix) + 1) + "txtSanketNo");
+                var ele3 = $("#" + (parseInt(suffix) + 1) + "txtKhaPaNo");
+                var ele4 = $("#" + (parseInt(suffix) + 1) + "txtHisabNo");
+
+                AddUnicode(ele1);
+                AddUnicode(ele2);
+                AddUnicode(ele3);
+                AddUnicode(ele4);
+
+
+                // Re-assign Validation
+                var form = $("form")
+                    .removeData("validator")
+                    .removeData("unobtrusiveValidation");
+                $.validator.unobtrusive.parse(form);
+            });
+        });
+
+        $("#0txtBibaran").keyup(function () {
+            $("#0txtBibaran", "#dataTable").autocomplete(autoCompOption);
+        });
+
+
+        var autoCompOption = {
+            source: function (request, response) {
+                $.ajax({
+                    url: RootUrl + 'Dharauti/AutoComplete/',
+                    data: "{'prefix': '" + request.term + "'}",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return item;
+                        }))
+                    }//,
+                    //error: function (response) {
+                    //    alert(response.responseText);
+                    //},
+                    //failure: function (response) {
+                    //    alert(response.responseText);
+                    //}
+                });
+            },
+            select: function (e, i) {
+                $(this).val(i.item.label);
+                autofill(i.item.value, $(this).attr('id').match(/\d+/));
+            },
+
+            minLength: 1
+        }
+
+        function autofill(item, index) {
+            $.ajax({
+                url: RootUrl + 'Dharauti/autofill/',
+                data: "{'value':" + JSON.stringify(item) + "}",
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $("#" + index + "txtBibaran").val(data.byehoraName);
+                    if (data.hisabNo == null) {
+                        $("#" + index + "txtHisabNo").val("");
+                    }
+                    else {
+                        $("#" + index + "txtHisabNo").val(data.hisabNo);
+                    }
+                },
+                error: function (response) {
+                    // alert("error" + Error.toString() + "error");
+                }
+            });
+        }
+
+
+
+        $("#addNew2").click(function (e) {
+            e.preventDefault();
+            var $tableBody = $("#dataTable2");
+            var $trLast = $tableBody.find("tr:last");
+            var $trNew = $trLast.clone();
+
+            var suffix = $trNew.find(':input:first').attr('name').match(/\d+/);
+            var rowCount = $("#txtRowCount").val();
+            $("#txtRowCount").val(parseInt(rowCount) + 1);
+            $trNew.find("td:last").html('<a href="#" id="remove2"><i class="fa fa-minus-circle text-danger" style="font-size:15px;"></i></a>');
+            $.each($trNew.find(':input'), function (i, val) {
+
+                // Replaced Name
+                var oldN = $(this).attr('name');
+                var newN = oldN.replace(suffix, (parseInt(suffix) + 1));
+                $(this).attr('name', newN);
+
+                var oldId = $(this).attr('id');
+                var newId = oldId.replace(suffix, (parseInt(suffix) + 1));
+                $(this).attr('id', newId);
+
+                //Replaced value
+                var type = $(this).attr('type');
+                if (type == "text") {
+                    //$(this).attr('value', '');
+                    $(this).val('');
+
+                }
+                else if (type == "number") {
+                    $(this).val('');
+                }
+                else if (type == "decimal") {
+                    $(this).val('');
+                }
+                // If you have another Type then replace with default value
+                $(this).removeClass("input-validation-error");
+
+            });
+
+
+            $trLast.after($trNew);
+            $("#" + (parseInt(suffix) + 1) + "txtPauneKoNaam").autocomplete(autoCompOption2);
+            var ele1 = $("#" + (parseInt(suffix) + 1) + "txtPauneKoNaam");
+            var ele2 = $("#" + (parseInt(suffix) + 1) + "txtKhaSiNo");
+            var ele3 = $("#" + (parseInt(suffix) + 1) + "txtKhaSirsak");
+            var ele4 = $("#" + (parseInt(suffix) + 1) + "txtPauneKoCode");
+            var ele5 = $("#" + (parseInt(suffix) + 1) + "txtRemarks");
+            var ele6 = $("#" + (parseInt(suffix) + 1) + "txtPanNo");
+            
+
+            AddUnicode(ele1);
+            AddUnicode(ele2);
+            AddUnicode(ele3);
+            AddUnicode(ele4);
+            AddUnicode(ele5);
+            AddUnicode(ele6);
+
+            //$("#txtRowCount").val(parseInt(suffix) + 1);
+            // Re-assign Validation
+            var form = $("form")
+                .removeData("validator")
+                .removeData("unobtrusiveValidation");
+            $.validator.unobtrusive.parse(form);
+        });
+
+
+        $("#addNew3").click(function (e) {
+            e.preventDefault();
+            var $tableBody = $("#dataTable3");
+            var $trLast = $tableBody.find("tr:last");
+            var $trNew = $trLast.clone();
+
+            var suffix = $trNew.find(':input:first').attr('name').match(/\d+/);
+            var rowCount = $("#txtRowCount2").val();
+            $("#txtRowCount2").val(parseInt(rowCount) + 1);
+            $trNew.find("td:last").html('<a href="#" id="remove3"><i class="fa fa-minus-circle text-danger" style="font-size:15px;"></i></a>');
+            $.each($trNew.find(':input'), function (i, val) {
+
+                // Replaced Name
+                var oldN = $(this).attr('name');
+                var newN = oldN.replace(suffix, (parseInt(suffix) + 1));
+                $(this).attr('name', newN);
+
+                var oldId = $(this).attr('id');
+                var newId = oldId.replace(suffix, (parseInt(suffix) + 1));
+                $(this).attr('id', newId);
+
+                //Replaced value
+                var type = $(this).attr('type');
+                if (type == "text") {
+                    //$(this).attr('value', '');
+                    $(this).val('');
+
+                }
+                else if (type == "number") {
+                    $(this).val('');
+                }
+                else if (type == "decimal") {
+                    $(this).val('');
+                }
+                // If you have another Type then replace with default value
+                $(this).removeClass("input-validation-error");
+
+            });
+
+
+            $trLast.after($trNew);
+            $("#" + (parseInt(suffix) + 1) + "txtNepDate").nepaliDatePicker();
+            var ele1 = $("#" + (parseInt(suffix) + 1) + "txtBillNo");
+            var ele2 = $("#" + (parseInt(suffix) + 1) + "txtDharautiRakhne");
+            var ele3 = $("#" + (parseInt(suffix) + 1) + "txtBapat")
+
+            AddUnicode(ele1);
+            AddUnicode(ele2);
+            AddUnicode(ele3);
+            //$("#" + (parseInt(suffix) + 1) + "txtPaune").autocomplete(autoCompOption2);
+
+            //$("#txtRowCount").val(parseInt(suffix) + 1);
+            // Re-assign Validation
+            var form = $("form")
+                .removeData("validator")
+                .removeData("unobtrusiveValidation");
+            $.validator.unobtrusive.parse(form);
+        });
+
+
+        // 2. Remove
+
+        $('body').on("click", 'a#remove2', function (e) {
+            e.preventDefault();
+            $(this).parent().parent().remove();
+            var suffix = $("#txtRowCount").val();
+            $("#txtRowCount").val(parseInt(suffix) - 1);
+        });
+
+        $('body').on("click", 'a#remove3', function (e) {
+            e.preventDefault();
+            $(this).parent().parent().remove();
+            var suffix = $("#txtRowCount2").val();
+            $("#txtRowCount2").val(parseInt(suffix) - 1);
+        });
+
+        $("#0txtPaune").change(function () {
+            $("#0txtPaune", "#dataTable2").autocomplete(autoCompOption2);
+        });
+
+
+        var autoCompOption2 = {
+            source: function (request, response) {
+                $.ajax({
+                    url: '/Dharauti/AutoComplete2/',
+                    data: "{'prefix': '" + request.term + "'}",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return item;
+                        }))
+                    },
+                    error: function (response) {
+                        //alert(response.responseText);
+                    },
+                    failure: function (response) {
+                        //  alert(response.responseText);
+                    }
+                });
+            },
+            select: function (e, i) {
+                $(this).val(i.item.label);
+                autofill2(i.item.value, $(this).attr('id').match(/\d+/));
+            },
+            minLength: 1
+        }
+
+        function autofill2(item, index) {
+            $.ajax({
+                url: '/Dharauti/autofill2/',
+                data: "{'value':" + JSON.stringify(item) + "}",
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $("#" + index + "txtPauneKoNaam").val(data.pauneKoNaam);
+                    $("#" + index + "txtPauneKoCode").val(data.pauneKoCode);
+                },
+                error: function (response) {
+                    alert("error" + Error.toString() + "error");
+                }
+            });
+        }
+
+        function checkValidation() {
+            if ($("#txtBaUSiNa").val() == null || $("#txtBaUSiNa").val() == 0) {
+                alert("No Option Selected From BaUSiNa");
+                return false;
+            }
+            if ($("#txtNepDate").text() == null || $("#txtNepDate").val() == "") {
+                alert("Date is Null");
+                return false;
+            }
+
+        }
+
+
+        function checkValidationDeCre() {
+
+            var deAmount = 0;
+            var creAmount = 0;
+            var breakout = false;
+            var jornalType = $("#txtJornalType").val();
+            $("body #dataTable tr#dataRow").each(function (e) {
+
+                var suffix = $(this).find(':input:first').attr('name').match(/\d+/);
+
+                var deCre = $("#" + suffix + "ddlDeCre").val();
+                var debit = $("#" + suffix + "txtDebit").val();
+                var credit = $("#" + suffix + "txtCredit").val();
+                var hisabNo = $("#" + suffix + "txtHisabNo").val();
+
+                if (deCre == "") {
+                    alert("Please Select Dedit or Credit in dropdown option");
+                    breakout = true;
+                    return false;
+                    // break;
+                }
+
+                if ($("#" + suffix + "txtBibaran").val() == "") {
+                    alert("Bhyehora Field is Empty");
+                    breakout = true;
+                    return false;
+                    //break;
+                }
+
+                if (deCre == "credit" && (hisabNo == null || hisabNo == "") && jornalType == "धरौटी आम्दानी") {
+                    alert("Hisab Num Required for credit items.");
+                    breakout = true;
+                    return false;
+                }
+
+                if ((deCre == "debit" && parseFloat(debit) == 0) || (deCre == "debit" && parseFloat(credit) != 0) || (deCre == "credit" && parseFloat(credit) == 0) || (deCre == "credit" && parseFloat(debit) != 0)) {
+                    alert("Insert Value in debit or Credit field with matching selection of debit or credit from debit/Credit field");
+                    breakout = true;
+                    return false;
+                    // break;
+                }
+                deAmount = parseFloat(deAmount) + parseFloat($("#" + suffix + "txtDebit").val());
+                creAmount = parseFloat(creAmount) + parseFloat($("#" + suffix + "txtCredit").val());
+            });
+            if (breakout == false) {
+                if (deAmount.toFixed(2) != creAmount.toFixed(2) ){
+                    alert("Total Debit and Credit amount are not equal.Please make correction and submit.")
+                    return false;
+                }
+            }
+            if (breakout) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+
+
+        function checkValidationTextBox() {
+            if ($("#txtJornalNo").val() == null ) {
+                alert("Jornal Num is Required.");
+                return false;
+            }
+            else if ($("#txtBaUSiNa").val() == null || $("#txtBaUSiNa").val() == 0) {
+                alert("No Option Selected From BaUSiNa");
+                return false;
+            }
+            else if ($("#txtNepDate").text() == null || $("#txtNepDate").val() == "") {
+                alert("Date is Null");
+                return false;
+            }
+            else if ($("#ddlJornalType").val() == "" || $("#ddlJornalType").val() == null) {
+                alert("No JonrnalType Selected");
+                return false;
+            }
+            else if ($("#txtChequeRakam").val() == 0 || $("#txtChequeRakam").val() == "") {
+                alert("Chqeque Rakam is Required");
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+
+        function checkValidationBhuktani() {
+            var breakout = false;
+            $("body #dataTable2 tr#dataRow").each(function (e) {
+                $(this).find('input,select').each(function () {
+                    var oldN = $(this).attr('name');
+                    var oldNIndex = oldN.match(/\d+/);
+                    var wiwaran = $("#" + oldNIndex + "txtKhaSirsak").val();
+                    var khaSiNa = $("#" + oldNIndex + "txtKhaSiNo").val();
+                    var rakam = $("#" + oldNIndex + "txtRakam").val();
+                    var pauneKoNaam = $("#" + oldNIndex + "txtPauneKoNaam").val();
+                    var pauneKoCode = $("#" + oldNIndex + "txtPauneKoCode").val();
+                    if (rakam == 0 || rakam == "" || isNaN(rakam) || paunekoNaam == "" ) {
+                        alert("पाउने रकम and भुक्तानी पाउनेको नाम fields in भुक्तानी आदेश table must be inserted before submitting form.पाउने रकम Field must be number.")
+                        breakout = true;
+                        return false;
+
+                    }
+                });
+            });
+            if (breakout) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+        function checkValidationAmdani() {
+            var breakout = false;
+            $("body #dataTable3 tr#dataRow").each(function (e) {
+                $(this).find('input,select').each(function () {
+                    var oldN = $(this).attr('name');
+                    var oldNIndex = oldN.match(/\d+/);
+                    var nepDate = $("#" + oldNIndex + "txtNepDate").val();
+                    var daharutiRakhne = $("#" + oldNIndex + "txtDharautiRakhne").val();
+                    var billNo = $("#" + oldNIndex + "txtBillNo").val();
+                    var billRakamNoVat = $("#" + oldNIndex + "txtBillRakamNoVat").val();
+                    var vatRakam = $("#" + oldNIndex + "txtVatRakam").val();
+                    var dharautiRakam = $("#" + oldNIndex + "txtDharautiRakam").val();
+                    var bapat = $("#" + oldNIndex + "txtBapat").val();
+                    if (nepDate == "" || daharutiRakhne == "" || billNo == 0 || billRakamNoVat == "" || vatRakam == "" || dharautiRakam == ""  || isNaN(billRakamNoVat) || isNaN(vatRakam) || isNaN(dharautiRakam)){
+                        alert("धरौटी राख्ने table मा 'बापत' बाहेक सम्पूर्ण field हरु अनिवार्य छन् |")
+                        breakout = true;
+                        return false;
+
+                    }
+                });
+            });
+            if (breakout) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+
+        function serializeTableRow() {
+            var i = 0;
+            $("body #dataTable tr#dataRow").each(function (e) {
+                $(this).find('input,select').each(function () {
+
+                    // var suffix = $(this).find(':input:first').attr('name').match(/\d+/);
+                    var oldN = $(this).attr('name');
+                    var oldNIndex = oldN.match(/\d+/);
+                    var newN = oldN.replace('[' + oldNIndex + ']', '[' + parseInt(i) + ']');
+                    $(this).attr('name', newN);
+                });
+                i = (parseInt(i) + 1);
+            });
+        }
+
+        function serializeTableRow2() {
+            var i = 0;
+            $("body #dataTable2 tr#dataRow").each(function (e) {
+                $(this).find('input').each(function () {
+
+                    // var suffix = $(this).find(':input:first').attr('name').match(/\d+/);
+                    var oldN = $(this).attr('name');
+                    var oldNIndex = oldN.match(/\d+/);
+                    var newN = oldN.replace(oldNIndex, parseInt(i));
+                    $(this).attr('name', newN);
+                });
+                i = (parseInt(i) + 1);
+            });
+        }
+
+
+        function serializeTableRow3() {
+            var i = 0;
+            $("body #dataTable3 tr#dataRow").each(function (e) {
+                $(this).find('input').each(function () {
+
+                    // var suffix = $(this).find(':input:first').attr('name').match(/\d+/);
+                    var oldN = $(this).attr('name');
+                    var oldNIndex = oldN.match(/\d+/);
+                    var newN = oldN.replace(oldNIndex, parseInt(i));
+                    $(this).attr('name', newN);
+                });
+                i = (parseInt(i) + 1);
+            });
+        }
+
+        function checkJornalNo() {
+            var valid = true;
+            var jornalNo = $("#txtJornalNo").val();
+            var fyId = $("#ddlFyId").val();
+            $.ajax({
+                async: false,
+                url: RootUrl + 'JornalEntries/checkJornalNo/',
+                data: "{'jornalNo':'" + jornalNo + "','fyId':'" + fyId + "','jornalType':'धरौटी'}",
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data == "NotNull") {
+                        valid = false;
+                    }
+                }
+            });
+            return valid;
+        }
+
+
+        $("#btnSubmit").click(function (e) {
+            var breakout = false;
+            if (checkValidationTextBox() == false) {
+                breakout = true;
+                e.preventDefault();
+            }
+            if (breakout == false && checkJornalNo() == false) {
+                alert("Jornal No already exists. Use another Jornal No.")
+                breakout = true;
+                e.preventDefault();
+            }
+
+            if (breakout == false) {
+                if (checkValidationDeCre() == false) {
+                    breakout = true;
+                    e.preventDefault();
+                }
+            }
+
+            if (breakout == false && ($("#ddlJornalType").val() == "धरौटी फिर्ता")) {
+                if (checkValidationBhuktani() == false) {
+                    breakout = true;
+                    e.preventDefault();
+                }
+            }
+            if (breakout == false && ($("#ddlJornalType").val() == "धरौटी आम्दानी")) {
+                if (checkValidationAmdani() == false) {
+                    breakout = true;
+                    e.preventDefault();
+                }
+            }
+            if (breakout == false) {
+                serializeTableRow();
+                if ($("#ddlJornalType").val() == "धरौटी फिर्ता") {
+                    
+                    serializeTableRow2();
+                }
+               else if($("#ddlJornalType").val()=="धरौटी आम्दानी")
+                {
+                serializeTableRow3();
+            }
+        }
+        else {
+                e.preventDefault();
+        }
+        });
+    </script>
+   
+<script src="~/Transliteration/transliteration.js"></script>
+<link href="~/Transliteration/transliteration.css" rel="stylesheet" />
+<script src="~/Transliteration/transliteration.I.js"></script>
+
+}
+
+
+
+

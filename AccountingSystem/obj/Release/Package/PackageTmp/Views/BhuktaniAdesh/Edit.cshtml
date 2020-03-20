@@ -1,0 +1,487 @@
+﻿@*@model AccountingSystem.Models.bhuktaniAdesh
+
+    @{
+        ViewBag.Title = "Edit";
+        Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    }
+
+    <h2>Edit</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>bhuktaniAdesh</h4>
+            <hr />
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.bhuktaniAdeshId)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.bhuktaniAdeshNo, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.bhuktaniAdeshNo)
+                    @Html.ValidationMessageFor(model => model.bhuktaniAdeshNo)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.baUSiNaId, "baUSiNaId", new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("baUSiNaId", String.Empty)
+                    @Html.ValidationMessageFor(model => model.baUSiNaId)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.month, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.month)
+                    @Html.ValidationMessageFor(model => model.month)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.nepDate, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.nepDate)
+                    @Html.ValidationMessageFor(model => model.nepDate)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.rakam, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.rakam)
+                    @Html.ValidationMessageFor(model => model.rakam)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.pauneKoNaam, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.pauneKoNaam)
+                    @Html.ValidationMessageFor(model => model.pauneKoNaam)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.pauneKoCode, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.pauneKoCode)
+                    @Html.ValidationMessageFor(model => model.pauneKoCode)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.bibaran, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.bibaran)
+                    @Html.ValidationMessageFor(model => model.bibaran)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.khaSiNo, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.khaSiNo)
+                    @Html.ValidationMessageFor(model => model.khaSiNo)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.reamrks, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.reamrks)
+                    @Html.ValidationMessageFor(model => model.reamrks)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.jornalKharchaNo, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.jornalKharchaNo)
+                    @Html.ValidationMessageFor(model => model.jornalKharchaNo)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.jornalNikasiNo, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.jornalNikasiNo)
+                    @Html.ValidationMessageFor(model => model.jornalNikasiNo)
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.year, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.year)
+                    @Html.ValidationMessageFor(model => model.year)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+
+
+@model List<AccountingSystem.Models.bhuktaniAdesh>
+
+@{
+    ViewBag.Title = "Edit BhuktaniAdesh";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@Styles.Render("~/Content/nepDate")
+
+<div class="row">
+    <h2 class="text-center">भुक्तानी आदेश विवरण प्रविष्टि गर्नुहोस </h2>
+    @using (Html.BeginForm("Edit", "BhuktaniAdesh", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.ValidationSummary()
+        if (ViewBag.Message != null)
+        {
+            <div class="text-success">
+                @ViewBag.Message
+            </div>
+        }
+        if (ViewBag.ErrorMessage != null)
+        {
+            <div class="text-danger">
+                @ViewBag.ErrorMessage
+            </div>
+        }
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>भुक्तानी आदेश नं</label>
+                @Html.TextBox("bhuktaniAdeshNo", Model[0].bhuktaniAdeshNo, new { @class = "form-control", id = "txtAdeshNo" })
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>आ.ब.</label>
+                @Html.DropDownList("fyId", null, new { @class = "form-control", id = "ddlFyId" })
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>महिना</label><label id="ValMonth"></label>
+                @Html.DropDownList("month", EnumHelper.GetSelectList(typeof(AccountingSystem.Models.month), (AccountingSystem.Models.month)Model[0].monthIndex), new { @class = "form-control", id = "txtMonth", @data_val = "true", @data_val_required = "Month is Required" })
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>मिति</label>
+                @Html.TextBox("nepDate", Model[0].nepDate.ToString("yyyy-MM-dd"), new { @class = "form-control", id = "txtNepDate" })
+            </div>
+        </div>
+
+        <table class="table table-bordered" id="dataTable" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <th>विवरण</th>
+                <th>खर्च शिर्षक नं.</th>
+                <th>पाउने रकम</th>
+                <th>भुक्तानी पाउनेको नाम</th>
+                <th>भुक्तानी पाउनेको कोड</th>
+                <th>कैफियत</th>
+                @*<th></th>*@
+            </tr>
+            @if (Model != null && Model.Count > 0)
+            {
+                int j = 0;
+                foreach (var i in Model)
+                {
+                    <tr id="dataRow">
+                        <td>@Html.TextBoxFor(a => a[j].bibaran, new { @class = "form-control", id = j + "txtKhaSirsak" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].khaSiNo, new { @class = "form-control", id = j + "txtKhaSiNo", style = "width:250px;" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].rakam, new { @class = "form-control", id = j + "txtRakam" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].pauneKoNaam, new { @class = "form-control", id = j + "txtPauneKoNaam", style = "width:200px;" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].pauneKoCode, new { @class = "form-control", id = j + "txtPauneKoCode", style = "width:200px;" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].reamrks, new { @class = "form-control", id = j + "txtRemarks", style = "width:200px;" })</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].nepDate)</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].baUSiNaId)</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].bhuktaniAdeshId)</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].year)</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].bhuktaniAdeshNo)</td>
+                        @*<td style="display:none;">@Html.HiddenFor(a=>a[j].fyId)</td>
+                        <td>
+                            @if (j > 0)
+                            {
+                            <a href="#" id="remove"><i class="fa fa-minus-circle text-danger" style="font-size:15px;"></i></a>
+                            }
+                        </td>*@
+                    </tr>
+                    j++;
+                }
+            }
+        </table>
+        @*<div class="col-md-12 text-right">
+                <a href="#" id="addNewRow" class="btn btn-default">Add New Row</a>
+            </div>*@
+
+        <div class="col-md-12 text-center">
+            <input type="submit" value="Save" class="btn btn-primary" id="btnSubmit" />
+            @Html.ActionLink("Back To List", "Index", null, new { @class = "btn btn-default" })
+        </div>
+
+    }
+</div>
+@* Here I will add Jquery Code for validation / dynamically add new rows / Remove rows etc*@
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+    @Scripts.Render("~/bundles/nepDate")
+    <script src="~/Scripts/NepaliUnicode.js"></script>
+<script src="~/Transliteration/jsapi.js"></script>
+
+    <script language="javascript">
+        $(document).ready(function () {
+
+            function AddUnicodeTxt() {
+                var $tableBody = $("#dataTable");
+                var $trLast = $tableBody.find("tr:last");
+                var suffix = $trLast.find(':input:first').attr('name').match(/\d+/);
+                for (var i = 0; i <= suffix; i++) {
+                    var ele1 = $("#" + i + "txtPauneKoNaam");
+                    var ele2 = $("#" + i + "txtPauneKoCode");
+                    var ele3 = $("#" + i + "txtKhaSirsak");
+                    var ele4 = $("#" + i + "txtKhaSiNo");
+                    AddUnicode(ele1);
+                    AddUnicode(ele2);
+                    AddUnicode(ele3);
+                    AddUnicode(ele4);
+                }
+                var ele5 = $("#txtAdeshNo");
+                AddUnicode(ele5);
+
+
+            }
+
+            AddUnicodeTxt();
+
+
+            $('#txtNepDate').nepaliDatePicker();
+
+            // 2. Remove
+            $('body').on("click", 'a#remove', function (e) {
+                e.preventDefault();
+                $(this).parent().parent().remove();
+            });
+
+            //Add new col
+            $('body').on("click", 'a#addNewRow', function (e) {
+                e.preventDefault();
+                var $tableBody = $("#dataTable");
+                // var $trRowclicked = $(this).closest('tr');
+                var $trLast = $tableBody.find("tr:last");
+                var $trNew = $trLast.clone();
+
+                var suffix = $trNew.find(':input:first').attr('name').match(/\d+/);
+                $trNew.find("td:last").html('<a href="#" id ="remove"><i class="fa fa-minus-circle text-danger" style="font-size:15px;"></i></a>');
+                $.each($trNew.find(':input'), function (i, val) {
+                    // Replaced Name
+                    var oldN = $(this).attr('name');
+                    var newN = oldN.replace('[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']');
+                    $(this).attr('name', newN);
+
+                    var oldId = $(this).attr('id');
+                    var newId = oldId.replace(suffix, (parseInt(suffix) + 1));
+                    $(this).attr('id', newId);
+
+                    //Replaced value
+                    var type = $(this).attr('type');
+                    if (type == "text") {
+                        $(this).val('');
+                    }
+
+                    else if (type == "number") {
+                        $(this).val('');
+                    }
+                    else if (type == "decimal") {
+                        $(this).val(0);
+                    }
+                    // If you have another Type then replace with default value
+                    $(this).removeClass("input-validation-error");
+
+                });
+                $trLast.after($trNew);
+                $("#" + (parseInt(suffix) + 1) + "txtPauneKoNaam").autocomplete(autoCompOption);
+                var ele1 = $("#" + (parseInt(suffix) + 1) + "txtPauneKoNaam");
+                var ele2 = $("#" + (parseInt(suffix) + 1) + "txtPauneKoCode");
+                var ele3 = $("#" + (parseInt(suffix) + 1) + "txtKhaSirsak");
+                var ele4 = $("#" + (parseInt(suffix) + 1) + "txtKhaSiNo");
+                AddUnicode(ele1);
+                AddUnicode(ele2);
+                AddUnicode(ele3);
+                AddUnicode(ele4);
+
+                // Re-assign Validation
+                var form = $("form")
+                    .removeData("validator")
+                    .removeData("unobtrusiveValidation");
+                $.validator.unobtrusive.parse(form);
+            });
+        });
+
+        $("#0txtPauneKoNaam").keyup(function () {
+            $("#0txtPauneKoNaam", "#dataTable").autocomplete(autoCompOption);
+        });
+
+
+        var autoCompOption = {
+            source: function (request, response) {
+                $.ajax({
+                    url: RootUrl + 'BhuktaniAdesh/AutoComplete/',
+                    data: "{'prefix': '" + request.term + "'}",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return item;
+                        }))
+                    },
+                    error: function (response) {
+                        alert(response.responseText);
+                    },
+                    failure: function (response) {
+                        alert(response.responseText);
+                    },
+
+                });
+            },
+            select: function (e, i) {
+                $(this).val(i.item.label);
+                autofill(i.item.value, $(this).attr('id').match(/\d+/));
+            },
+            focus: function (event, i) {
+                event.preventDefault();
+                $(this).val(i.item.label);
+            },
+            minLength: 1
+        }
+
+        function autofill(item, index) {
+            $.ajax({
+                url: RootUrl+'BhuktaniAdesh/autofill/',
+                data: "{'value':" + JSON.stringify(item) + "}",
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    $("#" + index + "txtPauneKoNaam").val(data.pauneKoNaam);
+                    $("#" + index + "txtPauneKoCode").val(data.pauneKoCode);
+                    $("#" + index + "txtRemarks").val(data.pauneKoCode);
+                },
+                error: function (response) {
+                    // alert("error" + Error.toString() + "error");
+                }
+            });
+        }
+        //var $tableBody = $("#dataTable");
+        //var $trLast = $tableBody.find("tr:last");
+        //var suffix = $trLast.find(':input:first').attr('name').match(/\d+/);
+        //var deAmount = 0;
+        //var creAmount = 0;
+        //for (var i = 0; i <= parseInt(suffix) ; i++) {
+        //    var deCre = $("#" + i + "ddlDeCre").val();
+        //    var debit = $("#" + i + "txtDebit").val();
+        //    var credit = $("#" + i + "txtCredit").val();
+        //    if ($("#" + i + "txtBibaran").val() == "") {
+        //        alert("No Items inserted in table.Please Insert data and submt.");
+        //        e.preventDefault();
+        //        break;
+        //    }
+        //    if (deCre == "") {
+        //        alert("Please Select Dedit or Credit in dropdown option");
+        //        e.preventDefault();
+        //        break;
+        //    }
+        //    else if ((deCre == "debit" && debit == 0) || (deCre == "credit" && credit == 0)) {
+        //        alert("Please Insert Value Either in Debit or Credit with matching selection");
+        //        e.preventDefault();
+        //        break;
+        //    }
+        //    else {
+        //        deAmount = parseFloat(deAmount) + parseFloat($("#" + i + "txtDebit").val());
+        //        creAmount = parseFloat(creAmount) + parseFloat($("#" + i + "txtCredit").val());
+
+        //    }
+        //}
+        //if (deAmount != creAmount) {
+        //    alert("Total Debit and Credit amount are not equal.Please make correction and submit.")
+        //    e.preventDefault();
+        //}
+
+
+        //{
+        //    var $tableBody = $("#dataTable");
+        //    var $trLast = $tableBody.find("tr:last");
+        //    var suffix = $trLast.find(':input:first').attr('name').match(/\d+/);
+        //    for (var i = 0; i <= parseInt(suffix2) ; i++) {
+        //        var wiwaran = $("#" + i + "txtKhaSirsak").val();
+        //        var khaSiNa = $("#" + i + "txtKhaSiNa").val();
+        //        var rakam = $("#" + i + "txtRakam").val();
+        //        var pauneKoNaam = $("#" + i + "txtPauneKoNaam").val();
+        //        var pauneKoCode = $("#" + i + "txtPauneKoCode").val();
+        //        if (wiwaran == "" || khaSiNa == "" || rakam == 0 || rakam == "" || paunekoNaam == "" || pauneKoCode == "") {
+        //            if (confirm('All values in भुक्तानी आदेश table are not inserted.Do you want to Proceed')) {
+        //            }
+        //            else {
+        //                e.preventDefault();
+        //                break;
+        //            }
+        //        }
+        //    }
+        //}
+        //});
+        function checkValidation() {
+            if ($("#txtYear").val() == null || $("#txtNepDate").val() == null) {
+                alert("No value in Year Or Date field");
+                return false;
+            }
+        }
+
+
+        function serializeTableRow() {
+            var i = 0;
+            $("#dataTable tr#dataRow").each(function (e) {
+                $(this).find('input').each(function () {
+
+                    // var suffix = $(this).find(':input:first').attr('name').match(/\d+/);
+                    var oldN = $(this).attr('name');
+                    var oldNIndex = oldN.match(/\d+/);
+                    var newN = oldN.replace('[' + oldNIndex + ']', '[' + parseInt(i) + ']');
+                    $(this).attr('name', newN);
+                });
+                i = (parseInt(i) + 1);
+            });
+        }
+
+        $("#btnSubmit").click(function (e) {
+            serializeTableRow();
+        });
+    </script>
+<script src="~/Transliteration/transliteration.js" type="text/javascript"></script>
+<link href="~/Transliteration/transliteration.css" rel="stylesheet" />
+<script src="~/Transliteration/transliteration.I.js" type="text/javascript"></script>
+
+}
+
+
+
+

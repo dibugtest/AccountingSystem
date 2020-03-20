@@ -1,0 +1,83 @@
+﻿@model AccountingSystem.Models.khaSiNa
+
+@{
+    ViewBag.Title = "Create KhaSiNa";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <h2 class="text-center">ख.शि.नं. प्रविष्टि</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form">
+            @Html.ValidationSummary(true)
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>ब.उ.शि.</label>@Html.ValidationMessageFor(model => model.baUSiNaId)
+                    @Html.DropDownListFor(model => model.baUSiNaId, new SelectList(ViewBag.baUSiNaId, "value", "text"), "--ब.उ.शि.नं. छान्नुहोस्--", new { @class = "form-control",id="ddlBaUSiNa" })
+                   
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>खर्च र्शिर्षक</label>@Html.ValidationMessageFor(model => model.khaSirsak)
+                    @Html.TextBoxFor(model => model.khaSirsak, new { @class = "form-control",id="txtKhaSirsak",@data_val="true",@data_val_required="KhaSirSak is Required" })
+                    
+                </div>
+            </div>
+           
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>खर्च शिर्षक नं.</label>@Html.ValidationMessageFor(model => model.khaSiNo)
+                    @Html.TextBoxFor(model => model.khaSiNo, new { @class = "form-control",id="txtKhaSiNo",@data_val="true",@data_val_required="KhaSiNo is Required"})
+                   
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>खर्च रकम (रू.)</label>@Html.ValidationMessageFor(model => model.khaRakam)
+                    @Html.TextBoxFor(model => model.khaRakam, new { @class = "form-control",id="txtKhaRakam" })
+                    
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>कैफियत</label>@Html.ValidationMessageFor(model => model.remarks)
+                    @Html.TextBoxFor(model => model.remarks, new { @class = "form-control",id="txtRemarks" })
+                    
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-12 text-center">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+            </div>
+
+        </div>
+    }
+</div>
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+    <script src="~/Scripts/NepaliUnicode.js"></script>
+<script src="~/Transliteration/jsapi.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var ele1 = $("#txtKhaSirsak");
+            var ele2 = $("#txtKhaSiNo");
+            var ele3 = $("#txtRemarks");
+            AddUnicode(ele1);
+            AddUnicode(ele2);
+            AddUnicode(ele3);
+        });
+    </script>
+   <script src="~/Transliteration/transliteration.js"></script>
+<link href="~/Transliteration/transliteration.css" rel="stylesheet" />
+<script src="~/Transliteration/transliteration.I.js"></script>
+
+}

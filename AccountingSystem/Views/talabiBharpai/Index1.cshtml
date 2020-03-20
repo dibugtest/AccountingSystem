@@ -1,0 +1,114 @@
+﻿@model List<AccountingSystem.Models.talabiBharpai>
+
+@{
+    ViewBag.Title = "Index Talabi Bharpai";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+<h2 class="text-center">तलबी भरपाई विवरण </h2>
+  
+@using (Html.BeginForm("index", "talabiBharpai", FormMethod.Post))
+{
+    if (ViewBag.ErrorMessage != null)
+    { 
+        <div class="col-md-12">
+            <div class="alert alert-danger text-center">@ViewBag.ErrorMessage</div>
+        </div>
+    }
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>आ.ब.</label>
+            @Html.DropDownList("fyId", null, new { @class = "form-control", id = "ddlFyId" })
+        </div>
+    </div> 
+    <div class="col-md-3">
+        <div class="form-group">
+            <label>महिना</label>
+            @Html.DropDownList("month", EnumHelper.GetSelectList(typeof(AccountingSystem.Models.month)), new { @class = "form-control", id = "txtMonth" })
+        </div>
+    </div>
+    <div class="col-md-3 text-center" style="padding-top:20px;">
+        <input type="submit" value="Select" class="btn btn-primary" />
+    </div>
+    @*<div class="col-md-12" style="padding-left:0px;">
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>वर्ष</label>
+                @Html.TextBoxFor(a => a[0].yearMonth.year, new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>महिना</label>
+                @Html.TextBoxFor(a => a[0].yearMonth.month, new { @class = "form-control", @readonly = "true" })
+            </div>
+        </div>
+    </div>*@
+
+}
+<table class="table table-bordered" id="dataTable" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <th>नाम</th>
+        <th>दर्जा</th>
+        <th>शुरु स्केल</th>
+        <th>ग्रेड रकम</th>
+        <th>जम्मा</th>
+        <th>क.स.को.थप</th>
+        <th>बिमा</th>
+        <th>जम्मा</th>
+        <th>महंगी भत्ता</th>
+        <th>जोखिम भत्ता</th>
+        <th>जम्मा तलब भत्ता</th>
+        <th>क.स.को.कट्टी</th>
+        <th>सापटी</th>
+        <th>ना.ल.कोष</th>
+        <th>बिमा</th>
+        <th>पारिश्रमिक कर कट्टी</th>
+        <th>सा.सु.कर.कट्टी</th>
+        <th>बाँकी पाउने</th>
+        <th></th>
+    </tr>
+    @if (Model.Count > 0 &&Model!=null)
+    {
+        int j = 0;
+        foreach (var i in Model)
+        {
+            <tr>
+                <td>@i.officer.fullName</td>
+                <td>@i.officer.darja</td>
+                <td>@i.officer.suruScale</td>
+                <td>@(i.officer.gradeDar*i.officer.gradeSankhya)</td>
+                <td>@i.suruScaleGrade</td>
+                <td>@i.kaSaKoThap</td>
+                <td>@i.officer.bima</td>
+                <td>@i.suruBimaTotal</td>
+                <td>@i.officer.mahangiBhatta</td>
+                <td>@i.officer.jokhimBhatta</td>
+                <td>@i.talabiBhattaTotal</td>
+                <td>@i.kaSaKoKatti</td>
+                <td>@i.sapati</td>
+                <td>@i.naLaKos</td>
+                <td>@i.officer.bima</td>
+                <td>@i.pariKar</td>
+                <td>@i.saSuKar</td>
+                <td>@i.pauneTotal</td>
+                <td>
+               @* @Html.ActionLink("Edit", "Edit", new { id = i.talabiId })|*@
+                @Html.ActionLink("Delete", "Delete", new { id = i.talabiId }, new { onclick = "return confirm('"+i.yearMonth.year + " साल " +i.yearMonth.month+" महिनाको तलबी भरपाई विवरण हटाउन चाहनुहुन्छ?');" })
+                    </td>
+
+            </tr>
+            j++;
+        }
+    }
+</table>
+    @if (Model.Count == 0)
+    { 
+        <label>Record Not Found</label>
+    }
+    <div class="col-md-12 text-center" >@Html.ActionLink("Create New", "Create", null, new { @class="btn btn-primary"})</div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}

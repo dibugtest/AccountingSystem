@@ -1,0 +1,78 @@
+﻿@model AccountingSystem.Models.office
+
+@{
+    ViewBag.Title = "Delete Office";
+}
+<div class="row">
+    <h3>सम्बन्धित कर्मचारीको विवरण हटाउन चाहनुहुन्छ?</h3>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            मन्त्रालय
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mantralaye)
+        </dd>
+
+        <dt>
+            विभाग
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bibhag)
+        </dd>
+
+        <dt>
+            कार्यालय
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.karyalaye)
+        </dd>
+
+        <dt>
+            ठेगाना
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.address)
+        </dd>
+
+        <dt>
+            फोन
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone)
+        </dd>
+
+        <dt>
+            url/वेब
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.url_web)
+        </dd>
+
+        <dt>
+            इमेल
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="col-md-12">
+            <input type="submit" value="Delete" class="btn btn-primary" /> 
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>

@@ -1,0 +1,33 @@
+﻿@using AccountingSystem.Models;
+@using Microsoft.AspNet.Identity;
+@{
+    ViewBag.Title = "Manage Account";
+}
+<div class="row">
+    <h2 class="text-center">Change Password</h2>
+
+    
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      
+        <p class="text-success text-center" >@ViewBag.StatusMessage</p>
+        
+        @if (ViewBag.HasLocalPassword)
+        {
+            @Html.Partial("_ChangePasswordPartial")
+        }
+        else
+        {
+            @Html.Partial("_SetPasswordPartial")
+        }
+    </div>
+    <div class="col-md-4"></div>
+    @*<section id="externalLogins">
+            @Html.Action("RemoveAccountList")
+            @Html.Partial("_ExternalLoginsListPartial", new { Action = "LinkLogin", ReturnUrl = ViewBag.ReturnUrl })
+        </section>*@
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

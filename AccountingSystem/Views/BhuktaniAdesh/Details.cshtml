@@ -1,0 +1,123 @@
+﻿@model AccountingSystem.Models.bhuktaniAdesh
+
+@{
+    ViewBag.Title = "Details Bhuktani Adesh";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>bhuktaniAdesh</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.baUSiNa.baUSirsak)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.baUSiNa.baUSirsak)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bhuktaniAdeshNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bhuktaniAdeshNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.month)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.month)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nepDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nepDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rakam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rakam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pauneKoNaam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pauneKoNaam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pauneKoCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pauneKoCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bibaran)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bibaran)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.khaSiNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.khaSiNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.reamrks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.reamrks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.jornalKharchaNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jornalKharchaNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.jornalNikasiNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jornalNikasiNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.year)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.bhuktaniAdeshId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

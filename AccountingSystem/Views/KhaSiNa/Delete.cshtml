@@ -1,0 +1,61 @@
+﻿@model AccountingSystem.Models.khaSiNa
+
+@{
+    ViewBag.Title = "Delete KhaSiNa";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+<h3>सम्बन्धित ख.शि.नं. हटाउन चाहनुहुन्छ?</h3>
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+    <dl class="dl-horizontal">
+        <dt>
+         ब.उ.शि.नं.
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.baUSiNa.baUSirsak)
+        </dd>
+
+        <dt>
+         शिर्षक
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.khaSirsak)
+        </dd>
+
+        <dt>
+          ख.शि.नं.
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.khaSiNo)
+        </dd>
+        <dt>
+            खर्च रकम (रू.)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.khaRakam)
+        </dd>
+        <dt>
+          कैफियत
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.remarks)
+        </dd>
+
+    </dl>
+        </div>
+    <div class="col-md-2"></div>
+        @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color col-md-12 text-center" >
+            <input type="submit" value="Delete" class="btn btn-danger" /> 
+            @Html.ActionLink("Back to List", "Index", null, new {@class="btn btn-default"})
+        </div>
+    }
+</div>

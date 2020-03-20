@@ -1,0 +1,290 @@
+﻿@{
+    ViewBag.Title = "Journal";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    @if(Request.HttpMethod.ToString()=="POST")
+    {
+    <h2 class="text-center">गोश्वारा भौचरहरु</h2>
+    <div class="col-md-4">
+        <div class="panel panel-primary">   
+            <div class="panel-heading text-center">
+                <strong>खर्च </strong>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered text-center">
+                    <tr>
+                        <th class="text-center">
+                            वर्ष,महिना
+                        </th>
+                        <th>गो.भौ.नं.</th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in ViewBag.kharchaJornal)
+                    {
+                        <tr>
+                            <td>
+                                @(item.year + "," + item.month)
+                            </td>
+                            <td>@item.jornalNo</td>
+                            <td>
+                                <a href='@Url.Action("JornalBibaran", "JornalEntries", new { id = item.jornalEntriesId  })'>
+                                    <i class="fa fa-download" style="font-size:15px;"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <strong>निकासा</strong>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered text-center">
+                    <tr>
+                        <th class="text-center">
+                            वर्ष,महिना
+                        </th>
+                        <th>गो.भौ.नं.</th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in ViewBag.nikasaJornal)
+                    {
+                        <tr>
+                            <td>
+                                @(item.year + "," + item.month)
+                            </td>
+                            <td>@item.jornalNo</td>
+                            <td>
+                                <a href='@Url.Action("JornalBibaran", "JornalEntries", new { id = item.jornalEntriesId })'>
+                                    <i class="fa fa-download" style="font-size:15px;"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <strong>कट्टी </strong>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered text-center">
+                    <tr>
+                        <th class="text-center">
+                            वर्ष,महिना
+                        </th>
+                        <th>गो.भौ.नं.</th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in ViewBag.kattiJornal)
+                    {
+                        <tr>
+                            <td>
+                                @(item.year + "," + item.month)
+                            </td>
+                            <td>@item.jornalNo</td>
+                            <td>
+                                <a href='@Url.Action("JornalBibaran", "JornalEntries", new { id = item.jornalEntriesId })'>
+                                    <i class="fa fa-download" style="font-size:15px;"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+        </div>
+    </div>
+        <div class="col-md-12">&nbsp;&nbsp;</div>
+         <div class="col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <strong>पेश्की </strong>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered text-center">
+                    <tr>
+                        <th class="text-center">
+                            वर्ष,महिना
+                        </th>
+                        <th>गो.भौ.नं.</th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in ViewBag.peskiJornal)
+                    {
+                        <tr>
+                            <td>
+                                @(item.year + "," + item.month)
+                            </td>
+                            <td>@item.jornalNo</td>
+                            <td>
+                                <a href='@Url.Action("JornalBibaran", "JornalEntries", new { id = item.jornalEntriesId })'>
+                                    <i class="fa fa-download" style="font-size:15px;"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+        </div>
+    </div>
+         <div class="col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-heading text-center">
+                <strong>पेश्की फछर्यौट </strong>
+            </div>
+            <div class="panel-body">
+                <table class="table table-bordered text-center">
+                    <tr>
+                        <th class="text-center">
+                            वर्ष,महिना
+                        </th>
+                        <th>गो.भौ.नं.</th>
+                        <th></th>
+                    </tr>
+                    @foreach (var item in ViewBag.farchautJornal)
+                    {
+                        <tr>
+                            <td>
+                                @(item.year + "," + item.month)
+                            </td>
+                            <td>@item.jornalNo</td>
+                            <td>
+                                <a href='@Url.Action("JornalBibaran", "JornalEntries", new { id = item.jornalEntriesId })'>
+                                    <i class="fa fa-download" style="font-size:15px;"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+        </div>
+    </div>
+    }
+    else
+    { 
+    <h2 class="text-center">गोश्वारा भौचरहरुका लागि आर्थिक वर्ष र महिना छान्नुहोस्</h2>
+    using (Html.BeginForm())
+    {
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>ब.उ.शि.नं</label>
+                @Html.DropDownList("baUSiNaId", null, new { @class = "form-control", id = "ddlBaUSiNo" })
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>आ.ब.</label>
+                @Html.DropDownList("fyId", null, new { @class = "form-control", id = "ddlFyId" })
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>महिना</label>
+                @Html.DropDownList("mn", EnumHelper.GetSelectList(typeof(AccountingSystem.Models.month)), new { @class = "form-control", id = "txtMonth" })
+            </div>
+        </div>
+        <div class="col-md-12 text-center">
+            <input type="submit" value="Submit" class="btn btn-primary" id="btnSubmit" />
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+    }
+    }
+</div>
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+   
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var filJornalList=null;
+
+            function filJornalNo() {
+                var fisYear = $("#ddlFyId").val();
+                var monthIndex = $("#txtMonth").val();
+                var jornalType = $("#ddlJornalType").val();
+
+                $.ajax({
+                    url: '/Report/filJornalNo/',
+                    type: "GET",
+                    dataType: "json",
+                    data:  "fyId="+fisYear+"&mn="+ monthIndex+"&jornalType="+ jornalType ,
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        filJornalList = data;
+                    },
+                    error: function (response) {
+                        // alert("Something Went Wrong");
+                    }
+                });
+            }
+
+                $("#txtMonth").change(function (e) {
+                    changeFunction();
+                });
+                $("#ddlFyId").change(function (e) {
+                    changeFunction();
+                });
+                $("#ddlJornalType").change(function (e) {
+                    changeFunction();
+                });
+                    function changeFunction() {
+                        if ($("#ddlJornalType").val() == "" || $("#ddlJornalType").val() == 0) {
+                            alert("Select one of the option from Jornal Type");
+                           // e.preventDefault();
+                        }
+
+                        filJornalNo();
+                        var option = '';
+                        $("#ddlJornalNo").empty();
+                        option += '<option value="">--छान्नुहोस्--</option>';
+                        for (var i = 0; i < filJornalList.length; i++) {
+                            option += '<option value="' + filJornalList[i].jornalNo + '">' + filJornalList[i].jornalNo + '</option>';
+                        }
+                        $('#ddlJornalNo').append(option);
+                    }
+          
+
+
+
+            $("#btnSubmit").click(function (e) {
+                if (checkValidationTextBox() == false) {
+                    e.preventDefault();
+                }
+            });
+
+            function checkValidationTextBox() {
+                if ($("#ddlJornalType").val() == "" || $("#ddlJornalType").val() == 0) {
+                    alert("Select one of the option from Jornal Type");
+                    return false;
+                }
+
+               else if ($("#ddlJornalNo").val() == "" || $("#ddlJornalNo").val() == 0) {
+                    alert("Select one of the option from Jornal Num");
+                    return false;
+                }
+
+                else {
+                    return true;
+                }
+            }
+        });
+    </script>
+}

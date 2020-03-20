@@ -1,0 +1,128 @@
+﻿@model AccountingSystem.Models.office
+
+@{
+    ViewBag.Title = "Create Office";
+}
+<div class="row">
+    <h2 class="text-center">कार्यालय प्रविष्टि</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+       
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>मन्त्रालय</label>@Html.ValidationMessageFor(Model => Model.mantralaye)
+                @Html.TextBoxFor(Model => Model.mantralaye, new { type = "text", @class = "form-control", id = "txtMantralaya" })
+                
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>विभाग</label>@Html.ValidationMessageFor(Model => Model.bibhag)
+                @Html.TextBoxFor(Model => Model.bibhag, new { @class = "form-control", id = "txtBibhag" })
+              
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>कार्यालय</label>@Html.ValidationMessageFor(Model => Model.karyalaye)
+                @Html.TextBoxFor(Model => Model.karyalaye, new { @class = "form-control", id = "txtKaryalaya" })
+                
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>ठेगाना</label>@Html.ValidationMessageFor(Model => Model.address)
+                @Html.TextBoxFor(Model => Model.address, new { @class = "form-control", id = "txtAddress" })
+              
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>फोन</label>@Html.ValidationMessageFor(Model => Model.phone)
+                @Html.TextBoxFor(Model => Model.phone, new { @class = "form-control", id = "txtPhone" })
+              
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>अफिस कोड</label>@Html.ValidationMessageFor(Model => Model.officeCode)
+                @Html.TextBoxFor(Model => Model.officeCode, new { @class = "form-control", id = "txtOfficeCode" })
+               
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>PO Box</label>@Html.ValidationMessageFor(Model => Model.POBoxNo)
+                @Html.TextBoxFor(Model => Model.POBoxNo, new { @class = "form-control", id = "txtPOBox" })
+             
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>इमेल</label>@Html.ValidationMessageFor(Model => Model.email)
+                @Html.TextBoxFor(Model => Model.email, new { @class = "form-control" })
+               
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>url/वेब</label>@Html.ValidationMessageFor(Model => Model.url_web)
+                @Html.TextBoxFor(Model => Model.url_web, new { @class = "form-control" })
+               
+            </div>
+        </div>
+        <div class="col-md-12 text-center">
+            <input type="submit" value="Create" class="btn btn-primary" />
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Transliteration/jsapi.js"></script>
+
+    <script type="text/javascript">
+
+        // Load the Google Transliterate API
+        google.load("elements", "1", {
+            packages: "transliteration"
+        });
+
+        function onLoad() {
+            var options = {
+                sourceLanguage:
+                    google.elements.transliteration.LanguageCode.ENGLISH,
+                destinationLanguage:
+                    [google.elements.transliteration.LanguageCode.NEPALI],
+                shortcutKey: 'ctrl+g',
+                transliterationEnabled: true
+            };
+
+            // Create an instance on TransliterationControl with the required
+            // options.
+            var control =
+                new google.elements.transliteration.TransliterationControl(options);
+
+            // Enable transliteration in the textbox with id
+            // 'transliterateTextarea'.
+            control.makeTransliteratable(['txtMantralaya']);
+            control.makeTransliteratable(['txtBibhag']);
+            control.makeTransliteratable(['txtKaryalaya']);
+            control.makeTransliteratable(['txtOfficeCode']);
+            control.makeTransliteratable(['txtPOBox']);
+            control.makeTransliteratable(['txtPhone']);
+            control.makeTransliteratable(['txtAddress']);
+
+        }
+        google.setOnLoadCallback(onLoad);
+    </script>
+    <script src="~/Transliteration/transliteration.js"></script>
+<link href="~/Transliteration/transliteration.css" rel="stylesheet" />
+<script src="~/Transliteration/transliteration.I.js"></script>
+
+}

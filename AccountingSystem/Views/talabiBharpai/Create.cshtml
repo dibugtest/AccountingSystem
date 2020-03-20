@@ -1,0 +1,185 @@
+﻿@model List<AccountingSystem.Models.VMTalabiBharpai>
+
+@{
+    ViewBag.Title = "Talabi Bharpai";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@Styles.Render("~/Content/nepDate")
+<link href="~/Content/jquery.jqGrid/ui.jqgrid.css" rel="stylesheet" />
+
+<div class="row">
+    <h2 class="text-center">तलबी भरपाई विवरण प्रविष्टि गर्नुहोस</h2>
+    @using (Html.BeginForm("create", "talabiBharpai", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.ValidationSummary()
+        if (ViewBag.Message != null)
+        {
+            <div style="border:solid 1px green">
+                @ViewBag.Message
+            </div>
+        }
+        <fieldset style="border:1px solid;">
+            <legend style="width:auto;">विवरण</legend>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>आ.ब.</label>@Html.ValidationMessage("fyId")
+                    @Html.DropDownList("fyId", null, new { @class = "form-control", id = "ddlFyId" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>महिना</label><label id="ValMonth"></label>
+                    @Html.DropDownList("month", EnumHelper.GetSelectList(typeof(AccountingSystem.Models.month)), new { @class = "form-control", id = "txtMonth" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>मिति</label>
+                    @Html.TextBox("nepDate", "", new { @class = "form-control", id = "txtNepDate", @data_val = "true", @data_val_required = "Date is Required" })
+                </div>
+            </div>
+        </fieldset>
+        <table class="table table-bordered" id="dataTable" border="0" cellpadding="0" cellspacing="0" >
+            <tr>
+                <th>नाम</th>
+                <th>दर्जा</th>
+                <th>शुरु स्केल</th>
+                <th>ग्रेड रकम</th>
+                @*<th>जम्मा</th>*@
+                <th>क.स.को.थप</th>
+                <th>बिमा</th>
+                @*<th>जम्मा</th>*@
+                <th>महंगी भत्ता</th>
+                <th>जोखिम भत्ता</th>
+                @*<th>जम्मा तलब भत्ता</th>*@
+                @*<th>क.स.को.कट्टी</th>*@
+                <th>सापटी</th>
+                <th>ना.ल.कोष</th>
+                @*<th>बिमा</th>*@
+                <th>पारिश्रमिक कर कट्टी</th>
+                <th>सा.सु.कर.कट्टी</th>
+                @*<th>जम्मा कट्टी</th>
+                    <th>बाँकी पाउने</th>*@
+                @*<th>महिना</th>*@
+            </tr>
+            <tbody>
+                @if (Model != null && Model.Count > 0)
+                {
+                    int j = 0;
+                    foreach (var i in Model)
+                    {
+                        <tr id="dataRow">
+                              <td style="display:none;">@Html.HiddenFor(a => a[j].officerId)</td>
+                            <td>@Html.DisplayFor(a => a[j].fullName, new { style = "width:70px;" })</td>
+                            <td>@Html.DisplayFor(a => a[j].darja, new { style = "width:70px;"  })</td>
+                            <td>@Html.TextBoxFor(a => a[j].suruScale, new { @class = "form-control", style = "width:80px" })</td>
+                            <td>@Html.TextBoxFor(a => a[j].gradeRakam, new { @class = "form-control", style = "width:80px" })</td>@*@((i.officer.gradeSankhya * i.officer.gradeDar).ToString("0.00"))*@
+                            @*<td>@Html.DisplayFor(a => a[j].suruScaleGrade, new { @class = "form-control", style = "width:70px;"})</td>*@
+                            <td>@Html.TextBoxFor(a => a[j].kaSaKoThap, new { @class = "form-control", type = "decimal", style="width:80px" })</td>
+                            <td>@Html.TextBoxFor(a => a[j].bima, new { @class = "form-control", style = "width:80px" })</td>@*@Html.DisplayFor(a => a[j].officer.bima)*@
+                            @*<td>@Html.DisplayFor(a => a[j].suruBimaTotal, new { @class = "form-control", style = "width:70px;"})</td>*@
+                            <td>@Html.TextBoxFor(a => a[j].mahangiBhatta, new { @class = "form-control", style = "width:80px" })</td>@*@Html.DisplayFor(a => a[j].officer.mahangiBhatta)*@
+                            <td>@Html.TextBoxFor(a => a[j].jokhimBhatta, new { @class = "form-control", style = "width:80px" })</td>@*@Html.DisplayFor(a => a[j].officer.jokhimBhatta)*@
+                            @*<td>@Html.DisplayFor(a => a[j].talabiBhattaTotal, new { @class = "form-control", style = "width:70px;"})</td>*@
+                            @*<td>@Html.DisplayFor(a => a[j].kaSaKoKatti, new { @class = "form-control" })</td>*@
+                            <td>@Html.TextBoxFor(a => a[j].sapati, new { @class = "form-control", style = "width:70px;", id = "txtSapati" })</td>
+                            <td>@Html.TextBoxFor(a => a[j].naLaKos, new { @class = "form-control", style = "width:70px;", id = "txtNaLaKos" })</td>
+                            @*<td>@(2 * Model[j].bima)</td>*@@*@(2 * Model[j].officer.bima)*@
+                            <td>@Html.TextBoxFor(a => a[j].pariKar, new { @class = "form-control", style = "width:70px;" })</td>
+                            <td>@Html.TextBoxFor(a => a[j].saSuKar, new { @class = "form-control", style = "width:70px;" })</td>
+                            @*<td>@Html.DisplayFor(a => a[j].kattiTotal, new { @class = "form-control", style = "width:70px;"})</td>
+                        <td>@Html.DisplayFor(a => a[j].pauneTotal, new { @class = "form-control", style = "width:70px;"})</td>*@
+                            <td style="display:none;">@Html.HiddenFor(a => a[j].fyId, new { @class = "form-control", id = j + "txtFyId", value = 1 })</td>
+
+                        </tr>
+                        j++;
+                    }
+                }
+            </tbody>
+        </table>
+        <div class="col-md-12 text-center">
+            <input type="submit" value="Submit" class="btn btn-primary" id="btnSubmit" />
+            @Html.ActionLink("Back To List", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>
+
+@* Here I will add Jquery Code for validation / dynamically add new rows / Remove rows etc*@
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+    @Scripts.Render("~/bundles/nepDate")
+    <script src="~/Scripts/NepaliUnicode.js"></script>
+
+    <script language="javascript">
+        $(document).ready(function () {
+            $("#txtNepDate").nepaliDatePicker();
+            $("#btnSubmit").click(function (e) {
+                var breakout = false;
+
+                var fyId = $("#ddlFyId").val();
+                var monthIndex = $("#txtMonth").val();
+                if (checkYearMonth(fyId, monthIndex)) {
+                    if (confirm('Record For Selected Fiscal Year and Month already exists. Do you want to update record')) {
+                        breakout = false;
+                    } else {
+                        breakout = true;
+                    }
+                }
+                else {
+                    breakout = false;
+                }
+
+                if ($("#txtMonth").val() == "" || $("#txtMonth").val() == null) {
+                    breakout = true;
+                }
+                if (checkNaN() && !breakout)
+                {
+                    alert("All input in the table should be number.");
+                    breakout = true;
+                }
+                if (breakout) {
+                    e.preventDefault();
+                }
+
+            });
+
+            function checkYearMonth(fyId, monthIndex) {
+                var valid = false;
+                $.ajax({
+                    async: false,
+                    url: RootUrl + 'talabiBharpai/CheckYearMonth',
+                    data: "{'fyId': '" + fyId + "','monthIndex': '" + monthIndex + "'}",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        if (data == "true") {
+                            valid = true;
+                        }
+                    }
+                });
+                return valid;
+            }
+
+            function checkNaN() {
+                var valid = false;
+                $('#dataTable tbody tr').find('input').each(function () {
+                    if (isNaN($(this).val()))
+                    {
+                        valid = true;
+                    }
+                });
+                return valid;
+            }
+
+        });
+    </script>
+}
+
+

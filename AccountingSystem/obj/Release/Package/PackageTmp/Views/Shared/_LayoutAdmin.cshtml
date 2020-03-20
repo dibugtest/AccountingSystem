@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>@ViewBag.Title</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="~/Admin/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="~/Admin/dist/css/sb-admin-2.css" rel="stylesheet">
+    <!-- Morris Charts CSS -->
+    <link href="~/Admin/vendor/morrisjs/morris.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="~/Admin/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <style type="text/css">
+        * {
+            font-family: Arial;
+            font-size: 14px;
+        }
+        html {
+            overflow-y: scroll;
+        }
+    </style>
+
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body style="padding-top:0px;">
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href='@Url.Action("Index", "Home")'>DebugSoft</a>
+            </div>
+            <!-- /.navbar-header -->
+
+
+            <ul class="nav navbar-top-links navbar-left navbar-collapse">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-edit fa-fw"></i> प्रविष्टि<i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href='@Url.Action("index", "officer")'><i class="fa fa-edit fa-fw"></i>कर्मचारी प्रविष्टि</a>
+                        </li>
+                        <li>
+                            <a href='@Url.Action("create", "office")'><i class="fa fa-edit fa-fw"></i> कार्यालय प्रविष्टि</a>
+                        </li>
+                        <li>
+                            <a href='@Url.Action("create", "vendor")'><i class="fa fa-edit fa-fw"></i>सप्लाएर प्रविष्टि</a>
+                        </li>
+                        <li>
+                            <a href='@Url.Action("createFisYear", "fiscalYear")'><i class="fa fa-edit fa-fw"></i>आर्थिक वर्ष प्रविष्टि</a>
+                        </li>
+                      
+                        <li>
+                            <a href='@Url.Action("create", "BaUSiNa")'><i class="fa fa-edit fa-fw"></i> ब.उ.शि.नं. </a>
+                        </li>
+                        <li><a href='@Url.Action("create", "KhaSiNa")'><i class="fa fa-edit fa-fw"></i> ख.शि.नं. </a></li>
+                        <li>
+                            <a href='@Url.Action("create", "byehora")'><i class="fa fa-edit fa-fw"></i> व्यहोरा प्रविष्टि </a>
+                        </li>
+                        <li>
+                            <a href='@Url.Action("create", "BhuktaniPaune")'><i class="fa fa-edit fa-fw"></i> भूक्तानी पाउने प्रविष्टि  </a>
+                        </li>
+                        <li><a href='@Url.Action("create", "rajaswoSirsak")'><i class="fa fa-edit fa-fw"></i>राजश्व शिर्षक प्रविष्टि </a></li>
+                        <li>
+                            <a href='@Url.Action("create", "rajaswoUpaSirsak")'><i class="fa fa-edit fa-fw"></i>राजश्व उपशिर्षक प्रविष्टि </a>
+                        </li>
+                        <li><a href='@Url.Action("create", "kharchaShrot")'><i class="fa fa-edit fa-fw"></i> खर्च श्रोत </a></li>
+                        <li>
+                            <a href='@Url.Action("create", "arthabudget")'><i class="fa fa-edit fa-fw"></i> अर्थ बजेट तर्फ</a>
+                        </li>
+                        <li>
+                            <a href='@Url.Action("create", "talabiBharpai")'><i class="fa fa-edit fa-fw"></i> तलबी भरपाई </a>
+                        </li>
+                        <li><a href='@Url.Action("createTalabi", "BhuktaniAdesh")'><i class="fa fa-edit fa-fw"></i> तलबी भुक्तानी आदेश</a></li>
+
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-edit fa-fw"></i>भौचर प्रविष्टि<i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href='@Url.Action("createKharcha", "jornalEntries")'><i class="fa fa-edit fa-fw"></i> खर्च</a>
+                        </li>
+                        <li>
+                            <a href='@Url.Action("nikasa", "jornalEntries")'><i class="fa fa-edit fa-fw"></i> निकासा</a>
+                        </li>
+                        <li>
+                            <a href='@Url.Action("createKatti", "jornalEntries")'><i class="fa fa-edit fa-fw"></i> कट्टी</a>
+                        </li>
+                        <li>
+                            <a href='@Url.Action("index", "jornalEntries")'><i class="fa fa-table fa-fw"></i>गोश्वारा भौचर हेर्नुहोस्</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-edit fa-fw"></i>पेश्की<i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href='@Url.Action("createPeski", "jornalEntries")'><i class="fa fa-edit fa-fw"></i>पेश्की</a>
+                        </li>
+                        <li>
+                            <a href='@Url.Action("IndexPeski", "jornalEntries")'><i class="fa fa-table fa-fw"></i>पेश्की गोश्वारा भौचर हेर्नुहोस्</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-edit fa-fw"></i>राजश्व<i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href='@Url.Action("createJornal", "Rajaswo")'><i class="fa fa-edit fa-fw"></i>गोस्वारा भौचर प्रविष्टि</a>
+                        </li>
+                        <li>
+                            <a href='@Url.Action("createAsuli", "Rajaswo")'><i class="fa fa-edit fa-fw"></i> असूली विवरण प्रविष्टि</a>
+                        </li>
+                        <li>
+                            <a href='@Url.Action("createDakhila", "Rajaswo")'><i class="fa fa-edit fa-fw"></i> दाखिला विवरण प्रविष्टि</a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-edit fa-fw"></i>धरौटी<i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href='@Url.Action("createJornal", "dharauti")'><i class="fa fa-edit fa-fw"></i>गोस्वारा भौचर प्रविष्टि</a>
+                        </li>
+                        <li>
+                            <a href='@Url.Action("indexjornal", "dharauti")'><i class="fa fa-table fa-fw"></i>गोश्वारा भौचर हेर्नुहोस्</a>
+                        </li>
+                    </ul>
+                </li>
+                @*<li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-edit fa-fw"></i> विवरण<i class="fa fa-caret-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href='@Url.Action("index", "officer")'><i class="fa fa-table fa-fw"></i> कर्मचारी</a></li>
+
+                        <li><a href='@Url.Action("index", "office")'><i class="fa fa-table fa-fw"></i> कार्यालय</a></li>
+                        <li><a href='@Url.Action("index", "talabiBharpai")'><i class="fa fa-table fa-fw"></i> तलबी भरपाई</a></li>
+                        <li>
+                            <a href='@Url.Action("index", "BaUSiNa")'><i class="fa fa-table fa-fw"></i> ब.उ.शि.नं. </a>
+                        </li>
+                        <li><a href='@Url.Action("index", "KhaSiNa")'><i class="fa fa-table fa-fw"></i> ख.शि.नं. </a></li>
+                        <li><a href='@Url.Action("index", "kharchaShrot")'><i class="fa fa-table fa-fw"></i> खर्च श्रोत </a></li>
+                    </ul>
+                </li>*@
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-print fa-fw"></i> रिपोर्ट<i class="fa fa-caret-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href='@Url.Action("indextalabiBharpai", "Report")'><i class="fa fa-print fa-fw"></i> तलबी भरपाई</a></li>
+
+                        <li><a href='@Url.Action("indexJornal", "JornalEntries")'><i class="fa fa-print fa-fw"></i> गोश्वारा भौचर</a></li>
+                        <li><a href='@Url.Action("BhuktaniAdeshBibaran", "BhuktaniAdesh")'><i class="fa fa-print fa-fw"></i> भुक्तानी आदेश</a></li>
+                        <li>
+                            <a href='@Url.Action("Fantwari", "kharchaKoFantwari")'><i class="fa fa-print fa-fw"></i> खर्चको फाँटवारी</a>
+                        </li>
+                        <li><a href='@Url.Action("Nagadi", "kharchaKoFantwari")'><i class="fa fa-print fa-fw"></i> बैंक नगदी किताब</a></li>
+                        <li><a href='@Url.Action("Hisab", "kharchaKoFantwari")'><i class="fa fa-print fa-fw"></i> बजेट हिसाब</a></li>
+                        <li><a href='@Url.Action("indexArthaBudget", "Report")'><i class="fa fa-print fa-fw"></i> अर्थ बजेट</a></li>
+                        <li><a href='@Url.Action("TalabiBhuktani", "BhuktaniAdesh")'><i class="fa fa-print fa-fw"></i> तलबी भुक्तानी आदेश</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-print fa-fw"></i> रिपोर्ट राजश्व<i class="fa fa-caret-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href='@Url.Action("RajaswoJornal", "rajaswo")'><i class="fa fa-print fa-fw"></i>राजश्व गोश्वारा भौचर</a></li>
+                        <li><a href='@Url.Action("masikPratibedan", "rajaswo")'><i class="fa fa-print fa-fw"></i> राजश्व मासिक प्रतिवेदन</a></li>
+                        <li>
+                            <a href='@Url.Action("bankNagadi", "rajaswo")'><i class="fa fa-print fa-fw"></i> राजश्व बैंक नगदी किताब</a>
+                        </li>
+                        <li><a href='@Url.Action("rajaswoDakhila", "rajaswo")'><i class="fa fa-print fa-fw"></i> राजश्व दाखिला विवरण</a></li>
+                        <li><a href='@Url.Action("rajaswoAsuli", "rajaswo")'><i class="fa fa-print fa-fw"></i> राजश्व असूली विवरण</a></li>
+                        @*<li><a href='@Url.Action("indexArthaBudget", "Report")'><i class="fa fa-print fa-fw"></i> अर्थ बजेट</a></li>*@
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-print fa-fw"></i> रिपोर्ट धरौटी<i class="fa fa-caret-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href='@Url.Action("dharautiJornal", "dharauti")'><i class="fa fa-print fa-fw"></i>धरौटी गोश्वारा भौचर</a></li>
+                        <li><a href='@Url.Action("maskewari", "dharauti")'><i class="fa fa-print fa-fw"></i>धरौटी मस्केवारी</a></li>
+                        <li><a href='@Url.Action("khata", "dharauti")'><i class="fa fa-print fa-fw"></i> व्यक्तिगत धरौटी खाता </a></li>
+                        <li>
+                            <a href='@Url.Action("bhuktaniAdesh", "dharauti")'><i class="fa fa-print fa-fw"></i>धरौटी भुक्तानी आदेश</a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href='@Url.Action("backup","home")'><i class="fa fa-database"></i> Backup Database</a></li>
+            </ul>  
+            @Html.Partial("_LoginPartial")   <!-- /.navbar-static-side -->
+        </nav>
+                 
+    <div id="page-wrapper" style="margin-left: 0px;">
+        <div style="min-height:560px;">@RenderBody()</div>
+       
+        <footer><div><p style="float:left;" >&copy; @DateTime.Now.Year - नेपाल सरकार राष्ट्रिय अभिलेखालय</p><p style="float:right;"><a href="http://www.dibugsoft.com" class="btn btn-link">Supported By:Debug Soft</a></p></div></footer>
+        </div>
+    <!-- /#page-wrapper -->
+    </div>
+    <script src="~/Admin/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Admin/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        var RootUrl = '@Url.Content("~/")';
+    </script>
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

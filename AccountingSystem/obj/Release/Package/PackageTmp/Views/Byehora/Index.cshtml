@@ -1,0 +1,45 @@
+﻿@model IEnumerable<AccountingSystem.Models.byehora>
+
+@{
+    ViewBag.Title = "Index Byehora";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <h2 class="text-center">गोश्वारा भौचर विवरण</h2>
+
+    <table class="table table-bordered table-responsive">
+        <tr>
+            <th>
+                व्यहोरा
+            </th>
+            <th>
+                हिसाब नं.
+            </th>
+            <th>
+                कैफियत
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.byehoraName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.hisabNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.remarks)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.byehoraId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.byehoraId })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div class="col-md-12 text-center">@Html.ActionLink("Create New", "Create", null, new {@class="btn btn-primary" })</div>
+    </div>

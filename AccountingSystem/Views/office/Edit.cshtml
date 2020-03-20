@@ -1,0 +1,182 @@
+﻿@model AccountingSystem.Models.office
+
+@{
+    ViewBag.Title = "Edit Office";
+}
+<div class="row">
+<h2 class="text-center">सम्बन्धित कर्मचारीको विवरण परिवर्तन गर्नुहोस</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    @*<div class="form-horizontal">
+        <h4>office</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.officeId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.mantralaye, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.mantralaye)
+                @Html.ValidationMessageFor(model => model.mantralaye)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.bibhag, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.bibhag)
+                @Html.ValidationMessageFor(model => model.bibhag)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.karyalaye, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.karyalaye)
+                @Html.ValidationMessageFor(model => model.karyalaye)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.address, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.address)
+                @Html.ValidationMessageFor(model => model.address)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.phone, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.phone)
+                @Html.ValidationMessageFor(model => model.phone)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.url_web, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.url_web)
+                @Html.ValidationMessageFor(model => model.url_web)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.email, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.email)
+                @Html.ValidationMessageFor(model => model.email)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>*@
+            @Html.ValidationSummary(true)
+         @Html.HiddenFor(model => model.officeId)
+   <div class="col-md-3">
+            <div class="form-group">
+                <label>मन्त्रालय</label>
+                @Html.TextBoxFor(model => model.mantralaye,Model.mantralaye, new {type="text", @class="form-control",id="txtMantralaya"})
+                @Html.ValidationMessageFor(model=>model.mantralaye)
+            </div>
+        </div>
+         <div class="col-md-3">
+            <div class="form-group">
+                <label>विभाग</label>
+                @Html.TextBoxFor(model => model.bibhag,Model.bibhag, new { @class="form-control",id="txtBibhag"})
+                @Html.ValidationMessageFor(model=>model.bibhag)
+            </div>
+        </div>
+         <div class="col-md-3">
+            <div class="form-group">
+                <label>कार्यालय</label>
+                @Html.TextBoxFor(model => model.karyalaye,Model.karyalaye, new { @class="form-control",id="txtKaryalaya"})
+                @Html.ValidationMessageFor(model=>model.karyalaye)
+            </div>
+        </div>
+         <div class="col-md-3">
+            <div class="form-group">
+                <label>ठेगाना</label>
+                @Html.TextBoxFor(model => model.address,Model.address, new { @class="form-control",id="txtAddress"})
+                @Html.ValidationMessageFor(model=>model.address)
+            </div>
+        </div>
+         <div class="col-md-3">
+            <div class="form-group">
+                <label>फोन</label>
+                @Html.TextBoxFor(model => model.phone,Model.phone, new { @class="form-control",id="txtPhone"})
+                @Html.ValidationMessageFor(model=>model.phone)
+            </div>
+        </div>
+         <div class="col-md-3">
+            <div class="form-group">
+                <label>अफिस कोड</label>
+                @Html.TextBoxFor(model => model.officeCode,Model.officeCode, new { @class="form-control",id="txtOfficeCode"})
+                @Html.ValidationMessageFor(model=>model.officeCode)
+            </div>
+        </div>
+         <div class="col-md-3">
+            <div class="form-group">
+                <label>PO Box</label>
+                @Html.TextBoxFor(model => model.POBoxNo,Model.POBoxNo, new { @class="form-control",id="txtPOBox"})
+                @Html.ValidationMessageFor(model=>model.POBoxNo)
+            </div>
+        </div>
+         <div class="col-md-3">
+            <div class="form-group">
+                <label>इमेल</label>
+                @Html.TextBoxFor(model => model.email,Model.email, new { @class="form-control"})
+                @Html.ValidationMessageFor(model=>model.email)
+            </div>
+        </div>
+         <div class="col-md-3">
+            <div class="form-group">
+                <label>url/वेब</label>
+                @Html.TextBoxFor(model => model.url_web,Model.url_web, new { @class="form-control"})
+                @Html.ValidationMessageFor(model=>model.url_web)
+            </div>
+        </div>
+        <div class="col-md-12 text-center" >
+    <input type="submit" value="Save" class="btn btn-primary" />
+    @Html.ActionLink("Back to List", "Index", null, new { @class="btn btn-default"})
+        </div>
+    }
+</div>
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+    <script src="~/Scripts/NepaliUnicode.js"></script>
+<script src="~/Transliteration/jsapi.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var ele1 = $("#txtBibhag");
+            var ele2 = $("#txtMantralaya");
+            var ele3 = $("#txtKaryalaya");
+            var ele4 = $("#txtAddress");
+            var ele5 = $("#txtPhone");
+            var ele6 = $("#txtOfficeCode");
+            var ele7 = $("#txtPOBox");
+            AddUnicode(ele1);
+            AddUnicode(ele2);
+            AddUnicode(ele3);
+            AddUnicode(ele4);
+            AddUnicode(ele5);
+            AddUnicode(ele6);
+            AddUnicode(ele7);
+        });
+    </script>
+   <script src="~/Transliteration/transliteration.js"></script>
+<link href="~/Transliteration/transliteration.css" rel="stylesheet" />
+<script src="~/Transliteration/transliteration.I.js"></script>
+
+}

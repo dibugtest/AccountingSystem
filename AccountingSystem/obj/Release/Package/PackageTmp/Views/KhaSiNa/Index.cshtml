@@ -1,0 +1,86 @@
+﻿@model IEnumerable<AccountingSystem.Models.khaSiNa>
+
+@{
+    ViewBag.Title = "Index KhaSiNa";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <h2 class="text-center">दर्ता भएका ख.शि.नं.हरुको विवरण</h2>
+    
+    <div class="col-md-12">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            if (ViewBag.ErrorMessage != null)
+            {
+                <div class="alert alert-danger text-center">@ViewBag.ErrorMessage</div>
+            }
+
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>ब.उ.शि.नं.</label>
+                    @Html.DropDownList("baUSiNaId", null, "--ब.उ.शि.नं.--", new { @class = "form-control", id = "txtBaUSiNa" })
+                </div>
+            </div>
+
+            <div class="col-md-2" style="padding-top:22px;"><input type="submit" value="Select" class="btn btn-primary" id="btnSubmit" /></div>
+
+        }
+    </div>
+
+
+
+    <div class="col-md-12">
+        <table class="table table-bordered table-responsive">
+            <tr>
+                <th>
+                    ब.उ.शि.नं.
+                </th>
+                <th>
+                   शिर्षक
+                </th>
+                <th>
+                   ख.शि.नं.
+                </th>
+                <th>
+                    खर्च रकम (रू.)
+                </th>
+                <th>
+                   कैफियत
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.baUSiNa.baUSirsak)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.khaSirsak)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.khaSiNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.khaRakam)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.remarks)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.khaSiNaId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.khaSiNaId })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <div class="col-md-12 text-center" >
+        @Html.ActionLink("Create New", "Create", null, new { @class="btn btn-primary"})
+    </div>
+</div>

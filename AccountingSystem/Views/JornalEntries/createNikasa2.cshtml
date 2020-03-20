@@ -1,0 +1,321 @@
+﻿@model List<AccountingSystem.Models.jornalEntries>
+
+@{
+    ViewBag.Title = "Create Journal Nikasa";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@Styles.Render("~/Content/nepDate")
+
+<div class="row">
+    <h2 class="text-center">गोश्वारा भौचरको निकासा प्रविष्टि गर्नुहोस</h2>
+    @using (Html.BeginForm("CreateNikasas", "jornalEntries", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.ValidationSummary()
+        if (ViewBag.Message != null)
+        {
+            <div style="border:solid 1px green">
+                @ViewBag.Message
+            </div>
+        }
+        if (ViewBag.ErrorMessage != null)
+        {
+            <div style="border:solid 1px green">
+                @ViewBag.ErrorMessage
+            </div>
+        }
+        <fieldset style="border:1px solid;">
+            <legend style="width:auto;">विवरण</legend>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>ग्वाश्वारा भौचर नं.</label>
+                    @Html.TextBox("jornalEntriesNo", Model[0].jornalNo, new { @class = "form-control", id = "txtJornalNo"})
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+
+
+                    <label>ब.उ.शि.नं.</label>
+                    @Html.DropDownList("baUSiNaId", null, new { @class = "form-control", id = "txtBaUSiNa" })
+                </div>
+            </div>
+            <div class="col-md-2">
+
+                <div class="form-group">
+                    <label>आ.ब.</label>
+                    @Html.DropDownList("fyId", null, new { @class = "form-control", id = "ddlFyId" })
+                </div>
+
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>मिति</label>
+                    @Html.TextBox("nepDate","", new { @class = "form-control", id = "txtNepDate" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>महिना</label>
+                    @Html.DropDownList("month", EnumHelper.GetSelectList(typeof(AccountingSystem.Models.month), (AccountingSystem.Models.month)Model[0].monthIndex), new { @class = "form-control", id = "txtMonth", @data_val = "true", @data_val_required = "Month is Required" })
+                </div>
+            </div>
+        @Html.TextBox("enDate", DateTime.Now, new { id = "txtEngDate", type = "datetime", style = "display:none;"})
+        </fieldset>
+    <input name="bhuktaniAdeshNo" type="hidden" value=@ViewBag.bhuktaniAdeshNo>
+        <table class="table table-bordered" id="dataTable" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <th>संकेत नं.</th>
+                <th>डेबिट/क्रेडिट</th>
+                <th>व्यहोरा</th>
+                <th>खाता नं.</th>
+                <th>हिसाब नं.</th>
+                <th>डेबिट </th>
+                <th>क्रेडिट</th>
+            </tr>
+            @if (Model != null && Model.Count > 0)
+            {
+                int j = 0;
+                foreach (var i in Model)
+                {
+                    <tr id="dataRow">
+                        <td>@Html.TextBoxFor(a => a[j].sanketNo, new { @class = "form-control", id = j + "txtSanketNo" })</td>
+                        <td>
+                            @Html.DropDownListFor(a => a[j].deCre, null, new { @class = "form-control", id = j + "ddlDeCre", style = "width:100px;" })
+                        </td>
+                        <td>@Html.TextBoxFor(a => a[j].bibaran, "", new { @class = "form-control", id = j + "txtBibaran", style = "width:250px;" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].khaPaNo, "", new { @class = "form-control", id = j + "txtKhaPaNo" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].hisabNo, "", new { @class = "form-control", id = j + "txtHisabNo", style = "width:200px;" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].debit, new { @class = "form-control", id = j + "txtDebit", type = "decimal", style = "width:200px;" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].credit, new { @class = "form-control", id = j + "txtCredit", type = "decimal", style = "width:200px;" })</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].baUSiNaId, new { id = j + "txtByehoraId", value = i.baUSiNaId })</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].nepDate, new { id = j + "txtNepaliDate", value = i.nepDate })</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].jornalNo, new { id = j + "txtByehoraId", value = i.jornalNo })</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].jornalType, new { id = j + "txtNepaliDate", value = i.jornalType })</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].fyId, new { id = j + "txtFyId" })</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].month, new { id = j + "txtMonthName" })</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].year, new { id = j + "txtYear" })</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].monthIndex, new { id = j + "txtMonthIndex" })</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].chequeRakam, new { id = j + "txtChequeRakam", value = 0 })</td>
+                    </tr>
+                            j++;
+                }
+            }
+        </table>
+          <div class="col-md-3">
+            <div class="form-group">
+                <label>चेक रकम</label>
+                @Html.TextBox("chequeRakam",0, new {@class="form-control",id="txtChequeRakam",type="number",step="0.01"})
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>नोट</label>
+                @Html.TextArea("note", Model[0].note, new { @class = "form-control", id = "txtNote" })
+            </div>
+        </div>
+        <div class="col-md-12 text-center">
+            <input type="submit" value="Submit" class="btn btn-primary" id="btnSubmit" />
+            @Html.ActionLink("Back To List", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+    @Scripts.Render("~/bundles/nepDate")
+
+    <script src="~/Scripts/NepaliUnicode.js"></script>
+  <script src="~/Transliteration/jsapi.js"></script>
+
+    <script language="javascript">
+        $(document).ready(function () {
+
+            function AddUnicodeTxt() {
+                var $tableBody = $("#dataTable");
+                var $trLast = $tableBody.find("tr:last");
+                var suffix = $trLast.find(':input:first').attr('name').match(/\d+/);
+               
+                for (var i = 0; i <= suffix; i++) {
+                    var ele1 = $("#" + i + "txtBibaran");
+                    var ele2 = $("#" + i + "txtSanketNo");
+                    var ele3 = $("#" + i + "txtHisabNo");
+                    var ele4 = $("#" + i + "txtKhaPaNo");
+                   
+                  
+                    AddUnicode(ele1);
+                    AddUnicode(ele2);
+                    AddUnicode(ele3);
+                    AddUnicode(ele4);
+                  
+                }
+                var ele5 = $("#txtJornalNo");
+                var ele6 = $("#txtNote");
+
+                AddUnicode(ele5);
+                AddUnicode(ele6);
+            }
+
+            AddUnicodeTxt();
+
+            $('#txtNepDate', 'body').nepaliDatePicker({
+                onChange: function () {
+                    $('#txtNepDate').val();
+                    $('#txtEngDate').val(BS2AD($('#txtNepDate').val()));
+                }
+            });
+
+
+        });
+      
+        function checkValidationDeCre() {
+
+            var deAmount = 0;
+            var creAmount = 0;
+            var breakout = false;
+            $("body #dataTable tr#dataRow").each(function (e) {
+
+                var suffix = $(this).find(':input:first').attr('name').match(/\d+/);
+
+                var deCre = $("#" + suffix + "ddlDeCre").val();
+                var debit = $("#" + suffix + "txtDebit").val();
+                var credit = $("#" + suffix + "txtCredit").val();
+
+                if ($("#" + suffix + "txtBibaran").val() == "") {
+                    alert("Bhyehora Field is Empty");
+                    breakout = true;
+                    return false;
+                    //break;
+                }
+                if (deCre == "") {
+                    alert("Please Select Dedit or Credit in dropdown option");
+                    breakout = true;
+                    return false;
+                    // break;
+                }
+                if ((deCre == "debit" && parseFloat(debit) == 0) || (deCre == "debit" && parseFloat(credit) != 0) || (deCre == "credit" && parseFloat(credit) == 0) || (deCre == "credit" && parseFloat(debit) != 0)) {
+                    alert("Insert Value in debit or Credit field with matching selection of debit or credit from debit/Credit field");
+                    breakout = true;
+                    return false;
+                    // break;
+                }
+                deAmount = parseFloat(deAmount) + parseFloat($("#" + suffix + "txtDebit").val());
+                creAmount = parseFloat(creAmount) + parseFloat($("#" + suffix + "txtCredit").val());
+            });
+            if (breakout == false) {
+                if (deAmount.toFixed(2) != creAmount.toFixed(2)) {
+                    alert("Total Debit and Credit amount are not equal.Please make correction and submit.")
+                    return false;
+                }
+            }
+            if (breakout) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+        function checkValidationTextBox() {
+            if ($("#txtJornalNo").val() == null) {
+                alert("Jornal Num is required.");
+                return false;
+            }
+          else if ($("#txtBaUSiNa").val() == null || $("#txtBaUSiNa").val() == 0) {
+                alert("No Option Selected From BaUSiNa");
+                return false;
+            }
+            else if ($("#txtNepDate").text() == null || $("#txtNepDate").val() == "") {
+                alert("Date is Null");
+                return false;
+            }
+            else if ($("#txtChequeRakam").val() == 0 || $("#txtChequeRakam").val() == "") {
+                alert("Chqeque Rakam is Required");
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+        function serializeTableRow() {
+            var i = 0;
+            $("#dataTable tr#dataRow").each(function (e) {
+                $(this).find('input,select').each(function () {
+
+                    // var suffix = $(this).find(':input:first').attr('name').match(/\d+/);
+                    var oldN = $(this).attr('name');
+                    var oldNIndex = oldN.match(/\d+/);
+                    var newN = oldN.replace('[' + oldNIndex + ']', '[' + parseInt(i) + ']');
+                    $(this).attr('name', newN);
+                });
+                i = (parseInt(i) + 1);
+            });
+        }
+
+        function checkJornalNo() {
+            var valid = true;
+            var jornalNo = $("#txtJornalNo").val();
+            var fyId = $("#ddlFyId").val();
+            var baUSiNaId = $("#txtBaUSiNa").val();
+            $.ajax({
+                async: false,
+                url: RootUrl + 'JornalEntries/checkJornalNo/',
+                data: "{'jornalNo':'" + jornalNo + "','fyId':'" + fyId + "','baUSiNaId':'" + baUSiNaId + "','jornalType':'निकासा'}",
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    if (data == "NotNull") {
+                        valid = false;
+                    }
+                }
+            });
+            return valid;
+        }
+
+
+        $("#btnSubmit").click(function (e) {
+            var breakout = false;
+
+            var jornalType = $("#txtJornalType").val();
+            if (checkValidationTextBox() == false) {
+                breakout = true;
+               // e.preventDefault();
+            }
+
+            if (checkJornalNo() == false && breakout == false) {
+                alert("Jornal No Already exists.");
+                breakout = true;
+            } 
+
+            if (breakout == false) {
+                if (checkValidationDeCre() == false) {
+                    breakout = true;
+                  //  e.preventDefault();
+                }
+            }
+
+            if (breakout == false) {
+                serializeTableRow();
+
+            }
+            if (breakout)
+            {
+                e.preventDefault();
+            }
+        });
+    </script>
+   <script src="~/Transliteration/transliteration.js"></script>
+<link href="~/Transliteration/transliteration.css" rel="stylesheet" />
+<script src="~/Transliteration/transliteration.I.js"></script>
+
+}
+
+
+

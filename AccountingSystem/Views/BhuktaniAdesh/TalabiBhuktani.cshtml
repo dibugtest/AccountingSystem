@@ -1,0 +1,141 @@
+﻿@{
+    ViewBag.Title = "Talabi Bhuktani Adesh";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <h2 class="text-center">तलबी भुक्तानी आदेशको लागि वर्ष र महिना छान्नुहोस्</h2>
+    @using (Html.BeginForm("TalabiBhuktaniAdesh", "bhuktaniAdesh", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.ValidationSummary()
+        if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+        <div class="col-md-12 ">
+            <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>आ.ब.</label>
+                        @Html.DropDownList("fyId", null, new { @class = "form-control", id = "ddlFyId" })
+                    </div>
+                </div>
+            <div class="col-md-4"></div>
+            </div>
+         <div class="col-md-12">
+             <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>महिना </label>
+                @Html.DropDownList("month", EnumHelper.GetSelectList(typeof(AccountingSystem.Models.month)), new { @class = "form-control", id = "txtMonth"})
+            </div>
+        </div>
+             <div class="col-md-4"></div>
+</div>
+    <div class="col-md-12">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>भुक्तानी आदेश नं</label><label class="text-danger" id="lblError"></label>
+                    @Html.DropDownList("bhuktaniAdeshNo", new SelectList(ViewBag.bhuktaniAdeshNo, "text", "value"), "--छान्नुहोस्--", new { @class = "form-control", id = "ddlBhuktaniNo" })
+                </div>
+            </div>
+            </div>
+    <div class="col-md-12">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 text-center">
+            <input type="submit" value="Submit" id="btnSubmit" class="btn btn-primary" />
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    }
+</div>
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var listBhuktaniNo;
+
+            function getBhuktaniNo() {
+                var fyId = $("#ddlFyId").val();
+                var monthIndex = $("#txtMonth").val();
+                if (fyId == null || monthIndex == null ) {
+                    alert("fiscal year, month and BaUSiNa is Required");
+                    listBhuktaniNo = null;
+                }
+                else {
+
+                    $.ajax({
+                        async: false,
+                        url: RootUrl + 'BhuktaniAdesh/getBhuktaniNoTalabi/',
+                        type: "POST",
+                        dataType: "json",
+                        data: "{'fyId':'" + fyId + "','monthIndex':'" + monthIndex +"'}",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            listBhuktaniNo = data;
+                        }
+                    });
+                }
+            }
+
+            $("#txtMonth").change(function (e) {
+                changeFunction();
+            });
+            $("#ddlFyId").change(function (e) {
+                changeFunction();
+            });
+
+
+            function changeFunction() {
+                getBhuktaniNo();
+                var option = '';
+                $("#ddlBhuktaniNo").empty();
+                option += '<option value="">--छान्नुहोस्--</option>';
+                for (var i = 0; i < listBhuktaniNo.length; i++) {
+                    option += '<option value="' + listBhuktaniNo[i].value + '">' + listBhuktaniNo[i].label + '</option>';
+                }
+                $('#ddlBhuktaniNo').append(option);
+                if (listBhuktaniNo.length == 0) {
+                    $('#lblError').val("No भुक्तानी आदेश नं. found for selected for selected month and fiscal year.");
+                }
+                else {
+                    $('#lblError').val("");
+                }
+
+            }
+
+            $("#btnSubmit").click(function (e) {
+                if ($("#ddlBhuktaniNo").val() == "" || $("#ddlBhuktaniNo").val() == 0) {
+                    alert("Bhuktani Adesh No is Required");
+                    e.preventDefault();
+                }
+            });
+
+            //$("#btnSubmit").click(function (e) {
+            //    if (checkValidationTextBox() == false) {
+            //        e.preventDefault();
+            //    }
+            //});  
+
+        //    function checkValidationTextBox() {
+               
+        //        if ($("#txtYear").val() == "" || $("#txtYear").val()==null) {
+        //            alert("Year is Required");
+        //            return false;
+        //        }
+        //        else {
+        //            return true;
+        //        }
+        //    }
+        });
+    </script>
+   
+}

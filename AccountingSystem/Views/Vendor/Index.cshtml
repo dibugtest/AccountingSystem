@@ -1,0 +1,102 @@
+﻿@model IEnumerable<AccountingSystem.Models.vendor>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <h2 class="text-center">दर्ता भएका सप्लाएरहरुको विवरण</h2>
+    <div class="col-md-12">
+        <table class="table table-bordered table-responsive">
+            <tr>
+                <th>
+                    सप्लाएरको नाम
+                </th>
+                <th>
+                    ठेगाना
+                </th>
+                <th>
+                    TPIN/PAN न.
+                </th>
+                <th>
+                    करदाता न.
+                </th>
+                <th>
+                    इमेल
+                </th>
+                <th>
+                    इमेल(बैकल्पिक)
+                </th>
+                <th>
+                    फोन
+                </th>
+                <th>
+                    मोबाईल न.
+                </th>
+                <th>
+                    url
+                </th>
+                <th>
+                    सम्पर्क गर्ने ब्यक्तिको नाम
+                </th>
+                <th>बैंकको नाम</th>
+                <th>बैंक शाखा</th>
+                <th>बैंक खाता नं.</th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TPIN_PAN)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.karDataNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.altEmail)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.mobilePhone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.url)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.contactPerson)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.bankName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.bankBranch)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.bankAccNo)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.vendorId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.vendorId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.vendorId })
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="col-md-12 text-center">
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+    </div>
+</div>

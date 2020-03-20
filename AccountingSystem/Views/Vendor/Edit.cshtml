@@ -1,0 +1,170 @@
+﻿@model AccountingSystem.Models.vendor
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <h2 class="text-center">सम्बन्धित सप्लाएरको विवरण परिवर्तन गर्नुहोस</h2>
+
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.vendorId)
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">सप्लाएरको नाम</label>@Html.ValidationMessageFor(model => model.name)
+                    @Html.TextBoxFor(model => model.name, new { @class = "form-control", id = "txtName" })
+
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label ">ठेगाना</label>@Html.ValidationMessageFor(model => model.address)
+                    @Html.TextBoxFor(model => model.address, new { @class = "form-control", id = "txtAddress" })
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">सम्पर्क गर्ने व्यक्तिको नाम</label>@Html.ValidationMessageFor(model => model.contactPerson)
+                    @Html.TextBoxFor(model => model.contactPerson, new { @class = "form-control", id = "txtContactPerson" })
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">TPIN/PAN नम्बर</label>@Html.ValidationMessageFor(model => model.TPIN_PAN)
+                    @Html.TextBoxFor(model => model.TPIN_PAN, new { @class = "form-control", id = "txtTPIN_PAN" })
+
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label ">करदाता नम्बर</label>@Html.ValidationMessageFor(model => model.karDataNo)
+                    @Html.TextBoxFor(model => model.karDataNo, new { @class = "form-control", id = "txtKarDataNo" })
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label ">फोन नम्बर</label>@Html.ValidationMessageFor(model => model.phone)
+                    @Html.TextBoxFor(model => model.phone, new { @class = "form-control", id = "txtPhone" })
+
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label ">मोबाईल नम्बर </label>@Html.ValidationMessageFor(model => model.mobilePhone)
+                    @Html.TextBoxFor(model => model.mobilePhone, new { @class = "form-control", id = "txtMobilePhone" })
+
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label">इमेल</label>@Html.ValidationMessageFor(model => model.email)
+                    @Html.TextBoxFor(model => model.email, new { @class = "form-control" })
+
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label ">इमेल(बैकल्पिक)</label>@Html.ValidationMessageFor(model => model.altEmail)
+                    @Html.TextBoxFor(model => model.altEmail, new { @class = "form-control" })
+
+                </div>
+            </div>
+
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label class="control-label ">url</label>@Html.ValidationMessageFor(model => model.url)
+
+                    @Html.TextBoxFor(model => model.url, new { @class = "form-control" })
+
+                </div>
+            </div>
+
+
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">बैंकको नाम</label>@Html.ValidationMessageFor(model => model.bankName)
+                    @Html.TextBoxFor(model => model.bankName, new { @class = "form-control", id = "txtBankName" })
+
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">बैंक शाखा</label>@Html.ValidationMessageFor(model => model.bankBranch)
+                    @Html.TextBoxFor(model => model.bankBranch, new { @class = "form-control", id = "txtBankBranch" })
+
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="control-label">बैंक खाता नं.</label>@Html.ValidationMessageFor(model => model.bankAccNo)
+                    @Html.TextBoxFor(model => model.bankAccNo, new { @class = "form-control", id = "txtBankAccNo" })
+
+                </div>
+            </div>
+
+            <div class="col-md-12 text-center">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    }
+
+</div>
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+    <script src="~/Scripts/NepaliUnicode.js"></script>
+<script src="~/Transliteration/jsapi.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var ele1 = $("#txtName");
+            var ele2 = $("#txtAddress");
+            var ele3 = $("#txtContactPerson");
+            var ele4 = $("#txtTPIN_PAN");
+            var ele5 = $("#txtKarDataNo");
+            var ele6 = $("#txtPhone");
+            var ele7 = $("#txtMobilePhone");
+            var ele8 = $("#txtBankName");
+            var ele9 = $("#txtBankBranch");
+            var ele10 = $("#txtBankAccNo");
+            AddUnicode(ele1);
+            AddUnicode(ele2);
+            AddUnicode(ele3);
+            AddUnicode(ele4);
+            AddUnicode(ele5);
+            AddUnicode(ele6);
+            AddUnicode(ele7);
+            AddUnicode(ele8);
+            AddUnicode(ele9);
+            AddUnicode(ele10);
+
+        });
+    </script>
+   <script src="~/Transliteration/transliteration.js"></script>
+<link href="~/Transliteration/transliteration.css" rel="stylesheet" />
+<script src="~/Transliteration/transliteration.I.js"></script>
+
+}

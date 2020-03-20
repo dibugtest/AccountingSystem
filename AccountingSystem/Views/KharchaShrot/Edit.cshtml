@@ -1,0 +1,75 @@
+﻿@model AccountingSystem.Models.khaShrot
+
+@{
+    ViewBag.Title = "Edit kharchashrot";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <h2 class="text-center">सम्बन्धित खर्च श्रोत परिवर्तन गर्नुहोस</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+    <div class="form">
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.sourceId)
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>खर्च श्रोत</label>
+
+                    @Html.TextBoxFor(model => model.sourceName, "", new { @class = "form-control",id="txtSourceName" })
+                    @Html.ValidationMessageFor(model => model.sourceName)
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>कैफियत</label>
+                    @Html.TextAreaFor(model => model.remarks, new { @class = "form-control",id="txtRemarks" })
+                    @Html.ValidationMessageFor(model => model.remarks)
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+            <div class="col-md-12 text-center">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    }
+
+    </div>
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+    @Scripts.Render("~/bundles/nepDate")
+    <script src="~/Scripts/NepaliUnicode.js"></script>
+    <script src="~/Transliteration/jsapi.js"></script>
+
+    <script language="javascript">
+        $(document).ready(function () {
+
+
+            var ele1 = $("#txtSourceName");
+            var ele2 = $("#txtRemarks");
+
+            AddUnicode(ele1);
+            AddUnicode(ele2);
+
+        });
+    </script>
+    <script src="~/Transliteration/transliteration.js"></script>
+    <link href="~/Transliteration/transliteration.css" rel="stylesheet" />
+    <script src="~/Transliteration/transliteration.I.js"></script>
+
+}

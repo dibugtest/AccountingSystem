@@ -1,0 +1,59 @@
+﻿@model AccountingSystem.Models.fiscalYear
+
+@{
+    ViewBag.Title = "Details FiscalYear";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>fiscalYear</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nepFy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nepFy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.enFy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.enFy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.activatedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.activatedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.activatedBy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.activatedBy)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.fyId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,75 @@
+﻿@model AccountingSystem.Models.rajaswoSirsak
+
+@{
+    ViewBag.Title = "Edit RajaswoSirsak";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+
+<div class="row">
+    <h2 class="text-center">राजश्व शिर्षक विवरण परिवर्तन गर्नुहोस</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.rsId)
+
+        <div class="col-md-4"></div>
+        <div class="col-md-4"> 
+            <div class="col-md-12">
+            <div class="form-group">
+                <label>राजस्व शिर्षक</label>
+                @Html.TextBoxFor(model => model.sirsak, new { @class = "form-control", id = "txtSirsak" })
+                @Html.ValidationMessageFor(model => model.sirsak)
+            </div>
+        </div>
+      
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>राजस्व शिर्षक नं.</label>
+                @Html.TextBoxFor(model => model.sirsakNo, new { @class = "form-control", id = "txtSirsakNo" })
+                @Html.ValidationMessageFor(model => model.sirsakNo)
+            </div>
+        </div>
+       
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>कैफियत</label>
+                @Html.TextBoxFor(model => model.remarks, new { @class = "form-control", id = "txtRemarks" })
+                @Html.ValidationMessageFor(model => model.remarks)
+            </div>
+        </div>
+       
+        <div class="col-md-12 text-center">
+            <input type="submit" value="Save" class="btn btn-primary" />
+            @Html.ActionLink("Back to List", "Index",null, new { @class = "btn btn-default" })
+           
+        </div>
+            </div>
+        <div class="col-md-4"></div>
+    }
+    @section Scripts{
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryval")
+        @Scripts.Render("~/bundles/jquery.ui")
+        @Styles.Render("~/Content/css/jquery.ui")
+        <script src="~/Scripts/NepaliUnicode.js"></script>
+    <script src="~/Transliteration/jsapi.js"></script>
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                var ele1 = $("#txtSirsak");
+                var ele2 = $("#txtSirsakNo");
+                var ele3 = $("#txtRemarks");
+                AddUnicode(ele1);
+                AddUnicode(ele2);
+                AddUnicode(ele3);
+            });
+        </script>
+    <script src="~/Transliteration/transliteration.js"></script>
+    <link href="~/Transliteration/transliteration.css" rel="stylesheet" />
+    <script src="~/Transliteration/transliteration.I.js"></script>
+
+    }

@@ -1,0 +1,123 @@
+﻿@model AccountingSystem.Models.vendor
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>vendor</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TPIN_PAN)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TPIN_PAN)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.karDataNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.karDataNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.altEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.altEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mobilePhone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mobilePhone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.url)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.url)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.contactPerson)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.contactPerson)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bankName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bankName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bankBranch)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bankBranch)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bankAccNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bankAccNo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.vendorId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

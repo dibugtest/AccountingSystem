@@ -1,0 +1,310 @@
+﻿@model List<AccountingSystem.Models.jornalEntries>
+
+
+@{
+    ViewBag.Title = "Dharauti Journal";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    #tbl {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 12px;
+    }
+
+        #tbl th {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        #tbl td {
+            border-left: 1px solid black;
+            border-right: 1px solid black;
+            padding: 8px;
+        }
+
+        #tbl tr#lastRow td#lastRow1 {
+            border-left: 1px solid black;
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+
+        #tbl tr#lastRow td#lastRow2 {
+            border-right: 1px solid black;
+            border-top: 1px solid black;
+            border-bottom: 1px solid black;
+        }
+</style>
+<div class="row">
+    <div style="width:525px;font-size:12px;" id="printDiv">
+        <div style="width:100%;text-align:center">
+            नेपाल सरकार<br />संकृति, पर्यटन तथा उड्ययन मन्त्रालय<br /> राष्ट्रिय अभिलेखालय<br />
+        </div><br />
+        <div style="width:100%;text-align:center;">
+            <span style="float:left;">
+                <label> गोश्वारा भौचर</label>
+            </span>
+            <span style="float:right;">
+                गो.भौ.नं.&nbsp;@Model[0].jornalNo<br />
+                मिति:&nbsp;@StringToUnicode(Model[0].nepDate.ToString("yyyy/MM/dd"))
+            </span>
+            <span>ब.उ.शि.नं.&nbsp;धरौटी @*@Model[0].baUSiNa.baUSiNo*@</span>
+        </div><br />
+
+        <table id="tbl">
+            <tr>
+                <th>संकेत नं.</th>
+                <th>व्यहोरा</th>
+                <th>खाता पाना</th>
+                <th>हिसाब नं.</th>
+                <th>डेबिट</th>
+                <th>क्रेडिट</th>
+            </tr>
+            @if (Model.Count > 0)
+            {
+                foreach (var item in Model)
+                {
+
+                    <tr>
+                        <td>@item.sanketNo</td>
+                        @if (item.deCre == "debit")
+                        {
+                            <td>डेबिट @item.bibaran</td>
+                        }
+                        else
+                        {
+                            <td>क्रेडिट @item.bibaran</td>
+                        }
+                        <td>
+                            @item.khaPaNo
+                        </td>
+                        <td>@item.hisabNo</td>
+                        <td>
+                            @CheckZero(item.debit)
+                        </td>
+                        <td>
+                            @CheckZero(item.credit)
+                        </td>
+                    </tr>
+                }
+                <tr>
+                    <td></td>
+                    <td>@Model[0].year साल @Model[0].month महिनाको <br />@Model[0].note </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td style="border:1px solid black;">@CheckZero(Model.Sum(m => m.debit))</td>
+                    <td style="border:1px solid black;">@CheckZero(Model.Sum(m => m.credit))</td>
+                </tr>
+                <tr id="lastRow">
+                    <td id="lastRow1" colspan="3" style="text-align:left;">रसिद नं.<br />प्राप्त रकम</td>
+                    <td id="lastRow2" colspan="3" style="text-align:left;">चेक नं.<br />चेक रकम: @CheckZero(Model[0].chequeRakam)</td>
+                </tr>
+                <tr id="lastRow">
+                    <td id="lastRow1" colspan="3" style="text-align:left;">पेश गर्ने<br />मिति<br />दर्जा</td>
+                    <td id="lastRow2" colspan="3" style="text-align:left;">सदर गर्ने<br />मिति<br />दर्जा</td>
+
+                </tr>
+
+                <tr id="lastRow">
+                    <td id="lastRow1" colspan="6" style="text-align:left;">यसमा उल्लेखित रकम रु .@CheckZero((decimal)Model.Sum(m=>m.debit)) (अक्षेरुपी&nbsp;&nbsp;&nbsp;&nbsp; @ViewBag.AmountInWords मात्र )<br /> चेक नं. &nbsp;&nbsp;&nbsp;बाट स धन्यवाद प्राप्त भयो |<br />दस्तखत:</td>
+                </tr>
+            }
+        </table>
+        @{int i = 1,
+          j = 1;}
+        @if (Model[0].jornalType == "धरौटी फिर्ता")
+        { 
+            <br />
+            <table style="width:60%;text-align:center;margin-left:100px;">
+                <tr>
+                    <th style="text-align:center;"></th>
+                    <th style="text-align:center;">बुझिलिनेको नाम</th>
+                    <th style="text-align:center;">रकम</th>
+                    <th style="text-align:center;">कर</th>
+                    <th style="text-align:center;">पाउने रकम</th>
+                </tr>
+                @foreach (var item in ViewBag.bhuktaniAdesh)
+                {
+                    <tr>
+                        <td>@StringToUnicode(i.ToString())</td>
+                        <td>@item.pauneKoNaam</td>
+                        <td>@CheckZero((decimal)item.rakam)</td>
+                        <td>@StringToUnicode(0.ToString())</td>
+                        <td>@CheckZero((decimal)item.rakam)</td>
+                    </tr>
+                    i++;
+                }
+
+                <tr>
+                    <td></td>
+                    <td>जम्मा</td>
+                    <td style="border-top:1px solid;border-collapse:collapse;">@CheckZero((decimal)ViewBag.totalRakam)</td>
+                    <td style="border-top:1px solid;border-collapse:collapse;">@StringToUnicode(0.ToString())</td>
+                    <td style="border-top:1px solid;border-collapse:collapse;">@CheckZero((decimal)ViewBag.totalRakam)</td>
+                </tr>
+            </table>
+
+        }
+        
+        else if (Model[0].jornalType == "धरौटी आम्दानी")
+        {
+            
+            <label>धरौटी राखेको</label>
+            <table style="text-align:center;" id="tbl">
+                <tr>
+                    <th style="text-align:center;">क्र.सं.</th>
+                    <th style="text-align:center;">मिति</th>
+                    <th style="text-align:center;">धरौटी राख्नेको विवरण</th>
+                    <th style="text-align:center;">विल नं.</th>
+                    <th style="text-align:center;">आ.ब.</th>
+                    <th style="text-align:center;">विल रकम VAT बाहेक</th>
+                    <th style="text-align:center;">VAT रकम</th>
+                    <th style="text-align:center;">धरौटी रकम</th>
+                    <th style="text-align:center;">बापत</th>
+                </tr>
+                @foreach (var item in ViewBag.DharautiAmdani)
+                {
+                    <tr style="border-bottom:1px solid black;">
+                        <td>@StringToUnicode(j.ToString())</td>
+                        <td>@StringToUnicode(item.nepDate)</td>
+                        <td>@item.dharautiRakhne</td>
+                        <td>@item.billNo</td>
+                        <td>@item.fiscalYear.nepFy</td>
+                        <td>@CheckZero(item.billRakamNoVat)</td>
+                        <td>@CheckZero(item.VatRakam)</td>
+                        <td>@CheckZero(item.dharautiRakam)</td>
+                        <td>@item.bapat</td>
+                    </tr>
+                    j++;
+                }
+                <tr id="lastRow" style="border-bottom:1px solid black;"> 
+                    <td></td>
+                    <td></td>
+                    <td>जम्मा</td>
+                    <td></td>
+                    <td></td>
+                    <td style="border-top:1px solid;border-collapse:collapse;">@CheckZero((decimal)ViewBag.totalBillRakamNoVat)</td>
+                    <td style="border-top:1px solid;border-collapse:collapse;">@CheckZero((decimal)ViewBag.totalVatRakam)</td>
+                    <td style="border-top:1px solid;border-collapse:collapse;">@CheckZero((decimal)ViewBag.totalDharautiRakam)</td>
+                    <td></td>
+                </tr>
+            </table>
+        }
+    </div>
+</div>
+<br />
+<div class="row">
+    <div style="margin-left:200px;">
+        <input type="submit" class="btn btn-primary" id="btnPrint" value="Print" />
+        <input type="submit" class="btn btn-primary" id="btnConvertWord" value="Download Word">
+    </div>
+</div>
+@helper StringToUnicode(string data)
+{
+    string uni = "";
+    foreach (char c in data)
+    {
+        var charCode = "U+" + ((int)c).ToString("X4");
+        switch (charCode)
+        {
+            case "U+0030":
+                uni += "०";
+                break;
+            case "U+0031":
+                uni += "१";
+                break;
+            case "U+0032":
+                uni += "२";
+                break;
+            case "U+0033":
+                uni += "३";
+                break;
+            case "U+0034":
+                uni += "४";
+                break;
+            case "U+0035":
+                uni += "५";
+                break;
+            case "U+0036":
+                uni += "६";
+                break;
+            case "U+0037":
+                uni += "७";
+                break;
+            case "U+0038":
+                uni += "८";
+                break;
+            case "U+0039":
+                uni += "९";
+                break;
+            default:
+                uni += c;
+                break;
+        }
+    }
+    @uni
+}
+@helper CheckZero(decimal data)
+{
+    if (data == 0)
+    {
+        @StringToUnicode("")
+    }
+    else
+    {
+        @StringToUnicode(data.ToString())
+    }
+}
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+    <script src="~/Scripts/googoose.js"></script>
+    <script language="javascript">
+        $(document).ready(function () {
+
+            $("#btnPrint").click(function (e) {
+                PrintElem("printDiv");
+            });
+
+
+            function PrintElem(elem) {
+                var mywindow = window.open('', 'PRINT', 'height=842,width=595');
+
+                mywindow.document.write('<html><head><style>body {font-size:12px;}#tbl {border-collapse: collapse !important;width: 100%;font-size: 12px;}#tbl td{  border-left: 1px solid black; border-right: 1px solid black; padding: 8px;} #tbl th {border: 1px solid black !important;padding: 1px !important;}  #tbl tr#lastRow td#lastRow1 {border-left: 1px solid black; border-top: 1px solid black; border-bottom: 1px solid black;            }        #tbl tr#lastRow td#lastRow2 {            border-right: 1px solid black;  border-top: 1px solid black;border-bottom: 1px solid black;} .alignleft {float: left;text-align: left;width: 33.33333%;}.aligncenter {float: left;text-align: center;width: 33.33333%;}.alignright {float: left;text-align: right;width: 33.33333%;}</style><title></title>');
+                mywindow.document.write('</head><body >');
+                mywindow.document.write(document.getElementById(elem).innerHTML);
+                mywindow.document.write('</body></html>');
+
+                mywindow.document.close(); // necessary for IE >= 10
+                mywindow.focus(); // necessary for IE >= 10*/
+
+                mywindow.print();
+                mywindow.close();
+
+                return true;
+            }
+
+            $("#btnConvertWord").click(function (event) {
+                var now = new Date();
+
+                $(document).googoose({
+                    area: '#printDiv',
+                    filename: "धरौटी गो.भौ." + now.getDate() + '/' + parseInt(now.getMonth() + 1) + '/' + now.getFullYear() + '.doc',
+                    size: '8.27in 11.69in',
+                    headermargin: '.01in',
+                    footermargin: '.01in'
+                });
+            });
+        });
+    </script>
+}

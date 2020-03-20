@@ -1,0 +1,113 @@
+﻿@model List<AccountingSystem.Models.fiscalYear>
+@{
+    ViewBag.Title = "Set FiscalYear";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <h2 class="text-center"></h2>
+    @using (Html.BeginForm("SetFiscalYear", "fiscalYear", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+        <h2 class="text-center">आर्थिक वर्षको स्टाटस परिवर्तन गर्नुहोस</h2>
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <table class="table table-bordered" id="dataTable">
+                <tr>
+                    <th>नेपाली आ.ब</th>
+                    <th>अंग्रेजी आ.ब</th>
+                    <th>
+                        स्टाटस
+                    </th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr id="dataRow">
+                        <td style="display:none;">@item.fyId</td>
+                        <td>@item.nepFy</td>
+                        <td>@item.enFy</td>
+                        <td>
+                            @Html.RadioButtonFor(modelItem => item.status, true, new { id = "txtStatus", disabled = "disabled" })
+                            @Html.HiddenFor(modelItem => item.status, false)
+
+                            @*@if (ViewBag.fySelected == item.fyId)
+                                {
+                                    <input type="checkbox" id="cbkStatus" name="status" checked disabled>
+                                }
+                                else
+                                {
+                                    <input type="checkbox" id="cbkStatus" name="status" disabled>
+                                }*@
+                        </td>
+                        <td><a href="#" id="btnStatus">Change Status</a></td>
+                    </tr>
+                }
+            </table>
+
+        </div>
+        <div class="col-md-3"></div>
+
+    }
+</div>
+@section Scripts{
+    <script type="text/javascript">
+
+        //$("a#btnStatus").click(function () {
+        //    var status;
+        //    var $rowSelected = $(this).parent().parent();
+        //    alert($rowSelected.find("td:first").text());
+        //});
+        $("a#btnStatus").click(function () {
+            var status;
+            var $rowSelected = $(this).parent().parent();
+            var fyId = $rowSelected.find("td:first").text();
+
+            if ($rowSelected.find('input:radio').is(':checked')) {
+                alert("Can't Change the Status True to False");
+            }
+            else {
+                if(confirm("Change Status will set jornal Num and Bhuktnai Adesh Num to initial position.Do you really want to change the status?"))
+                {
+                    changeStatus(fyId);
+                    var checkedRow = $('table#dataTable').find('tbody') // select table body and
+                                   .find('tr#dataRow') // select all rows that has
+                                    .has('input[type=radio]');
+                    //// checked checkbox element
+                    checkedRow.val('TRUE');
+                    $rowSelected.find("td input#txtStatus").val('FALSE');
+                    alert("Status of fiscalyear changed Successfully.");
+                }
+                // }
+            }
+            location.reload();
+        });
+
+        function changeStatus(id) {
+            $.ajax({
+                url: RootUrl + 'FiscalYear/changeStatus',
+                data: "{'fyId': '" + id + "'}",
+                dataType: "json",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    //alert(data);
+                    return true;
+
+                },
+                error: function (response) {
+                    return false;
+                },
+                failure: function (response) {
+                    return false;
+                }
+            });
+        }
+    </script>
+}

@@ -1,0 +1,53 @@
+﻿@model AccountingSystem.Models.byehora
+
+@{
+    ViewBag.Title = "Delete Byehora";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <h2>सम्बन्धित व्यहोरा हटाउन चाहनुहुन्छ ?</h2>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+          ख.शि.नं. 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.khaSiNa.khaSirsak)
+        </dd>
+
+        <dt>
+          व्यहोरा 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.byehoraName)
+        </dd>
+
+        <dt>
+         हिसाब नं.  
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hisabNo)
+        </dd>
+
+        <dt>
+          कैफियत 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.remarks)
+        </dd>
+
+    </dl>
+    </div>
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div>
+            <input type="submit" value="Delete" class="btn btn-danger" /> 
+            @Html.ActionLink("Back to List", "Index", null, new {@class="btn btn-default" })
+        </div>
+    }
+</div>

@@ -1,0 +1,279 @@
+﻿@model AccountingSystem.Models.officer
+
+@{
+    ViewBag.Title = "Edit Officer";
+}
+<div class="row">
+<h2 class="text-center">सम्बन्धित कर्मचारीको विवरण परिवर्तन गर्नुहोस</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+    
+     <fieldset style="border:1px solid;">
+            <legend style="width:auto;"> विवरण</legend>
+           <div class="col-md-12"><label>press(cltrl+g) for unicode</label></div> 
+         @Html.HiddenFor(model => model.officerId)
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>नाम</label>@Html.ValidationMessageFor(model => model.fullName)
+                    @Html.TextBoxFor(model => model.fullName,Model.fullName, new { @class = "form-control",id="txtName" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>दर्जा</label>@Html.ValidationMessageFor(model => model.darja)
+                    @Html.TextBoxFor(model => model.darja,Model.darja, new { @class = "form-control",id="txtDarja" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>स्टाटस</label>@Html.ValidationMessageFor(model => model.status)
+                    @Html.DropDownListFor(model => model.status, EnumHelper.GetSelectList(typeof(AccountingSystem.Models.status), (AccountingSystem.Models.status)Enum.Parse(typeof(AccountingSystem.Models.status), Model.status)), new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>जागिरको किसिम</label>@Html.ValidationMessageFor(model => model.jobType)
+                    @Html.DropDownList("jobType",null,new{@class="form-control"})
+                   @* @Html.DropDownListFor(model => model.jobType, EnumHelper.GetSelectList(typeof(AccountingSystem.Models.jobType), (AccountingSystem.Models.jobType)Enum.Parse(typeof(AccountingSystem.Models.jobType), Model.jobType)), new { @class = "form-control" })*@
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>कर्मचारी संकेत नं.(PIS)</label>@Html.ValidationMessageFor(model => model.pisNo)
+                    @Html.TextBoxFor(model => model.pisNo,Model.pisNo, new { @class = "form-control",id="txtPIS" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>कार्यालय</label>@Html.ValidationMessageFor(model => model.officeId)
+                    @Html.DropDownList("officeId",null, new { @class = "form-control" })
+
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>अफिस फोन</label>@Html.ValidationMessageFor(model => model.officePhone)
+                    @Html.TextBoxFor(model => model.officePhone,Model.officePhone, new { @class = "form-control",id="txtOfficePhone" })
+
+                </div>
+            </div>
+            <div class="col-md-3">
+
+                <div class="form-group">
+                    <label>Exten_No</label>@Html.ValidationMessageFor(model => model.extenNo)
+                    @Html.TextBoxFor(model => model.extenNo,Model.extenNo, new { @class = "form-control",id="txtExten" })
+
+                </div>
+            </div>
+            <div class="col-md-3">
+
+                <div class="form-group">
+                    <label>इमेल</label>@Html.ValidationMessageFor(model => model.email)
+                    @Html.TextBoxFor(model => model.email,Model.email, new { @class = "form-control",id="txtEmail" })
+
+                </div>
+            </div>
+            <div class="col-md-3">
+
+                <div class="form-group">
+                    <label>मोबाईल नं.</label>@Html.ValidationMessageFor(model => model.mobileNo)
+                    @Html.TextBoxFor(model => model.mobileNo,Model.mobileNo, new { @class = "form-control",id="txtMobile" })
+
+                </div>
+            </div>
+         <div class="col-md-3">
+             <div class="form-group">
+                 <label>क्र.स.</label>@Html.ValidationMessageFor(model => model.serialNo)
+                 @Html.TextBox("serialNo",Model.serialNo, new { @class = "form-control", id = "txtserialNo" })
+                
+             </div>
+         </div>
+        </fieldset>
+        <fieldset style="border:1px solid;">
+            <legend style="width:auto;"> तलबी विवरण</legend>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>शुरु स्केल</label>@Html.ValidationMessageFor(model => model.suruScale)
+                    @Html.TextBoxFor(model => model.suruScale, new { @class = "form-control", type = "decimal",value=Model.suruScale })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label> महंगी भत्ता</label>@Html.ValidationMessageFor(model => model.mahangiBhatta)
+                    @Html.TextBoxFor(model => model.mahangiBhatta, new { @class = "form-control", type = "decimal", value = Model.mahangiBhatta })
+
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label> जोखिम भत्ता</label>@Html.ValidationMessageFor(model => model.jokhimBhatta)
+                    @Html.TextBoxFor(model => model.jokhimBhatta, new { @class = "form-control", type = "decimal", value = Model.jokhimBhatta })
+
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="form-group">
+                    <label>ग्रेड संख्या</label>@Html.ValidationMessageFor(model => model.gradeSankhya)
+                    @Html.TextBoxFor(model => model.gradeSankhya, new { @class = "form-control", type = "decimal", value = Model.gradeSankhya })
+
+                </div>
+            </div>
+            <div class="col-md-1">
+
+                <div class="form-group">
+                    <label>ग्रेड दर</label>@Html.ValidationMessageFor(model => model.gradeDar)
+                    @Html.TextBoxFor(model => model.gradeDar, new { @class = "form-control", type = "decimal", value = Model.gradeDar })
+
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>सा.सु.कर</label>@Html.ValidationMessageFor(model => model.saSukar)
+                    @Html.TextBoxFor(model => model.saSukar, new { @class = "form-control", type = "decimal", value = Model.saSukar })
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label>परिश्रमिक कर</label>@Html.ValidationMessageFor(model => model.paKar)
+                    @Html.TextBoxFor(model => model.paKar, new { @class = "form-control" })
+                </div>
+            </div>
+        </fieldset>
+        <fieldset style="border:1px solid;">
+            <legend style="width:auto;"> बैंक तथा कर विवरण</legend>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>बैंक खाता नं.</label>@Html.ValidationMessageFor(model => model.bankAccNo)
+                    @Html.TextBoxFor(model => model.bankAccNo,Model.bankAccNo, new { @class = "form-control", id = "txtBankNo" })
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>बैंक शाखा</label>@Html.ValidationMessageFor(model => model.bankShakha)
+                    @Html.TextBoxFor(model => model.bankShakha,Model.bankShakha, new { @class = "form-control", id = "txtBankSha" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>स्थाई लेखा नं.</label>@Html.ValidationMessageFor(model => model.sthaiLekhaNo)
+                    @Html.TextBoxFor(model => model.sthaiLekhaNo,Model.sthaiLekhaNo, new { @class = "form-control", id = "txtSthai" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>सापटी</label>@Html.ValidationMessageFor(model => model.sapati)
+                    @Html.TextBoxFor(model => model.sapati, new {type="decimal", @class = "form-control", id = "txtSapati" })
+                </div>
+            </div>
+            </fieldset>
+        <fieldset style="border:1px solid;">
+            <legend style="width:auto;"> बिमा विवरण</legend>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>बिमा परिचय पत्र नं.</label>@Html.ValidationMessageFor(model => model.bimaPariNo)
+                    @Html.TextBoxFor(model => model.bimaPariNo,Model.bimaPariNo, new { @class = "form-control", id = "txtBimaPariNo" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>बिमा</label>@Html.ValidationMessageFor(model => model.bima)
+                    @Html.TextBoxFor(model => model.bima, new { @class = "form-control", type = "decimal",id="txtBima",value=Model.bima })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>कोड</label>@Html.ValidationMessageFor(model => model.bimaCode)
+                    @Html.TextBoxFor(model => model.bimaCode,Model.bimaCode, new { @class = "form-control", id = "txtBimaCode" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>सिटरोल नं.</label>@Html.ValidationMessageFor(model => model.bimaSheetRollNo)
+                    @Html.TextBoxFor(model => model.bimaSheetRollNo,Model.bimaSheetRollNo, new { @class = "form-control", id = "txtBimaSheetRollNo" })
+                </div>
+            </div>
+            </fieldset>
+     <fieldset style="border:1px solid;">
+            <legend style="width:auto;"> कर्मचारी संचय कोष/ नागरिक लगानी कोष विवरण</legend>
+         <div class="col-md-3">
+             <div class="form-group">
+                 <label>क.स.को.प्र.प.नं.</label>@Html.ValidationMessageFor(model => model.kaSaKosNo)
+                 @Html.TextBoxFor(model => Model.kaSaKosNo, new { @class = "form-control", id = "txtKaSaKosNo" })
+             </div>
+         </div>
+         <div class="col-md-3">
+                 <div class="form-group">
+                     <label>क.स.कोष कट्टी</label>@Html.ValidationMessageFor(model => model.bimaCode)
+                     @Html.TextBoxFor(model => model.kaSaKos, new { @class = "form-control", id = "txtKaSaKos" })
+                 </div>
+             </div>
+         <div class="col-md-3">
+             <div class="form-group">
+                 <label>ना.ल.को.प्र.प.नं.</label>@Html.ValidationMessageFor(model => model.naLaKosNo)
+                 @Html.TextBoxFor(model => model.naLaKosNo, new { @class = "form-control", id = "txtNaLaKosNo" })
+             </div>
+         </div>
+             <div class="col-md-3">
+                 <div class="form-group">
+                     <label>ना.ल.कोष कट्टी(%)</label>@Html.ValidationMessageFor(model => model.bimaSheetRollNo)
+                     @Html.TextBoxFor(model => model.naLaKos, new { @class = "form-control", id = "txtNaLaKos" })
+                 </div>
+                 </div>
+                 </fieldset>
+    <br />
+        <div class="col-md-12 text-center" >
+    <input type="submit" value="Save" class="btn btn-primary" id="btnSubmit" />
+    @Html.ActionLink("Back to List", "Index",null, new { @class = "btn btn-default" })</div>
+    }
+
+</div>
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+    <script src="~/Scripts/NepaliUnicode.js"></script>
+<script src="~/Transliteration/jsapi.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var ele1 = $("#txtName");
+            var ele2 = $("#txtDarja");
+            var ele3 = $("#txtPIS");
+            var ele4 = $("#txtOffice");
+            var ele5 = $("#txtExten");
+            var ele6 = $("#txtMobile");
+            var ele7 = $("#txtBimaCode");
+            var ele8 = $("#txtBimaSheetRollNo");
+            var ele9 = $("#txtSthai");
+            var ele10 = $("#txtBankNo");
+            var ele11 = $("#txtBankSha");
+            var ele12 = $("#txtBimaPariNo");
+            var ele13 = $("#txtOfficePhone");
+            var ele14 = $("#txtKaSaKosNo");
+            var ele15 = $("#txtNaLaKosNo");
+            AddUnicode(ele1);
+            AddUnicode(ele2);
+            AddUnicode(ele3);
+            AddUnicode(ele4);
+            AddUnicode(ele5);
+            AddUnicode(ele6);
+            AddUnicode(ele7);
+            AddUnicode(ele8);
+            AddUnicode(ele9);
+            AddUnicode(ele10);
+            AddUnicode(ele11);
+            AddUnicode(ele12);
+            AddUnicode(ele13);
+            AddUnicode(ele14);
+            AddUnicode(ele15);
+        });
+    </script>
+   <script src="~/Transliteration/transliteration.js"></script>
+<link href="~/Transliteration/transliteration.css" rel="stylesheet" />
+<script src="~/Transliteration/transliteration.I.js"></script>
+
+}

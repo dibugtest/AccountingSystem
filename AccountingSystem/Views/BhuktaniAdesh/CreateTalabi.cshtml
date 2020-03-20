@@ -1,0 +1,168 @@
+﻿@{
+    ViewBag.Title = "Talabi Bhuktani Adesh";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <h2 class="text-center">तलबी भुक्तानी आदेशको लागि आ.ब. र महिना छान्नुहोस्</h2>
+    @using (Html.BeginForm("Create2", "bhuktaniAdesh", FormMethod.Get))
+    {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+        if (TempData["ErrorMessage"] != null)
+        {
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+        }
+    <div class="col-md-12">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>आ.ब.</label>
+                @Html.DropDownList("fyId", null, new { @class = "form-control", id = "ddlFyId" })
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>महिना </label>
+                @Html.DropDownList("mn", EnumHelper.GetSelectList(typeof(AccountingSystem.Models.month)), new { @class = "form-control", id = "txtMonth" })
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>गोश्वारा भौचर नं.(खर्च तलबी ) </label>
+                @Html.DropDownList("jornalNo", null, "छान्नुहोस्", new { @class = "form-control", id = "ddlJornalNo" })
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 text-center">
+            <div class="col-md-12">
+                <input type="submit" value="Submit" id="btnSubmit" class="btn btn-primary" />
+                @Html.ActionLink("View List", "Index", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    }
+</div>
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+    <script src="~/Scripts/NepaliUnicode.js"></script>
+    <script src="~/Transliteration/jsapi.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            var listJornalNo;
+
+            function getJornalNo() {
+                var fyId = $("#ddlFyId").val();
+                var monthIndex = $("#txtMonth").val();
+                var jornalNo = $("#ddlJornalNo").val();
+
+                $.ajax({
+                    async: false,
+                    url: RootUrl + 'BhuktaniAdesh/getJornalNo/',
+                    type: "POST",
+                    dataType: "json",
+                    data: "{'fyId':'" + fyId + "','monthIndex':'" + monthIndex + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        listJornalNo = data;
+                    }
+                });
+            }
+
+            $("#txtMonth").change(function (e) {
+                changeFunction();
+            });
+            $("#ddlFyId").change(function (e) {
+                changeFunction();
+            });
+
+            function changeFunction() {
+                getJornalNo();
+                var option = '';
+                $("#ddlJornalNo").empty();
+                option += '<option value="">--छान्नुहोस्--</option>';
+                for (var i = 0; i < listJornalNo.length; i++) {
+                    option += '<option value="' + listJornalNo[i].value + '">' + listJornalNo[i].label + '</option>';
+                }
+                $('#ddlJornalNo').append(option);
+                if (listJornalNo.length == 0) {
+                    $('#lblError').val("खर्च(तलबी ) गोश्वारा भौचर for selected fiscal year and month not found.");
+                }
+                else {
+                    $('#lblError').val("");
+                }
+
+            }
+
+            $("#btnSubmit").click(function (e) {
+                var valid = false;
+                if ($("#ddlJornalNo").val() == null || $("#ddlJornalNo").val() == "") {
+                    alert("Jornal No is Required");
+                    valid = true;
+                }
+
+                var fyId = $("#ddlFyId").val();
+                var monthIndex = $("#txtMonth").val();
+                var jornalNo = $("#ddlJornalNo").val();
+                if (checkYearMonth(fyId, monthIndex, jornalNo)) {
+                    alert("Record for selected jornal No already exists.");
+                    valid = true;
+                    //if (confirm('Record For Selected Fiscal Year and Month already exists. Do you want to update record')) {
+                    //    valid = false;
+                    //} else {
+                    //    valid = true;
+                    //}
+                }
+                //else {
+                //    valid = false;
+                //}
+                if (valid) {
+                    e.preventDefault();
+                }
+            });
+
+
+
+            function checkYearMonth(fyId, monthIndex, jornalNo) {
+                var valid = false;
+                $.ajax({
+                    async: false,
+                    url: RootUrl + 'BhuktaniAdesh/CheckYearMonthJornalNo',
+                    data: "{'fyId': '" + fyId + "','monthIndex': '" + monthIndex + "','jornalNo':'" + jornalNo + "'}",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        if (data == "true") {
+                            //alert("Bhuktani Adesh Corresponding to Selected Journal No already exists.");
+                            valid = true;
+                        }
+
+                    }
+                });
+                return valid;
+            }
+        });
+    </script>
+    <script src="~/Transliteration/transliteration.js"></script>
+    <link href="~/Transliteration/transliteration.css" rel="stylesheet" />
+    <script src="~/Transliteration/transliteration.I.js"></script>
+
+}

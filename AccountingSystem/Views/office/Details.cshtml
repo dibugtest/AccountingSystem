@@ -1,0 +1,74 @@
+﻿@model AccountingSystem.Models.office
+
+@{
+    ViewBag.Title = "Details Office";
+}
+
+<h2>कार्यालय</h2>
+
+<div>
+    
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            मन्त्रालय
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mantralaye)
+        </dd>
+
+        <dt>
+            विभाग
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bibhag)
+        </dd>
+
+        <dt>
+            कार्यालय
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.karyalaye)
+        </dd>
+
+        <dt>
+            ठेगाना
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.address)
+        </dd>
+
+        <dt>
+            फोन
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phone)
+        </dd>
+
+        <dt>
+            url/वेब
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.url_web)
+        </dd>
+
+        <dt>
+            इमेल
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.officeId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

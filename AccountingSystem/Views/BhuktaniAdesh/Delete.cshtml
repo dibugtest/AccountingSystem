@@ -1,0 +1,129 @@
+﻿@model AccountingSystem.Models.bhuktaniAdesh
+
+@{
+    ViewBag.Title = "Delete Bhuktani Adesh";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>bhuktaniAdesh</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.baUSiNa.baUSirsak)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.baUSiNa.baUSirsak)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bhuktaniAdeshNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bhuktaniAdeshNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.month)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.month)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nepDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nepDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rakam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rakam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pauneKoNaam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pauneKoNaam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pauneKoCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pauneKoCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bibaran)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bibaran)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.khaSiNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.khaSiNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.reamrks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.reamrks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.jornalKharchaNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jornalKharchaNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.jornalNikasiNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jornalNikasiNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.year)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

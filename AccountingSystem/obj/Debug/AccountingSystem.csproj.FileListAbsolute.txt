@@ -1,0 +1,425 @@
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\AccountingSystem.dll.config
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\AccountingSystem.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\AccountingSystem.pdb
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Antlr3.Runtime.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\EntityFramework.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\EntityFramework.SqlServer.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.Core.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Cookies.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Facebook.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Google.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.OAuth.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Twitter.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.Web.Infrastructure.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Newtonsoft.Json.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Owin.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\System.Web.Helpers.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\System.Web.Mvc.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\System.Web.Optimization.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\System.Web.Razor.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.Deployment.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.Razor.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\WebGrease.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\System.Web.Helpers.xml
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\System.Web.Mvc.xml
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\System.Web.Optimization.xml
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\System.Web.Razor.xml
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.xml
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.Deployment.xml
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.Razor.xml
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Newtonsoft.Json.xml
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Antlr3.Runtime.pdb
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\EntityFramework.xml
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\EntityFramework.SqlServer.xml
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.Core.xml
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.xml
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.xml
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Facebook.xml
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Cookies.xml
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.OAuth.xml
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Google.xml
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Twitter.xml
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.pdb
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.csproj.GenerateResource.Cache
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\RdlCompile.cache
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\RdlCompile.compiled
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.QualityTools.Testing.Fakes.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\ReportViewerForMvc.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.ReportViewer.Common.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.ReportViewer.ProcessingObjectModel.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.ReportViewer.WebForms.DLL
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.csprojResolveAssemblyReference.cache
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst20.resources
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst.resources
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst1.resources
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst2.resources
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst3.resources
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst4.resources
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst5.resources
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst6.resources
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst7.resources
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst8.resources
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst9.resources
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst10.resources
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst11.resources
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst12.resources
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst13.resources
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\bin\Microsoft.SqlServer.Types.dll
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.addSerialNoColumnToOfficer.resources
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.AddSomePropertiesInTalabiBharpai.resources
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.AddSomePropertiesInTalabiBharpai1.resources
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.ChequeRakam_jornalEntries.resources
+I:\AccountingSystem\AccountingSystem\bin\AccountingSystem.dll.config
+I:\AccountingSystem\AccountingSystem\bin\AccountingSystem.dll
+I:\AccountingSystem\AccountingSystem\bin\AccountingSystem.pdb
+I:\AccountingSystem\AccountingSystem\bin\Antlr3.Runtime.dll
+I:\AccountingSystem\AccountingSystem\bin\EntityFramework.dll
+I:\AccountingSystem\AccountingSystem\bin\EntityFramework.SqlServer.dll
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.Core.dll
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.Owin.dll
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.dll
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Host.SystemWeb.dll
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Cookies.dll
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.dll
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Facebook.dll
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Google.dll
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.OAuth.dll
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Twitter.dll
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.QualityTools.Testing.Fakes.dll
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.ReportViewer.Common.dll
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.ReportViewer.ProcessingObjectModel.DLL
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.ReportViewer.WebForms.DLL
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.SqlServer.Types.dll
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.Web.Infrastructure.dll
+I:\AccountingSystem\AccountingSystem\bin\Newtonsoft.Json.dll
+I:\AccountingSystem\AccountingSystem\bin\Owin.dll
+I:\AccountingSystem\AccountingSystem\bin\ReportViewerForMvc.dll
+I:\AccountingSystem\AccountingSystem\bin\System.Web.Helpers.dll
+I:\AccountingSystem\AccountingSystem\bin\System.Web.Mvc.dll
+I:\AccountingSystem\AccountingSystem\bin\System.Web.Optimization.dll
+I:\AccountingSystem\AccountingSystem\bin\System.Web.Razor.dll
+I:\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.Deployment.dll
+I:\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.dll
+I:\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.Razor.dll
+I:\AccountingSystem\AccountingSystem\bin\WebGrease.dll
+I:\AccountingSystem\AccountingSystem\bin\EntityFramework.xml
+I:\AccountingSystem\AccountingSystem\bin\EntityFramework.SqlServer.xml
+I:\AccountingSystem\AccountingSystem\bin\System.Web.Helpers.xml
+I:\AccountingSystem\AccountingSystem\bin\System.Web.Mvc.xml
+I:\AccountingSystem\AccountingSystem\bin\System.Web.Razor.xml
+I:\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.xml
+I:\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.Deployment.xml
+I:\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.Razor.xml
+I:\AccountingSystem\AccountingSystem\bin\System.Web.Optimization.xml
+I:\AccountingSystem\AccountingSystem\bin\Newtonsoft.Json.xml
+I:\AccountingSystem\AccountingSystem\bin\Antlr3.Runtime.pdb
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.Core.xml
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.Owin.xml
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.xml
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Host.SystemWeb.xml
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.xml
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Facebook.xml
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Cookies.xml
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.OAuth.xml
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Google.xml
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Twitter.xml
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+I:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst20.resources
+I:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst.resources
+I:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst1.resources
+I:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst2.resources
+I:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst3.resources
+I:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst4.resources
+I:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst5.resources
+I:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst6.resources
+I:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst7.resources
+I:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst8.resources
+I:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst9.resources
+I:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst10.resources
+I:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst11.resources
+I:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst12.resources
+I:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst13.resources
+I:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.addSerialNoColumnToOfficer.resources
+I:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.AddSomePropertiesInTalabiBharpai.resources
+I:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.AddSomePropertiesInTalabiBharpai1.resources
+I:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.ChequeRakam_jornalEntries.resources
+I:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.csproj.GenerateResource.Cache
+I:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.dll
+I:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.pdb
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.ReportViewer.WinForms.dll
+I:\AccountingSystem\AccountingSystem\bin\Microsoft.ReportViewer.WinForms.xml
+I:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.csprojAssemblyReference.cache
+I:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.csproj.CoreCompileInputs.cache
+I:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.csproj.CopyComplete
+F:\AccountingSystem\AccountingSystem\bin\AccountingSystem.dll.config
+F:\AccountingSystem\AccountingSystem\bin\AccountingSystem.dll
+F:\AccountingSystem\AccountingSystem\bin\AccountingSystem.pdb
+F:\AccountingSystem\AccountingSystem\bin\Antlr3.Runtime.dll
+F:\AccountingSystem\AccountingSystem\bin\EntityFramework.dll
+F:\AccountingSystem\AccountingSystem\bin\EntityFramework.SqlServer.dll
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.Core.dll
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.Owin.dll
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.dll
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Host.SystemWeb.dll
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Cookies.dll
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.dll
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Facebook.dll
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Google.dll
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.OAuth.dll
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Twitter.dll
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.QualityTools.Testing.Fakes.dll
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.ReportViewer.Common.dll
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.ReportViewer.ProcessingObjectModel.DLL
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.ReportViewer.WebForms.DLL
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.SqlServer.Types.dll
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.Web.Infrastructure.dll
+F:\AccountingSystem\AccountingSystem\bin\Newtonsoft.Json.dll
+F:\AccountingSystem\AccountingSystem\bin\Owin.dll
+F:\AccountingSystem\AccountingSystem\bin\ReportViewerForMvc.dll
+F:\AccountingSystem\AccountingSystem\bin\System.Web.Helpers.dll
+F:\AccountingSystem\AccountingSystem\bin\System.Web.Mvc.dll
+F:\AccountingSystem\AccountingSystem\bin\System.Web.Optimization.dll
+F:\AccountingSystem\AccountingSystem\bin\System.Web.Razor.dll
+F:\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.Deployment.dll
+F:\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.dll
+F:\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.Razor.dll
+F:\AccountingSystem\AccountingSystem\bin\WebGrease.dll
+F:\AccountingSystem\AccountingSystem\bin\EntityFramework.xml
+F:\AccountingSystem\AccountingSystem\bin\EntityFramework.SqlServer.xml
+F:\AccountingSystem\AccountingSystem\bin\System.Web.Helpers.xml
+F:\AccountingSystem\AccountingSystem\bin\System.Web.Mvc.xml
+F:\AccountingSystem\AccountingSystem\bin\System.Web.Razor.xml
+F:\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.xml
+F:\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.Deployment.xml
+F:\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.Razor.xml
+F:\AccountingSystem\AccountingSystem\bin\System.Web.Optimization.xml
+F:\AccountingSystem\AccountingSystem\bin\Newtonsoft.Json.xml
+F:\AccountingSystem\AccountingSystem\bin\Antlr3.Runtime.pdb
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.Core.xml
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.Owin.xml
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.xml
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Host.SystemWeb.xml
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.xml
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Facebook.xml
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Cookies.xml
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.OAuth.xml
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Google.xml
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Twitter.xml
+F:\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+F:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.csprojResolveAssemblyReference.cache
+F:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst20.resources
+F:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst.resources
+F:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst1.resources
+F:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst2.resources
+F:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst3.resources
+F:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst4.resources
+F:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst5.resources
+F:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst6.resources
+F:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst7.resources
+F:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst8.resources
+F:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst9.resources
+F:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst10.resources
+F:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst11.resources
+F:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst12.resources
+F:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst13.resources
+F:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.addSerialNoColumnToOfficer.resources
+F:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.AddSomePropertiesInTalabiBharpai.resources
+F:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.AddSomePropertiesInTalabiBharpai1.resources
+F:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.ChequeRakam_jornalEntries.resources
+F:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.csproj.GenerateResource.Cache
+F:\AccountingSystem\AccountingSystem\obj\Debug\RdlCompile.cache
+F:\AccountingSystem\AccountingSystem\obj\Debug\RdlCompile.compiled
+F:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.dll
+F:\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.pdb
+D:\Projects\VS 2013\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.Sapti_Added_to_officer.resources
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\AccountingSystem.dll.config
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\AccountingSystem.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\AccountingSystem.pdb
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Antlr3.Runtime.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\EntityFramework.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\EntityFramework.SqlServer.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.Core.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.Owin.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Host.SystemWeb.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Cookies.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Facebook.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Google.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.OAuth.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Twitter.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.QualityTools.Testing.Fakes.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.ReportViewer.Common.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.ReportViewer.ProcessingObjectModel.DLL
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.ReportViewer.WebForms.DLL
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.SqlServer.Types.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.Web.Infrastructure.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Newtonsoft.Json.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Owin.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\ReportViewerForMvc.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\System.Web.Helpers.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\System.Web.Mvc.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\System.Web.Optimization.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\System.Web.Razor.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.Deployment.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.Razor.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\WebGrease.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\EntityFramework.xml
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\EntityFramework.SqlServer.xml
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\System.Web.Helpers.xml
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\System.Web.Mvc.xml
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\System.Web.Razor.xml
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.xml
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.Deployment.xml
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.Razor.xml
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\System.Web.Optimization.xml
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Newtonsoft.Json.xml
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Antlr3.Runtime.pdb
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.Core.xml
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.Owin.xml
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.xml
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Host.SystemWeb.xml
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.xml
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Facebook.xml
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Cookies.xml
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.OAuth.xml
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Google.xml
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Twitter.xml
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst20.resources
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst.resources
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst1.resources
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst2.resources
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst3.resources
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst4.resources
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst5.resources
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst6.resources
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst7.resources
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst8.resources
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst9.resources
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst10.resources
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst11.resources
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst12.resources
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst13.resources
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.addSerialNoColumnToOfficer.resources
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.AddSomePropertiesInTalabiBharpai.resources
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.AddSomePropertiesInTalabiBharpai1.resources
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.ChequeRakam_jornalEntries.resources
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.Sapti_Added_to_officer.resources
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.csproj.GenerateResource.Cache
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.pdb
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.ReportViewer.WinForms.dll
+F:\AccountSystem\AccountingSystem\AccountingSystem\bin\Microsoft.ReportViewer.WinForms.xml
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.csprojAssemblyReference.cache
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\RdlCompile.cache
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\RdlCompile.compiled
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.csproj.CoreCompileInputs.cache
+F:\AccountSystem\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.csproj.CopyComplete
+D:\Projects\AccountingSystem\AccountingSystem\bin\AccountingSystem.dll.config
+D:\Projects\AccountingSystem\AccountingSystem\bin\AccountingSystem.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\AccountingSystem.pdb
+D:\Projects\AccountingSystem\AccountingSystem\bin\Antlr3.Runtime.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\EntityFramework.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\EntityFramework.SqlServer.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.Core.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Cookies.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Facebook.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Google.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.OAuth.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Twitter.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.ReportViewer.Common.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.ReportViewer.ProcessingObjectModel.DLL
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.ReportViewer.WebForms.DLL
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.ReportViewer.WinForms.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.SqlServer.Types.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.Web.Infrastructure.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\Newtonsoft.Json.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\Owin.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\ReportViewerForMvc.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\System.Web.Helpers.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\System.Web.Mvc.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\System.Web.Optimization.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\System.Web.Razor.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.Deployment.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.Razor.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\WebGrease.dll
+D:\Projects\AccountingSystem\AccountingSystem\bin\EntityFramework.xml
+D:\Projects\AccountingSystem\AccountingSystem\bin\EntityFramework.SqlServer.xml
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.ReportViewer.WinForms.xml
+D:\Projects\AccountingSystem\AccountingSystem\bin\System.Web.Helpers.xml
+D:\Projects\AccountingSystem\AccountingSystem\bin\System.Web.Mvc.xml
+D:\Projects\AccountingSystem\AccountingSystem\bin\System.Web.Razor.xml
+D:\Projects\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.xml
+D:\Projects\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.Deployment.xml
+D:\Projects\AccountingSystem\AccountingSystem\bin\System.Web.WebPages.Razor.xml
+D:\Projects\AccountingSystem\AccountingSystem\bin\System.Web.Optimization.xml
+D:\Projects\AccountingSystem\AccountingSystem\bin\Newtonsoft.Json.xml
+D:\Projects\AccountingSystem\AccountingSystem\bin\Antlr3.Runtime.pdb
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.Core.xml
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.xml
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.xml
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Facebook.xml
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Cookies.xml
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.OAuth.xml
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Google.xml
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.Twitter.xml
+D:\Projects\AccountingSystem\AccountingSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.csprojAssemblyReference.cache
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst20.resources
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst.resources
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst1.resources
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst2.resources
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst3.resources
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst4.resources
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst5.resources
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst6.resources
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst7.resources
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst8.resources
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst9.resources
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst10.resources
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst11.resources
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst12.resources
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.codefirst13.resources
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.addSerialNoColumnToOfficer.resources
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.AddSomePropertiesInTalabiBharpai.resources
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.AddSomePropertiesInTalabiBharpai1.resources
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.ChequeRakam_jornalEntries.resources
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.Migrations.Sapti_Added_to_officer.resources
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.csproj.GenerateResource.cache
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.csproj.CoreCompileInputs.cache
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.csproj.CopyComplete
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.dll
+D:\Projects\AccountingSystem\AccountingSystem\obj\Debug\AccountingSystem.pdb

@@ -1,0 +1,84 @@
+﻿@model AccountingSystem.Models.khaSiNa
+
+@{
+    ViewBag.Title = "Edit KhaSiNa";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <h2 class="text-center">सम्बन्धित ख.शि.नं. परिवर्तन गर्नुहोस</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form">
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.khaSiNaId)
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>ब.उ.शि.नं.</label>@Html.ValidationMessageFor(model => model.baUSiNaId)
+                    @Html.DropDownList("baUSiNaId", null, new { @class = "form-control",id="txtBaUSiNo" })
+                   
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>खच र्शिर्षक</label>@Html.ValidationMessageFor(model => model.khaSirsak)
+                    @Html.TextBoxFor(model => model.khaSirsak, new { @class = "form-control",id="txtKhaSirsak" })
+                  
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>ख.शि.नं.</label>@Html.ValidationMessageFor(model => model.khaSiNo)
+                    @Html.TextBoxFor(model => model.khaSiNo, new { @class = "form-control",id="txtKhaSiNo" })
+                    
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>खर्च रकम (रू.)</label>@Html.ValidationMessageFor(model => model.khaRakam)
+                    @Html.TextBoxFor(model => model.khaRakam, new { @class = "form-control",id="txtKhaRakam" })
+                   
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>कैफियत</label>@Html.ValidationMessageFor(model => model.remarks)
+                    @Html.TextBoxFor(model => model.remarks, new { @class = "form-control",id="txtRemarks" })
+                  
+                </div>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-12 text-center">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+            </div>
+        </div>
+    }
+
+</div>
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+    <script src="~/Scripts/NepaliUnicode.js"></script>
+<script src="~/Transliteration/jsapi.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var ele1 = $("#txtKhaSirsak");
+            var ele2 = $("#txtKhaSiNo");
+            var ele3 = $("#txtRemarks");
+            AddUnicode(ele1);
+            AddUnicode(ele2);
+            AddUnicode(ele3);
+        });
+    </script>
+   <script src="~/Transliteration/transliteration.js"></script>
+<link href="~/Transliteration/transliteration.css" rel="stylesheet" />
+<script src="~/Transliteration/transliteration.I.js"></script>
+
+}

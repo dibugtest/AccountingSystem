@@ -1,0 +1,86 @@
+﻿@model AccountingSystem.Models.baUSiNa
+
+@{
+    ViewBag.Title = "Edit BaUSiNa";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <h2 class="text-center">सम्बन्धित ब.उ.शि.नं. परिवर्तन गर्नुहोस</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.baUSiNaId)
+        <div class="col-md-12">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>ब.उ.शि.</label>
+                    @Html.TextBoxFor(model => model.baUSirsak, new { @class = "form-control",id="txtBaSirsak"})
+                    @Html.ValidationMessageFor(model => model.baUSirsak)
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>ब.उ.शि.नं.</label>
+                    @Html.TextBoxFor(model => model.baUSiNo, new { @class = "form-control" ,id="txtBaUSiNo",@data_val="true"})
+                    @Html.ValidationMessageFor(model => model.baUSiNo)
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>कैफियत</label>
+                    @Html.TextBoxFor(model => model.remarks, new { @class = "form-control",id="txtRemarks" })
+                    @Html.ValidationMessageFor(model => model.remarks)
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+        <div class="col-md-12">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 text-center">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+            </div>
+            <div class="col-md-4"></div>
+        </div>
+
+    }
+
+</div>
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+    @Scripts.Render("~/bundles/nepDate")
+    <script src="~/Scripts/NepaliUnicode.js"></script>
+<script src="~/Transliteration/jsapi.js"></script>
+
+    <script language="javascript">
+        $(document).ready(function () {
+
+            var ele1 = $("#txtBaSirsak");
+            var ele2 = $("#txtBaUSiNo");
+            var ele3 = $("#txtRemarks");
+            AddUnicode(ele1);
+            AddUnicode(ele2);
+            AddUnicode(ele3);
+
+        });
+    </script>
+  
+<script src="~/Transliteration/transliteration.js"></script>
+<link href="~/Transliteration/transliteration.css" rel="stylesheet" />
+<script src="~/Transliteration/transliteration.I.js"></script>
+}

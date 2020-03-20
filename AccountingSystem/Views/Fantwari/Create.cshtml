@@ -1,0 +1,271 @@
+﻿@model List<AccountingSystem.Models.fantwariKharcha>
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@Styles.Render("~/Content/nepDate")
+
+<div class="row">
+    <h2 class="text-center">खर्चको फाँटवारी प्रविष्टि</h2>
+    @using (Html.BeginForm("Create", "Fantwari", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.ValidationSummary()
+        if (ViewBag.Message != null)
+        {
+            <div style="border:solid 1px green">
+                @ViewBag.Message
+            </div>
+        }
+        <fieldset style="border:1px solid;">
+            <legend style="width:auto;">विवरण</legend>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>ब.उ.शि.नं.</label>
+                    @Html.DropDownList("baUSiNaId",null, new { @class = "form-control", id = "txtBaUSiNa" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>वर्ष</label>
+                    @Html.TextBox("year",Model[0].year, new { @class = "form-control", id = "txtYear" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>मिति</label>
+                    @Html.TextBox("nepDate", "", new { @class = "form-control", id = "txtNepDate" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>महिना</label><label id="ValMonth"></label>
+                    @Html.DropDownList("month", EnumHelper.GetSelectList(typeof(AccountingSystem.Models.month)), new { @class = "form-control", id = "txtMonth", @data_val = "true", @data_val_required = "Month is Required" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>आ.ब.</label>
+                    @Html.TextBox("nepFy", Session["nepFy"], new { @class = "form-control", id = "txtNepFy" })
+                </div>
+            </div>
+
+        </fieldset>
+        <table class="table table-bordered" id="dataTable" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <th>यस महिनाको खर्च</th>
+                <th>यस महिना सम्मको निकासा</th>
+                <th>बजेट रकम नं.</th>
+                <th>बजेट रकम</th>
+                <th>वार्षिक बजेट रकम</th>
+                <th>बजेट बाँकी</th>
+                @*<th></th>*@
+            </tr>
+            @if (Model != null && Model.Count > 0)
+            {
+                int j = 0;
+                foreach (var i in Model)
+                {
+                    <tr>
+                        <td>@Html.TextBoxFor(a => a[j].kharchaThisMonth, "", new { @class = "form-control", id = j + "txtKhaThisMonth", style = "width:250px;" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].kharchaTillMonth, "", new { @class = "form-control", id = j + "txtKhaTillMonth" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].khaSiNo, "", new { @class = "form-control", id = j + "txtKhaSiNo", style = "width:200px;" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].khaSirsak, new { @class = "form-control", id = j + "txtKhaSirsak", type = "decimal", style = "width:200px;" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].yearlyBudget, new { @class = "form-control", id = j + "txtYearlyBudget", type = "decimal", style = "width:200px;" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].remainingBudget, "", new { @class = "form-control", id = j + "txtRemainBudget" })</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].fantwariId, new { id = j + "txtFantwariId" })</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].nepDate, new { id = j + "txtNepaliDate", value = DateTime.Now })</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].baUSiNaId, new { id = j + "txtBaUSiNaId"})</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].month, new { id = j + "txtMonth"})</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].year, new { id = j + "txtBaUSiNaId"})</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].monthIndex, new { id = j + "txtMonthIndex" })</td>
+
+                        @*<td>
+                            @if (j > 0)
+                            {
+                                <a href="#" class="remove">Remove</a>
+                            }
+                        </td>*@
+                    </tr>
+                            j++;
+                }
+            }
+        </table>
+        @*<div class="col-md-12 text-right"><a href="#" id="addNew" class="btn btn-default">Add New Row</a></div>*@
+
+        <div class="col-md-12 text-center">
+            <input type="submit" value="Submit" class="btn btn-primary" id="btnSubmit" />
+            @Html.ActionLink("Back To List", "Index", null, new { @class = "btn btn-default" })
+        </div>
+
+    }
+</div>
+
+@* Here I will add Jquery Code for validation / dynamically add new rows / Remove rows etc*@
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+    @Scripts.Render("~/bundles/nepDate")
+    <script src="~/Scripts/StrUni.js"></script>
+
+    <script language="javascript">
+        $(document).ready(function () {
+
+            $('#txtNepDate').nepaliDatePicker();
+
+            ////1. Add new row
+            //$("#addNew").click(function (e) {
+            //    e.preventDefault();
+            //    var $tableBody = $("#dataTable");
+            //    var $trLast = $tableBody.find("tr:last");
+            //    var $trNew = $trLast.clone();
+
+            //    var suffix = $trNew.find(':input:first').attr('name').match(/\d+/);
+            //    $trNew.find("td:last").html('<a href="#" class="remove">Remove</a>');
+            //    $.each($trNew.find(':input'), function (i, val) {
+            //        // Replaced Name
+            //        var oldN = $(this).attr('name');
+            //        var newN = oldN.replace('[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']');
+            //        $(this).attr('name', newN);
+
+            //        var oldId = $(this).attr('id');
+            //        var newId = oldId.replace(suffix, (parseInt(suffix) + 1));
+            //        $(this).attr('id', newId);
+
+            //        //Replaced value
+            //        var type = $(this).attr('type');
+            //        if (type == "text") {
+            //            //$(this).attr('value', '');
+            //            $(this).val('');
+
+            //        }
+            //        else if (type == "number") {
+            //            $(this).val('');
+            //        }
+            //        else if (type == "decimal") {
+            //            $(this).val(0);
+            //        }
+            //        // If you have another Type then replace with default value
+            //        $(this).removeClass("input-validation-error");
+
+            //    });
+            //    $trLast.after($trNew);
+            //    $("#" + (parseInt(suffix) + 1) + "txtBibaran").autocomplete(autoCompOption);
+
+            //    // Re-assign Validation
+            //    var form = $("form")
+            //        .removeData("validator")
+            //        .removeData("unobtrusiveValidation");
+            //    $.validator.unobtrusive.parse(form);
+            //});
+
+            //// 2. Remove
+            //$('body').on("click", 'a.remove', function (e) {
+            //    e.preventDefault();
+            //    $(this).parent().parent().remove();
+            //});
+            //$("#0txtBibaran").change(function () {
+            //    $("#0txtBibaran", "#dataTable").autocomplete(autoCompOption);
+            //});
+
+
+            //var autoCompOption = {
+            //    source: function (request, response) {
+            //        $.ajax({
+            //            url: '/JornalEntries/AutoComplete/',
+            //            data: "{'prefix': '" + request.term + "'}",
+            //            dataType: "json",
+            //            type: "POST",
+            //            contentType: "application/json; charset=utf-8",
+            //            success: function (data) {
+            //                response($.map(data, function (item) {
+            //                    return item;
+            //                }))
+            //            },
+            //            error: function (response) {
+            //                alert(response.responseText);
+            //            },
+            //            failure: function (response) {
+            //                alert(response.responseText);
+            //            }
+            //        });
+            //    },
+            //    select: function (e, i) {
+            //        $(this).val(i.item.label);
+            //        autofill(i.item.value, $(this).attr('id').match(/\d+/));
+            //    },
+            //    minLength: 1
+            //}
+
+            //function autofill(item, index) {
+            //    $.ajax({
+            //        url: '/JornalEntries/autofill/',
+            //        data: "{'value':" + JSON.stringify(item) + "}",
+            //        dataType: "json",
+            //        type: "POST",
+            //        contentType: "application/json; charset=utf-8",
+            //        success: function (data) {
+            //            $("#" + index + "txtBibaran").val(data.byehoraName);
+            //            if (data.hisabNo == null) {
+            //                $("#" + index + "txtHisabNo").val("");
+            //            }
+            //            else {
+            //                $("#" + index + "txtHisabNo").val(data.hisabNo);
+            //            }
+            //        },
+            //        error: function (response) {
+            //            alert("error" + Error.toString() + "error");
+            //        }
+            //    });
+            //}
+
+
+            //$("#btnSubmit").click(function (e) {
+            //    var $tableBody = $("#dataTable");
+            //    var $trLast = $tableBody.find("tr:last");
+            //    var suffix = $trLast.find(':input:first').attr('name').match(/\d+/);
+            //    var deAmount = 0;
+            //    var creAmount = 0;
+            //    for (var i = 0; i <= parseInt(suffix) ; i++) {
+            //        var deCre = $("#" + i + "ddlDeCre").val();
+            //        var debit = $("#" + i + "txtDebit").val();
+            //        var credit = $("#" + i + "txtCredit").val();
+            //        if ($("#" + i + "txtBibaran").val() == "") {
+            //            alert("No Items inserted in table.Please Insert data and submt.");
+            //            e.preventDefault();
+            //            break;
+            //        }
+            //        if (deCre == "") {
+            //            alert("Please Select Dedit or Credit in dropdown option");
+            //            e.preventDefault();
+            //            break;
+            //        }
+            //        else if ((deCre == "debit" && debit == 0) || (deCre == "credit" && credit == 0)) {
+            //            alert("Please Insert Value Either in Debit or Credit with matching selection");
+            //            e.preventDefault();
+            //            break;
+            //        }
+            //        else {
+            //            deAmount = parseFloat(deAmount) + parseFloat($("#" + i + "txtDebit").val());
+            //            creAmount = parseFloat(creAmount) + parseFloat($("#" + i + "txtCredit").val());
+            //            if (i == parseInt(suffix) && deAmount != creAmount) {
+            //                alert("Total Debit and Credit amount are not equal.Please make correction and submit.")
+            //                e.preventDefault();
+            //            }
+            //        }
+            //    }
+
+            //});
+        });
+    </script>
+
+}
+
+
+

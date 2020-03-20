@@ -1,0 +1,121 @@
+﻿@model AccountingSystem.Models.officer
+
+@{
+    ViewBag.Title = "Details Officer";
+}
+
+<h2>कर्मचारी</h2>
+
+<div>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            मन्त्रालय
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.office.mantralaye)
+        </dd>
+
+        <dt>
+            नाम
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fullName)
+        </dd>
+
+        <dt>
+            PIS नं.
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pisNo)
+        </dd>
+
+        <dt>
+            इमेल
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            कार्यालयको फोन
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.officePhone)
+        </dd>
+
+        <dt>
+            Ext.नं.
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.extenNo)
+        </dd>
+
+        <dt>
+            मोबाइल
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mobileNo)
+        </dd>
+
+        <dt>
+            श्रेणी
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.suruScale)
+        </dd>
+
+        <dt>
+            पद
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.suruScale)
+        </dd>
+
+        <dt>
+            भत्ता
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.grade)
+        </dd>
+
+        <dt>
+            तलब
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.grade)
+        </dd>
+
+        <dt>
+            बिमा
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bima)
+        </dd>
+
+        <dt>
+            स्ताटस
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.officerId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

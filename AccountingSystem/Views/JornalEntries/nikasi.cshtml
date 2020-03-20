@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "nikasi";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    @using (Html.BeginForm("createNikasi", "jornalEntries", FormMethod.Get))
+    {
+        <div class="col-md-3"></div>
+         <div class="col-md-6">
+            <div class="form-group">
+               <h2>गोश्वारा भौचर नं. छान्नुहोस्(press cltrl to select more than one option at once)</h2>
+                @Html.DropDownList("jornalNo", (MultiSelectList)(ViewBag.yearMonth), new { @class = "form-control", id = "ddlJornalNo", multiple = "multiple" })
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+        <div class="col-md-12 text-center">
+            <input class="btn btn-primary" type="submit" value="Submit"/>
+        </div>
+    }
+
+
+    @*@using (Html.BeginForm("createNikasi", "jornalEntries", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.ValidationSummary()
+        if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+            <div class="col-md-4"></div>
+            <div class="col-md-4">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>आ.ब.</label>
+                    @Html.DropDownList("fyId", null, new { @class = "form-control", id = "ddlFyId" })
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>महिना</label><label id="ValMonth"></label>
+                    @Html.DropDownList("mn", EnumHelper.GetSelectList(typeof(AccountingSystem.Models.month)), new { @class = "form-control", id = "txtMonth" })
+                </div>
+            </div>
+            <div class="col-md-12 text-center">
+                <input type="submit" value="Submit" class="btn btn-primary" id="btnSubmit" />
+            </div>
+        </div>
+          <div class="col-md-4"></div>
+    }*@
+
+</div>
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+    @Scripts.Render("~/bundles/nepDate")
+    <script src="~/Scripts/StrUni.js"></script>
+
+    @*<script language="javascript">
+        $(document).ready(function () {
+
+            var jornalNos;
+            function  getJornalNo(id) {
+                $.ajax({
+                    url: '/JornalEntries/getJornalNos/',
+                    dataType: "json",
+                    data:"{'id':" + JSON.stringify(id) + "}",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        jornalNos = data;
+                    },
+                    error: function (response) {
+                        alert("Something Went Wrong");
+                        return null;
+                    }
+                });
+            }
+
+
+            $("#ddlYearMonth").change(function () {
+                var option = '';
+                var id = $("#ddlYearMonth").val();
+                $("#ddlJornalNo").empty();
+                option = '<option value="" disable="true">--गो.भौ.नं.--</option>';
+                for (var i = 0; i < jornalNos.length; i++) {
+                        option += '<option value="' + jornalNos[i].jornalNo + '">' + jornalNos[i].jornalNo + '</option>';
+                }
+                $('#officerId').append(option);
+            });
+
+
+        });
+    </script>*@
+
+}

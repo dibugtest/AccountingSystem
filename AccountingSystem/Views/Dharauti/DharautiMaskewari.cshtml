@@ -1,0 +1,187 @@
+﻿@model AccountingSystem.Models.dharautiMaskewari
+
+@{
+    ViewBag.Title = "Dharauti Maskewari";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    /*dt {
+        float: left;
+        clear: left;
+        width: 200px;
+        text-align: right;
+        font-weight: bold;
+        font-size: 12px;
+    }
+
+    dd {
+        margin: 0 0 0 110px;
+        padding: 0 0 0.5em 20px;
+        font-size: 12px;
+    }*/
+    #firstCol {
+        padding-left: 5px;
+        float: left;
+        width: 210px;
+        text-align: left;
+    }
+
+    #secondCol {
+        padding-right: 5px;
+        float: right;
+        text-align: right;
+        width: 200px;
+    }
+
+</style>
+<div class="row">
+    <div style="width:525px;font-size:12px;" id="printDiv">
+        <div style="width:100%;text-align:center">
+            नेपाल सरकार<br />संकृति, पर्यटन तथा उड्ययन मन्त्रालय<br /> राष्ट्रिय अभिलेखालय<br />रामशाहपथ काठमाडौँ
+            <br />धरौटीको मस्केवारी<br />
+            @Model.year साल @Model.month महिनाको
+        </div>
+        <div style="width:100%;">
+            <span style="float:left;text-align:left;">आ.ब.@Model.nepFy</span>
+        </div><br />
+        <div style="width:100%;">
+            <div style="width:80%;">
+                <span id="firstCol"> गत महिनाको धरौटी मौज्दात</span><span id="secondCol" >&nbsp; रु @CheckZero(Model.prevMaujdat)</span><br />
+                <span id="firstCol" >यस महिनामा जम्मा भएको धरौटी </span><span id="secondCol">&nbsp; रु @CheckZero(Model.currentMaujdat)</span><br />
+                <span id="firstCol">जम्मा</span><span id="secondCol" style="border-top: 1px solid black;">&nbsp; रु@CheckZero(Model.prevMaujdat + Model.currentMaujdat)</span>
+
+            </div><br />
+            <div style="width:80%;text-align:left;">
+                <label style="text-align:left;"><u>घटाउने</u></label>
+            </div><br />
+            <div style="width:80%;text-align:left">
+                <span id="firstCol">यो महिनामा फिर्ता भएको धरौटी </span><span id="secondCol">&nbsp; रु@CheckZero(Model.dharautiFirta)</span><br />
+                <span id="firstCol">यो महिनामा सदर स्याहा भएको धरौटी</span><span id="secondCol">&nbsp; रु@CheckZero(Model.shyhaDharauti)</span><br />
+                <span id ="firstCol">जम्मा</span><span id="secondCol" style="border-top: 1px solid black;">&nbsp; रु @CheckZero(Model.dharautiFirta + Model.shyhaDharauti)</span>
+
+</div><br /><br />
+            <div style="width:80%;text-align:left;">
+                <span id="firstCol">खुद बाँकी धरौटी मौज्दात</span><span id="secondCol">&nbsp; रु@CheckZero(Model.bakidharauti)</span><br />
+                <span id="firstCol">नगद बाँकी </span><span id="secondCol">&nbsp; रु@CheckZero(Model.nagadBaki)</span><br />
+                <span id="firstCol">ने.रा. बैंक थापाथली | </span><span id="secondCol" >&nbsp; रु@CheckZero(Model.neRaBank)</span>
+
+            </div><br /><br />
+            <div style="width:80%;text-align:left;">
+                <label style="text-align:left;">उपर्युक्त व्यहोरा ठीक छ भनि</label>
+            </div><br /><br />
+
+        </div>
+        <div style="width:100%;text-align:left;">
+            <span style="float:left;">पेश गर्ने<br />मिति</span>
+            <span style="float:right;padding-right:100px;">सदर गर्ने <br />मिति</span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div style="margin-left:200px;">
+        <input type="submit" class="btn btn-primary" id="btnPrint" value="Print" />
+        <input type="submit" class="btn btn-primary" id="btnConvertWord" value="Download Word">
+
+    </div>
+</div>
+@helper StringToUnicode(string data)
+{
+    string uni = "";
+    foreach (char c in data)
+    {
+        var charCode = "U+" + ((int)c).ToString("X4");
+        switch (charCode)
+        {
+            case "U+0030":
+                uni += "०";
+                break;
+            case "U+0031":
+                uni += "१";
+                break;
+            case "U+0032":
+                uni += "२";
+                break;
+            case "U+0033":
+                uni += "३";
+                break;
+            case "U+0034":
+                uni += "४";
+                break;
+            case "U+0035":
+                uni += "५";
+                break;
+            case "U+0036":
+                uni += "६";
+                break;
+            case "U+0037":
+                uni += "७";
+                break;
+            case "U+0038":
+                uni += "८";
+                break;
+            case "U+0039":
+                uni += "९";
+                break;
+            default:
+                uni += c;
+                break;
+        }
+    }
+    @uni
+}
+@helper CheckZero(decimal data)
+{
+    if (data == 0)
+    {
+       @String.Empty
+    }
+    else
+    {
+        @StringToUnicode(data.ToString());
+    }
+}
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+    <script src="~/Scripts/googoose.js"></script>
+    <script language="javascript">
+        $(document).ready(function () {
+
+            $("#btnPrint").click(function (e) {
+                PrintElem("printDiv");
+            });
+
+
+            function PrintElem(elem) {
+                var mywindow = window.open('', 'PRINT', 'height=842,width=590');
+
+                mywindow.document.write('<html><head><style>body {font-size:12px;} dt {float: left;clear: left; width: 200px;text-align: right;font-weight: bold;font-size: 12px;}dd { margin: 0 0 0 110px;padding: 0 0 0.5em 20px;font-size: 12px;}    #firstCol {padding-left: 5px;float: left;width: 200px;text-align: left;} #secondCol { padding-right: 5px;float: right;text-align: right;width: 200px;}</style><title></title>');
+                mywindow.document.write('</head><body >');
+                mywindow.document.write(document.getElementById(elem).innerHTML);
+                mywindow.document.write('</body></html>');
+
+                mywindow.document.close(); // necessary for IE >= 10
+                mywindow.focus(); // necessary for IE >= 10*/
+
+                mywindow.print();
+                mywindow.close();
+
+                return true;
+            }
+
+            $("#btnConvertWord").click(function (event) {
+                var now = new Date();
+                $(document).googoose({
+                    area: '#printDiv',
+                    filename: "धरौटी मस्केवारी" + now.getDate() + '/' + parseInt(now.getMonth() + 1) + '/' + now.getFullYear() + '.doc',
+                    size: '8.27in 11.69in',
+                    headermargin: '.01in',
+                    footermargin: '.01in'
+                });
+            });
+
+        });
+    </script>
+}

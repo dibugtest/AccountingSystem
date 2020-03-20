@@ -1,0 +1,44 @@
+﻿@model AccountingSystem.Models.rajaswoSirsak
+
+@{
+    ViewBag.Title = "Delete RajaswoSirsak";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <h2 >सम्बन्धित राजश्व शिर्षक विवरण हटाउन चाहनुहुन्छ?</h2>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.sirsak)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sirsak)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sirsakNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sirsakNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.remarks)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div >
+            <input type="submit" value="Delete" class="btn btn-danger" /> 
+            @Html.ActionLink("Back to List", "Index", null,new{@class="btn btn-default"})
+        </div>
+    }
+</div>

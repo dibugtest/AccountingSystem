@@ -1,0 +1,206 @@
+﻿@model AccountingSystem.Models.fiscalYear
+
+@{
+    ViewBag.Title = "Create FiscalYear";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="row">
+    <h2 class="text-center">आर्थिक वर्ष</h2>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="col-md-12">
+                <h4>नेपाली आर्थिक वर्ष<br /></h4>
+                <div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>(पहिलो वर्ष)(eg.2074)</label>@Html.ValidationMessage("nepFy1", "Must be 4 digit number only")
+                            @Html.TextBoxFor(m => m.nepStartYear, new { @class = "form-control", id = "txtNepFy1", type = "number", maxlength = "4", minlength = "4" })
+
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>(दोश्रो वर्ष)(eg.2075)</label>@Html.ValidationMessage("nepFy2", "Must be 4 digit number only")
+                            @Html.TextBoxFor(m => m.nepEndYear, new { @class = "form-control", id = "txtNepFy2", type = "number", maxlength = "4", minlength = "4" })
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <h4> अंग्रेजी आर्थिक वर्ष<br /></h4>
+                <div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>(पाहिलो वर्ष)(eg.2017)</label>@Html.ValidationMessage("enFy1", "Must be 4 digit number only")
+                            @Html.TextBoxFor(m => m.enStartYear, new { @class = "form-control", id = "txtEnFy1", type = "number", maxlength = "4", minlength = "4" })
+
+                        </div>
+                    </div>
+                    <label></label>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>(दोश्रो वर्ष)(eg.2018)</label>@Html.ValidationMessage("enFy2", "Must be 4 digit number only")
+                            @Html.TextBoxFor(m => m.enEndYear, new { @class = "form-control", id = "txtEnFy2", type = "number", maxlength = "4", minlength = "4" })
+
+
+
+                        </div>
+                    </div>
+                    <br />
+                    नोट:दोश्रो वर्ष पहिलो वर्ष भन्दा १ ले बढी हुनुपर्छ |
+                </div>
+            </div>
+            @*<div class="col-md-12">
+                <div class="form-group">
+                    <label>स्टाटस</label><br />
+                    @Html.RadioButton("status", true, new { @class = "custom-control-input" }) <span class="custom-control-indicator"></span>TRUE
+                    @Html.RadioButton("status", false, new { @class = "custom-control-input" })FALSE
+                    @Html.ValidationMessageFor(model => model.status)
+                </div>
+            </div>*@
+
+            @Html.HiddenFor(m=>m.status)
+            @Html.Hidden("nepFy", "2074/075", new { id = "txtNepFy" })
+            @Html.Hidden("enFy", "2017/018", new { id = "txtEnFy" })
+
+
+            @Html.Hidden("activatedDate", DateTime.Now)
+            @Html.ValidationMessageFor(model => model.activatedDate)
+
+
+
+            @Html.Hidden("activatedBy", "")
+            @Html.ValidationMessageFor(model => model.activatedBy)
+
+
+
+            <div class="col-md-12 text-center">
+                <input type="submit" value="Create" class="btn btn-primary" id="btnSubmit" />
+                 @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+                @Html.ActionLink("Change FiscalYear", "SetFiscalYear", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+    }
+</div>
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+
+            function validateStatus() {
+                var valid = false;
+                $.ajax({
+                    async: false,
+                    url: RootUrl + 'FiscalYear/getFiscalYear/',
+                   // data: "{'fyId':' 0 '}",
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        if (data == "true") {
+                            valid = true;
+                        }
+
+                    }
+                });
+                return valid;
+            }
+
+            function validateFiscalYear() {
+                var nepFy1 = $("#txtNepFy1").val();
+                var nepFy2 = $("#txtNepFy2").val();
+                var enFy1 = $("#txtEnFy1").val();
+                var enFy2 = $("#txtEnFy2").val();
+                if (((parseInt(nepFy1) + 1) != parseInt(nepFy2))) {
+                    alert("Second Nepali Fiscal year should be next year of first year.");
+                    return false;
+                }
+                else if (((parseInt(enFy1) + 1) != parseInt(enFy2))) {
+                    alert("Second English fiscal year should be next year of first year.");
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            }
+
+
+            function checkFiscalYear() {
+                var valid = false;
+                var nepFy1 = $("#txtNepFy1").val();
+                var nepFy2 = $("#txtNepFy2").val();
+                var enFy1 = $("#txtEnFy1").val();
+                var enFy2 = $("#txtEnFy2").val();
+
+                $.ajax({
+                    async: false,
+                    url: RootUrl + 'FiscalYear/checkFiscalYear/',
+                    dataType: "json",
+                    type: "POST",
+                    data: "{'nepFy1':'" + nepFy1 + "','nepFy2':'" + nepFy2 + "','enFy1':'" + enFy1 + "','enpFy2':'" + enFy2 + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        if (data == "true") {
+                            valid = true;
+                        }
+                    }
+                });
+                return valid;
+            }
+
+
+
+            $("#btnSubmit").click(function (e) {
+                var breakout = false;
+                var status = $('input[name=status]:checked').val();
+                if (validateFiscalYear() == false) {
+                    breakout = true;
+                    e.preventDefault();
+                }
+
+                if (checkFiscalYear() && breakout == false) {
+                    alert("Record Already contains fiscal year you want to insert.");
+                    breakout = true;
+                    e.preventDefault();
+                }
+
+                if (status == "True" && breakout == false) {
+                    if (validateStatus()) {
+                        if (confirm("Record Already contains a fiscal year  with status TRUE,Do you want to change the status fical year.")) {
+
+                        } else {
+                            breakout = true;
+                            e.preventDefault();
+                        }
+                    }
+                }
+                if (breakout) {
+                    e.preventDefault();
+                }
+            });
+
+            function isNumberKey(evt) {
+                var charCode = (evt.which) ? evt.which : event.keyCode
+                if (charCode > 31 && (charCode < 48 || charCode > 57))
+                    return false;
+
+                return true;
+            }
+        });
+    </script>
+}

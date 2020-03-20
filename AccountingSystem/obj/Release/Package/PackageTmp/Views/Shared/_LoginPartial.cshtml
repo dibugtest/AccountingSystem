@@ -1,0 +1,62 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-top-links navbar-right in">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user fa-fw"></i>Hello @User.Identity.GetUserName() !<i class="fa fa-caret-down"></i></a>
+                <ul class="dropdown-menu">
+                    <li><a href='@Url.Action("AccountSettings", "Account")'><i class="fa fa-edit fa-fw"></i> Settings</a></li>
+                    <li><a href='@Url.Action("Manage", "Account")'><i class="fa fa-edit fa-fw"></i> Ch.Pswd</a></li>
+                    @if (User.Identity.GetUserName() == "SuperAdmin")
+                    {
+                        <li><a href='@Url.Action("listAppUser", "Account")'><i class="fa fa-edit fa-fw"></i> List of Users</a></li>
+                    }
+                    <li><a href="@Url.Action("Register", "Account")"><i class="fa fa-lock"></i>  Register</a></li>
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-lock"></i>  Log off</a></li>
+                </ul>
+            </li>
+        </ul>
+
+    }
+}
+else
+{
+    <ul class="nav navbar-top-links navbar-right in">
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user fa-fw"></i>login<i class="fa fa-caret-down"></i></a>
+            <ul class="dropdown-menu">
+                <li><a href='@Url.Action("Register", "Account")'><i class="fa fa-user-plus fa-fw"></i> Register</a></li>
+                <li><a href='@Url.Action("Login", "Account")'><i class="fa fa-key fa-fw"></i> Log in</a></li>
+
+
+            </ul>
+        </li>
+    </ul>
+}
+
+
+
+
+@*using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+            </li>
+            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        </ul>
+        }
+    }
+    else
+    {
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+            <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        </ul>
+    }*@

@@ -1,0 +1,69 @@
+﻿@model AccountingSystem.Models.arthaBudget
+
+@{
+    ViewBag.Title = "Delete Artha Budget";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <h2 >सम्बन्धित अर्थ बजेट विवरण हटाउन चाहनुहुन्छ?</h2>
+    <div class="col-md-12 ">
+    <dl class="dl-horizontal">
+        <dt>
+            वर्ष
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.year)
+        </dd>
+
+        <dt>
+            महिना
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.month)
+        </dd>
+
+        <dt>
+            कर्मचारीको नाम
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.employeeName)
+        </dd>
+
+        <dt>
+            ख.शि.नं.(२७३१३)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.khaSiNa3)
+        </dd>
+
+        <dt>
+            ख.शि.नं.(२७३१४)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.khaSiNa4)
+        </dd>
+
+        <dt>
+            मिति
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nepDate)
+        </dd>
+    </dl>
+    </div>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="col-md-12">
+            <input type="submit" value="Delete" class="btn btn-danger" /> 
+            @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+        </div>
+    }
+</div>

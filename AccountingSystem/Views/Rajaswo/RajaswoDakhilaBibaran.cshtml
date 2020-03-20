@@ -1,0 +1,261 @@
+﻿@model List<AccountingSystem.Models.rajaswoDakhila>
+
+
+@{
+    ViewBag.Title = "Rajaswo Dakhila bibaran";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    #tbl {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 12px;
+    }
+
+        #tbl td, #tbl th {
+            border: 1px solid black;
+            padding: 1px;
+        }
+</style>
+<div class="row">
+<div id="printDiv" style="width:595px;font-size:12px;">
+    <table id="tbl">
+        <tr style="background-color:#808080;">@Model[0].year @Model.FirstOrDefault(m => m.monthIndex == (int)ViewBag.monthIndex).month महिनामा राजश्व दाखिला विवरण</tr>
+        <tr>
+            @*<th>स.नं.</th>*@
+            <th>मिति</th>
+            <th>भौचर नं.</th>
+            <th>१४१५१</th>
+            <th>१४२१३</th>
+            <th>१४२२३</th>
+            <th>१४२२७</th>
+            <th>१५११२</th>
+            <th>जम्मा रकम</th>
+        </tr>
+
+        @if (Model.Count > 0)
+        {
+            @*@{int i=0;}*@
+
+            foreach (var item in Model)
+            {
+                if (item.monthIndex == (int)ViewBag.monthIndex)
+                {
+                    <tr>
+                        @*<td>@StringToUnicode((i++).ToString())</td>*@
+                        <td>@StringToUnicode(item.nepDateStr.Replace('-','/'))</td>
+                        <td>
+                            @item.jornalNo
+                        </td>
+                        <td>
+                            @CheckZero(item.kha14151)
+                        </td>
+                        <td>
+                            @CheckZero(item.kha14213)
+                        </td>
+                        <td>
+                            @CheckZero(item.kha14223)
+                        </td>
+                        <td>
+                            @CheckZero(item.kha14227)
+                        </td>
+                        <td>
+                            @CheckZero(item.kha15112)
+                        </td>
+                        <td>
+                            @CheckZero(item.kha15112 + item.kha14227 + item.kha14223 + item.kha14213 + item.kha14151)
+                        </td>
+
+                    </tr>
+                }
+
+            }
+            <tr>
+                <td colspan="2">जम्मा</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.kha14151))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.kha14213))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.kha14223))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.kha14227))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.kha15112))</td>
+                <td>
+                    @CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.kha14151) +
+                 Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.kha14213) +
+                     Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.kha14223) +
+                          Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.kha14227) +
+                               Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.kha15112))
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">अल्या</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.kha14151))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.kha14213))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.kha14223))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.kha14227))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.kha15112))</td>
+                <td>
+                    @CheckZero(Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.kha14151) +
+                 Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.kha14213) +
+                     Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.kha14223) +
+                          Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.kha14227) +
+                               Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.kha15112))
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">कूल जम्मा</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.kha14151))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.kha14213))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.kha14223))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.kha14227))</td>
+                <td>@CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.kha15112))</td>
+                <td>
+                    @CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.kha14151) +
+                 Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.kha14213) +
+                     Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.kha14223) +
+                          Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.kha14227) +
+                               Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.kha15112))
+                </td>
+            </tr>
+        }
+    </table>
+    <div style="width:100%;">
+        <div style="float:left; width:50%;">पेश गर्ने</div>
+        <div style="float:right;width:50%;text-align:right;padding-right:200px;">सदर गर्ने</div>
+        </div><div style="clear:both;"></div>
+        <div style="width:100%;text-align:center;">
+            <table>
+                <tr><th colspan="2">आ.ब. @Model[0].nepFy को जम्मा दाखिला रु</th></tr>
+                <tr><th>महिना</th><th>दाखिला रकम</th></tr>
+                <tr><td>श्रावण</td><td>@CheckZero((decimal)ViewBag.dakhilaTotal[0])</td></tr>
+                <tr><td>भाद्र</td><td>@CheckZero((decimal)ViewBag.dakhilaTotal[1])</td></tr>
+                <tr><td>असोज</td><td>@CheckZero((decimal)ViewBag.dakhilaTotal[2])</td></tr>
+                <tr><td>कार्तिक</td><td>@CheckZero((decimal)ViewBag.dakhilaTotal[3])</td></tr>
+                <tr><td>मंसिर</td><td>@CheckZero((decimal)ViewBag.dakhilaTotal[4])</td></tr>
+                <tr><td>पौष</td><td>@CheckZero((decimal)ViewBag.dakhilaTotal[5])</td></tr>
+                <tr><td>माघ</td><td>@CheckZero((decimal)ViewBag.dakhilaTotal[6])</td></tr>
+                <tr><td>फाल्गुन</td><td>@CheckZero((decimal)ViewBag.dakhilaTotal[7])</td></tr>
+                <tr><td>चैत्र</td><td>@CheckZero((decimal)ViewBag.dakhilaTotal[8])</td></tr>
+                <tr><td>बैशाख</td><td>@CheckZero((decimal)ViewBag.dakhilaTotal[9])</td></tr>
+                <tr><td>जेष्ठ</td><td>@CheckZero((decimal)ViewBag.dakhilaTotal[10])</td></tr>
+                <tr><td>अषाढ</td><td>@CheckZero((decimal)ViewBag.dakhilaTotal[11])</td></tr>
+                <tr>
+                    <td>जम्मा</td>
+                    <td>
+                        @CheckZero((decimal)ViewBag.dakhilaTotal[0] + (decimal)ViewBag.dakhilaTotal[1] + (decimal)ViewBag.dakhilaTotal[2]
+                  + (decimal)ViewBag.dakhilaTotal[3] + (decimal)ViewBag.dakhilaTotal[4] + (decimal)ViewBag.dakhilaTotal[5]
+                           + (decimal)ViewBag.dakhilaTotal[6] + (decimal)ViewBag.dakhilaTotal[7] + (decimal)ViewBag.dakhilaTotal[8]
+                           + (decimal)ViewBag.dakhilaTotal[9] + (decimal)ViewBag.dakhilaTotal[10] + (decimal)ViewBag.dakhilaTotal[11])
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div style="margin-left:200px;">
+        @*@Html.ActionLink("Create New", "Fantwari", null, new { @class = "btn btn-primary" })*@
+        <input type="submit" class="btn btn-primary" id="btnPrint" value="Print" />
+        <input type="submit" class="btn btn-primary" id="btnConvertWord" value="Download Word">
+    </div>
+</div>
+@helper StringToUnicode(string data)
+{
+    string uni = "";
+    foreach (char c in data)
+    {
+        var charCode = "U+" + ((int)c).ToString("X4");
+        switch (charCode)
+        {
+            case "U+0030":
+                uni += "०";
+                break;
+            case "U+0031":
+                uni += "१";
+                break;
+            case "U+0032":
+                uni += "२";
+                break;
+            case "U+0033":
+                uni += "३";
+                break;
+            case "U+0034":
+                uni += "४";
+                break;
+            case "U+0035":
+                uni += "५";
+                break;
+            case "U+0036":
+                uni += "६";
+                break;
+            case "U+0037":
+                uni += "७";
+                break;
+            case "U+0038":
+                uni += "८";
+                break;
+            case "U+0039":
+                uni += "९";
+                break;
+            default:
+                uni += c;
+                break;
+        }
+    }
+    @uni
+}
+@helper CheckZero(decimal data)
+{
+    if (data == 0)
+    {
+         @StringToUnicode("")
+    }
+    else
+    {
+        @StringToUnicode(data.ToString())
+    }
+}
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+    <script src="~/Scripts/googoose.js"></script>
+    <script language="javascript">
+        $(document).ready(function () {
+
+            $("#btnPrint").click(function (e) {
+                PrintElem("printDiv");
+            });
+
+
+            function PrintElem(elem) {
+                var mywindow = window.open('', 'PRINT', 'height=590,width=842');
+
+                mywindow.document.write('<html><head><style>body {font-size:12px;}#tbl {border-collapse: collapse !important;width: 100%;font-size: 12px;}#tbl td, #tbl th {border: 1px solid black !important;padding: 1px !important;} .alignleft {float: left;text-align: left;width: 33.33333%;}.aligncenter {float: left;text-align: center;width: 33.33333%;}.alignright {float: left;text-align: right;width: 33.33333%;}</style><title></title>');
+                mywindow.document.write('</head><body >');
+                mywindow.document.write(document.getElementById(elem).innerHTML);
+                mywindow.document.write('</body></html>');
+
+                mywindow.document.close(); // necessary for IE >= 10
+                mywindow.focus(); // necessary for IE >= 10*/
+
+                mywindow.print();
+                mywindow.close();
+
+                return true;
+            }
+
+            $("#btnConvertWord").click(function (event) {
+                var now = new Date();
+
+                $(document).googoose({
+                    area: '#printDiv',
+                    filename: 'राजश्व दाखिला' + now.getDate() + '/' + parseInt(now.getMonth() + 1) + '/' + now.getFullYear() + '.doc',
+                    size: '8.27in 11.69in',
+                    headermargin: '.01in',
+                    footermargin: '.01in'
+                });
+            });
+        });
+    </script>
+}

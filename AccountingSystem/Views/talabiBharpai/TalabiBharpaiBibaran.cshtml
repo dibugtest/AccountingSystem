@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "Report Talabi Bharpai";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+
+
+
+    <h2 class="text-center">तलबी भरपाई सम्बन्धि रिपोर्टहरु</h2>
+@using (Html.BeginForm("ReportGen", "Report", FormMethod.Get))
+    {
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>आ.ब.</label>
+                @Html.DropDownList("fyId", null, new { @class = "form-control", id = "ddlFyId" })
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>महिना</label>
+                @Html.DropDownList("mn", EnumHelper.GetSelectList(typeof(AccountingSystem.Models.month)), new { @class = "form-control", id = "txtMonth" })
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label>रिपोर्ट किसिम</label>
+                @Html.DropDownList("reportType", new List<SelectListItem> { new SelectListItem { Value = "TB", Text = "तलबी भरपाई" }, new SelectListItem { Value = "BA", Text = "बैंक" }, new SelectListItem { Value = "BI", Text = "बीमा" }, new SelectListItem { Value = "NA", Text = "ना.ल.कोष" }, new SelectListItem { Value = "SK", Text = "संचय कोष" }, new SelectListItem { Value = "TX", Text = "कर" } }, "--छान्नुहोस्--", new { @class = "form-control", id = "ddlReportType" })
+            </div>
+        </div>
+        <div class="col-md-12 text-center">
+            <input type="submit" value="Submit" class="btn btn-primary" id="btnSubmit" />
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+}
+    
+    </div>
+        @section Scripts {
+            @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/jqueryval")
+            @Scripts.Render("~/bundles/jquery.ui")
+            @Styles.Render("~/Content/css/jquery.ui")
+            @Scripts.Render("~/bundles/nepDate")
+            <script>
+                $(document).ready(function () {
+
+                    $("#btnSubmit").click(function (e) {
+                        var reportType = $("#ddlReportType").val();
+                        if (reportType == 0 || reportType == "")
+                        {
+                            alert("Report Type is Required");
+                            e.preventDefault();
+                        }
+                    });
+                });
+            </script>
+}

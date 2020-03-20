@@ -1,0 +1,73 @@
+﻿@model List<AccountingSystem.Models.jornalEntries>
+
+@{
+    ViewBag.Title = "Delete Journal";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+<h2>सम्बन्धित गोश्वारा भौचरको विवरण हटाउन चाहनुहुन्छ ?</h2>
+
+    <dl class="dl-horizontal">
+        <dt>
+           ब.उ.शि.नं.
+        </dt>
+
+        <dd>
+          @Model[0].baUSiNa.baUSiNo
+        </dd>
+
+        <dt>
+           गो.भौ.नं.
+        </dt>
+
+        <dd>
+           @Model[0].jornalNo
+        </dd>
+
+        <dt>
+           गो.भौ.किसिम
+        </dt>
+
+        <dd>
+            @Model[0].jornalType
+        </dd>
+        <dt>
+           वर्ष
+        </dt>
+
+        <dd>
+            @Model[0].year
+        </dd>
+        <dt>
+          महिना
+        </dt>
+
+        <dd>
+            @Model[0].month
+        </dd>
+
+        <dt>
+          मिति
+        </dt>
+
+        <dd>
+            @Model[0].nepDate.ToString("yyyy/MM/dd")
+        </dd>
+
+        <dt>
+           नोट
+        </dt>
+
+        <dd>
+            @Model[0].note
+        </dd>
+
+    </dl>
+
+  
+        <div >
+            <input type="submit" value="Delete" class="btn btn-danger" id=@Model[0].jornalNo> 
+            @Html.ActionLink("Back to List", "Index", null, new {@class="btn btn-default" })
+        </div>      
+    }
+</div>

@@ -1,0 +1,334 @@
+﻿@model List<AccountingSystem.Models.rajaswoAsuli>
+
+@{
+    ViewBag.Title = "Edit Rajaswo Asuli";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@Styles.Render("~/Content/nepDate")
+
+<div class="row">
+    <h2 class="text-center">राजश्व असुली विवरण परिवर्तन गर्नुहोस</h2>
+    @using (Html.BeginForm("EditAsuli", "Rajaswo", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.ValidationSummary()
+        if (ViewBag.Message != null)
+        {
+            <div style="border:solid 1px green">
+                @ViewBag.Message
+            </div>
+        }
+        <fieldset style="border:1px solid;">
+            <legend style="width:auto;"></legend>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>आ.ब.</label>
+                    @Html.DropDownList("fyId", null, new { @class = "form-control", id = "ddlFyId" })
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label>महिना</label><label id="ValMonth"></label>
+                    @Html.DropDownList("month", EnumHelper.GetSelectList(typeof(AccountingSystem.Models.month), (AccountingSystem.Models.month)Model[0].monthIndex), new { @class = "form-control", id = "txtMonth" })
+                </div>
+            </div>
+        </fieldset>
+        <table class="table table-bordered" id="dataTable" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <th>मिति</th>
+                <th>रसिद नं.</th>
+                <th>बुझाउनेको नाम</th>
+                <th>१४१५१ सरकारी सम्पतिको बहाल तथा अन्य आय</th>
+                <th colspan="6">१४२२३ शिक्षा क्षेत्रको आम्दानी</th>
+                <th>१४२१३ अन्य बिक्रीबाट प्राप्त रकम पुस्तक</th>
+                <th>अन्य प्रशासनिक सेवा शुल्क १४२२७ टेण्डर</th>
+               <th></th>
+            </tr>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>जन्म मिति</th>
+                <th>रि.प्रिन्ट</th>
+                <th>माइक्रो फिल्म</th>
+                <th>प्रतिलिपि</th>
+                <th>भाष्यन्तर व लिप्यन्तर</th>
+                <th>डिजिटल इमेज</th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+            @if (Model != null && Model.Count > 0)
+            {
+                int j = 0;
+                foreach (var i in Model)
+                {
+                    <tr id="dataRow">
+                        <td>@Html.TextBoxFor(a => a[j].nepDateStr, new { @class = "form-control", id = j + "txtNepDate", style = "width:150px;"})</td>
+                        <td>@Html.TextBoxFor(a => a[j].rasidNo, "", new { @class = "form-control", id = j + "txtRasidNo" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].bhujauneKoNaam, "", new { @class = "form-control", id = j + "txtBujauneKoNaam"})</td>
+                        <td>@Html.TextBoxFor(a => a[j].kha14151, new { @class = "form-control", id = j + "txtKha14151", type = "decimal"})</td>
+                        <td>@Html.TextBoxFor(a => a[j].janmaMiti, new { @class = "form-control", id = j + "txtJanmaMiti", type = "decimal"})</td>
+                        <td>@Html.TextBoxFor(a => a[j].rePrint, "", new { @class = "form-control", id = j + "txtRePrint", type = "decimal" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].microFilm, "", new { @class = "form-control", id = j + "txtMicroFilm", type = "decimal" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].pratilipi, "", new { @class = "form-control", id = j + "txtPratilipi", type = "decimal" })</td>
+                        <td>@Html.TextBoxFor(a => a[j].lipyantar, new { @class = "form-control", id = j + "txtLipyantar", type = "decimal"})</td>
+                        <td>@Html.TextBoxFor(a => a[j].digitalImage, new { @class = "form-control", id = j + "txtDigitalImage", type = "decimal"})</td>
+                        <td>@Html.TextBoxFor(a => a[j].kha14213, "", new { @class = "form-control", id = j + "txtKha14213",type="decimal"})</td>
+                        <td>@Html.TextBoxFor(a => a[j].kha14227, "", new { @class = "form-control", id = j + "txtKha14227", type = "decimal" })</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].raId, new {id=j+"txtRAId" })</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].year, new { id = j + "txtYear" })</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].month, new { id = j + "txtMonth" })</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].monthIndex, new { id = j + "txtMonthIndex" })</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].fyId, new { id = j + "txtFyId" })</td>
+                        <td style="display:none;">@Html.HiddenFor(a => a[j].nepDate, new { id = j + "txtDate" })</td>
+                        <td>
+                            @*@if (j > 0)
+                            {
+                                 <a href="#" id="remove">
+                                    <i class="fa fa-minus-circle text-danger" style="font-size:15px;"></i>
+                                </a>
+                            }*@
+                        </td>
+                    </tr>
+                            j++;
+                }
+            }
+        </table>
+        <div class="col-md-12 text-right"><a href="#" id="addNewRow" class="btn btn-default">Add New Row</a></div>
+       
+
+        <div class="col-md-12 text-center">
+            <input type="submit" value="Submit" class="btn btn-primary" id="btnSubmit" />
+            @Html.ActionLink("Back To List", "IndexRajaswoAsuli", null, new { @class = "btn btn-default" })
+        </div>
+
+    }
+</div>
+
+@* Here I will add Jquery Code for validation / dynamically add new rows / Remove rows etc*@
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+    @Scripts.Render("~/bundles/nepDate")
+
+    <script src="~/Scripts/NepaliUnicode.js"></script>
+<script src="~/Transliteration/jsapi.js"></script>
+
+    <script language="javascript">
+        $(document).ready(function () {
+
+            function AddUnicodeTxt() {
+                var $tableBody = $("#dataTable");
+                var $trLast = $tableBody.find("tr:last");
+                var suffix = $trLast.find(':input:first').attr('name').match(/\d+/);
+                for (var i = 0; i <= suffix; i++) {
+                    var ele1 = $("#" + i + "txtRasidNo");
+                    var ele2 = $("#" + i + "txtBujauneKoNaam");
+                    AddUnicode(ele1);
+                    AddUnicode(ele2);
+                    $("#" + i + "txtNepDate").nepaliDatePicker();
+                }
+            }
+
+            AddUnicodeTxt();
+
+
+            $('#0txtNepDate').nepaliDatePicker();
+
+            $('body').on("click", 'a#addNewRow', function (e) {
+                e.preventDefault();
+                var $tableBody = $("#dataTable");
+                // var $trRowclicked = $(this).closest('tr');
+                var $trLast = $tableBody.find("tr:last");
+                var $trNew = $trLast.clone();
+
+                var suffix = $trNew.find(':input:first').attr('name').match(/\d+/);
+                $trNew.find("td:last").html('<a href="#" id ="remove"><i class="fa fa-minus-circle text-danger" style="font-size:15px;"></i></a>');
+                $.each($trNew.find(':input'), function (i, val) {
+                    // Replaced Name
+                    var oldN = $(this).attr('name');
+                    var newN = oldN.replace('[' + suffix + ']', '[' + (parseInt(suffix) + 1) + ']');
+                    $(this).attr('name', newN);
+
+                    var oldId = $(this).attr('id');
+                    var newId = oldId.replace(suffix, (parseInt(suffix) + 1));
+                    $(this).attr('id', newId);
+
+                    //Replaced value
+                    var type = $(this).attr('type');
+                    if (type == "text") {
+                        $(this).val('');
+                    }
+
+                    else if (type == "number") {
+                        $(this).val('');
+                    }
+                    else if (type == "decimal") {
+                        $(this).val(0);
+                    }
+                    // If you have another Type then replace with default value
+                    $(this).removeClass("input-validation-error");
+
+                });
+                $trLast.after($trNew);
+                var ele1 = $("#" + (parseInt(suffix) + 1) + "txtRasidNo");
+                var ele2 = $("#" + (parseInt(suffix) + 1) + "txtBujauneKoNaam");
+                $("#" + (parseInt(suffix) + 1) + "txtRAId").val(0);
+                AddUnicode(ele1);
+                AddUnicode(ele2);
+
+                $("#" + (parseInt(suffix) + 1) + "txtNepDate").nepaliDatePicker();
+
+
+                // Re-assign Validation
+                var form = $("form")
+                    .removeData("validator")
+                    .removeData("unobtrusiveValidation");
+                $.validator.unobtrusive.parse(form);
+            });
+        });
+
+        // 2. Remove
+        $('body').on("click", 'a#remove', function (e) {
+            e.preventDefault();
+            $(this).parent().parent().remove();
+        });
+
+
+        //function checkValidationTextBox() {
+        //    var year = $("#txtYear").val();
+        //    if (year == null || year == "") {
+        //        alert("year is Required.");
+        //        return false;
+        //    }
+        //    else {
+        //        return true;
+        //    }
+        //}
+
+        function checkValidation() {
+            var breakout = false;
+            $("body #dataTable tr#dataRow").each(function (e) {
+                $(this).find('input').each(function () {
+                    var oldN = $(this).attr('name');
+                    var i = oldN.match(/\d+/);
+                    var nepDate = $("#" + i + "txtNepDate").val();
+                    var rasidNo = $("#" + i + "txtRasidNo").val();
+                    var bujauneKoNaam = $("#" + i + "txtBujauneKoNaam").val();
+                    var kha14151 = $("#" + i + "txtKha14151").val();
+                    var janmaMiti = $("#" + i + "txtJanmaMiti").val();
+                    var rePrint = $("#" + i + "txtRePrint").val();
+                    var microFilm = $("#" + i + "txtMicroFilm").val();
+                    var lipyantar = $("#" + i + "txtLipyantar").val();
+                    var partilipi = $("#" + i + "txtPratilipi").val();
+                    var digitalImage = $("#" + i + "txtDigitalImage").val();
+                    var kha14213 = $("#" + i + "txtKha14213").val();
+                    var kha14227 = $("#" + i + "txtKha14227").val();
+                    if (nepDate == null || nepDate == "") {
+                        alert("Date is required");
+                        breakout = true;
+                        return false;
+                    }
+                    else if (rasidNo == null || rasidNo == "") {
+                        alert("Rasid No is Required");
+                        breakout = true;
+                        return false;
+                    }
+                    else if (bujauneKoNaam = "" || bujauneKoNaam == null) {
+                        alert("BujauneKoNaam is Required");
+                        breakout = true;
+                        return false;
+                    }
+                    else if (kha14151 == 0 && janmaMiti == 0 && rePrint == 0 && microFilm == 0 && lipyantar == 0 && partilipi == 0 && digitalImage == 0 && kha14213 == 0 && kha14227 == 0) {
+                        alert("All Inserted values are zero. Please Insert at least one value greater than 0.")
+                        breakout = true;
+                        return false;
+                    }
+                    else if (isNaN(kha14151) || isNaN(janmaMiti) || isNaN(rePrint) || isNaN(microFilm) || isNaN(lipyantar) || isNaN(partilipi) || isNaN(digitalImage) || isNaN(kha14213) || isNaN(kha14227)) {
+                        alert("Some Inserted values are Not Numbers.Please Insert number only");
+                        breakout = true;
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                });
+            });
+            if (breakout) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+
+        function serializeTableRow() {
+            var i = 0;
+            $("#dataTable tr#dataRow").each(function (e) {
+                $(this).find('input').each(function () {
+
+                    // var suffix = $(this).find(':input:first').attr('name').match(/\d+/);
+                    var oldN = $(this).attr('name');
+                    var oldNIndex = oldN.match(/\d+/);
+                    var newN = oldN.replace('[' + oldNIndex + ']', '[' + parseInt(i) + ']');
+                    $(this).attr('name', newN);
+                });
+                i = (parseInt(i) + 1);
+            });
+        }
+
+        $("#btnSubmit").click(function (e) {
+            var breakout = false;
+            //if (checkValidationTextBox() == false) {
+            //    breakout = true;
+            //    e.preventDefault();
+            //}
+            if (breakout == false) {
+                if (checkValidation() == false) {
+                    breakout = true;
+                    e.preventDefault();
+                }
+            }
+            if (breakout == false) {
+                serializeTableRow();
+            }
+            else {
+                e.preventDefault();
+            }
+        });
+
+
+
+
+        //$("#btnSubmit").click(function (e) {
+
+
+        //    var $tableBody = $("#dataTable");
+        //    var $trLast = $tableBody.find("tr:last");
+        //    var suffix = $trLast.find(':input:first').attr('name').match(/\d+/);
+        //    for (var i = 0; i <= parseInt(suffix) ; i++) {
+        //        if ($("#" + i + "txtKha14151").val() == 0 && $("#" + i + "txtJanmaMiti").val() == 0 && $("#" + i + "txtRePrint").val() == 0 && $("#" + i + "txtMicroFilm").val() == 0 && $("#" + i + "txtPratilipi").val() == 0 && $("#" + i + "txtLipyantar").val() == 0 && $("#" + i + "txtDigitalImage").val() == 0 && $("#" + i + "txtKha14213").val() == 0 && $("#" + i + "txtKha14227").val() == 0) {
+        //            alert("No value inserted in table.")
+        //            e.preventDefault();
+        //            break;
+        //        }
+        //    }
+
+        //});
+    </script>
+<script src="~/Transliteration/transliteration.js"></script>
+<link href="~/Transliteration/transliteration.css" rel="stylesheet" />
+<script src="~/Transliteration/transliteration.I.js"></script>
+
+
+}
+
+
+

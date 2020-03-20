@@ -1,0 +1,287 @@
+﻿@model List<AccountingSystem.Models.rajaswoBankNagadi>
+
+
+@{
+    ViewBag.Title = "Rajaswo Bank Nagadi";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    #tbl {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 10px;
+    }
+
+        #tbl td, #tbl th {
+            border: 1px solid black;
+            padding: 1px;
+        }
+</style>
+<div class="row">
+    <div id="printDiv" style="width:842px;">
+        <div style="width:100%;text-align:center;font-size:12px;">
+            नेपाल सरकार<br /> राष्ट्रिय अभिलेखालय<br />
+            राजश्व आम्दानी बैंक नगदी किताब<br />
+            आ.ब.@Model[0].nepFy @Model.FirstOrDefault(m => m.monthIndex == (int)ViewBag.monthIndex).month
+        </div>
+
+        <table id="tbl">
+            <tr>
+                <th>गोश्वारा भौचर नं.</th>
+                <th>मिति</th>
+                <th>विवरण</th>
+                <th colspan="3">नगद</th>
+                <th colspan="3">बैंक</th>
+                <th colspan="3">राजश्व आम्दानी</th>
+                <th>चढाउनेको दस्तखत</th>
+                <th>कैफियत</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th>डेबिट</th>
+                <th>क्रेडिट</th>
+                <th>बाँकी</th>
+                <th>डेबिट</th>
+                <th>क्रेडिट</th>
+                <th>बाँकी</th>
+                <th>डेबिट</th>
+                <th>क्रेडिट</th>
+                <th>बाँकी</th>
+                <th></th>
+                <th></th>
+            </tr>
+
+            @if (Model.Count > 0)
+            {
+                foreach (var item in Model)
+                {
+                    if (item.monthIndex == (int)ViewBag.monthIndex)
+                    {
+                        <tr>
+                            <td>@item.jornalNo</td>
+                            <td>
+                                @StringToUnicode(item.nepDate.ToString("yyyy/MM/dd"))
+                            </td>
+                            <td>
+                                @item.bibaran
+                            </td>
+                            <td>
+                                @CheckZero(item.nagadiDe)
+                            </td>
+                            <td>
+                                @CheckZero(item.nagadiCre)
+                            </td>
+                            <td>
+                                @CheckZero(item.nagadiRemain)
+                            </td>
+                            <td>
+                                @CheckZero(item.bankDe)
+                            </td>
+                            <td>
+                                @CheckZero(item.bankCre)
+                            </td>
+                            <td>
+                                @CheckZero(item.bankRemain)
+                            </td>
+                            <td>
+                                @CheckZero(item.rajaswoDe)
+                            </td>
+                            <td>
+                                @CheckZero(item.rajswoCre)
+                            </td>
+                            <td>
+                                @CheckZero(item.rajswoRemain)
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    }
+
+                }
+                <tr>
+                    <td colspan="3">जम्मा</td>
+                    <td>@CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.nagadiDe))</td>
+                    <td>@CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.nagadiCre))</td>
+                    <td>
+                        @if ((Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.nagadiDe) - Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.nagadiCre)) < 0)
+                        {
+                            <label>(@CheckZero(-Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.nagadiDe) + Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.nagadiCre)))</label>
+                        }
+                        else
+                        {
+                            @CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.nagadiDe) - Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.nagadiCre))
+                        }
+                    </td>
+                    <td>@CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.bankDe))</td>
+                    <td>@CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.bankCre))</td>
+                    <td></td>
+                    <td>@CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.rajaswoDe))</td>
+                    <td>@CheckZero(Model.Where(m => m.monthIndex == (int)ViewBag.monthIndex).Sum(m => m.rajswoCre))</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="3">गत महिना सम्मको जम्मा</td>
+                    <td>@CheckZero(Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.nagadiDe))</td>
+                    <td>@CheckZero(Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.nagadiCre))</td>
+                    <td>
+                        @if ((Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.nagadiDe) - Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.nagadiCre)) < 0)
+                        {
+                            <label>(@CheckZero(-Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.nagadiDe) + Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.nagadiCre)))</label>
+                        }
+                        else
+                        {
+                            @CheckZero(Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.nagadiDe) - Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.nagadiCre))
+                        }
+                    </td>
+                    <td>@CheckZero(Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.bankDe))</td>
+                    <td>@CheckZero(Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.bankCre))</td>
+                    <td></td>
+                    <td>@CheckZero(Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.rajaswoDe))</td>
+                    <td>@CheckZero(Model.Where(m => m.monthIndex < (int)ViewBag.monthIndex).Sum(m => m.rajswoCre))</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td colspan="3">यो महिना सम्मको जम्मा</td>
+                    <td>@CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.nagadiDe))</td>
+                    <td>@CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.nagadiCre))</td>
+                    <td>
+                        @if ((Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.nagadiDe) - Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.nagadiCre)) < 0)
+                        {
+                            <label style="font-style:normal;">(@CheckZero(-Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.nagadiDe) + Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.nagadiCre)))</label>
+                        }
+                        else
+                        {
+                            @CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.nagadiDe) - Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.nagadiCre))
+                        }
+                    </td>
+                    <td>@CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.bankDe))</td>
+                    <td>@CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.bankCre))</td>
+                    <td></td>
+                    <td>@CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.rajaswoDe))</td>
+                    <td>@CheckZero(Model.Where(m => m.monthIndex <= (int)ViewBag.monthIndex).Sum(m => m.rajswoCre))</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            }
+        </table>
+
+        <div style="width:100%;">
+            <span style="float:left;">पेश गर्ने<br /></span>
+            <span style="float:right;padding-right:200px;">सदर गर्ने<br /></span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div style="margin-left:350px;">
+        @*@Html.ActionLink("Create New", "Fantwari", null, new { @class = "btn btn-primary" })*@
+        <input type="submit" class="btn btn-primary" id="btnPrint" value="Print" />
+        <input type="submit" class="btn btn-primary" id="btnConvertWord" value="Download Word">
+    </div>
+</div>
+@helper StringToUnicode(string data)
+{
+    string uni = "";
+    foreach (char c in data)
+    {
+        var charCode = "U+" + ((int)c).ToString("X4");
+        switch (charCode)
+        {
+            case "U+0030":
+                uni += "०";
+                break;
+            case "U+0031":
+                uni += "१";
+                break;
+            case "U+0032":
+                uni += "२";
+                break;
+            case "U+0033":
+                uni += "३";
+                break;
+            case "U+0034":
+                uni += "४";
+                break;
+            case "U+0035":
+                uni += "५";
+                break;
+            case "U+0036":
+                uni += "६";
+                break;
+            case "U+0037":
+                uni += "७";
+                break;
+            case "U+0038":
+                uni += "८";
+                break;
+            case "U+0039":
+                uni += "९";
+                break;
+            default:
+                uni += c;
+                break;
+        }
+    }
+    @uni
+}
+@helper CheckZero(decimal data)
+{
+    if (data == 0)
+    {
+        @StringToUnicode("")
+    }
+    else
+    {
+        @StringToUnicode(data.ToString())
+    }
+}
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+    <script src="~/Scripts/googoose.js"></script>
+    <script language="javascript">
+        $(document).ready(function () {
+
+            $("#btnPrint").click(function (e) {
+                PrintElem("printDiv");
+            });
+
+
+            function PrintElem(elem) {
+                var mywindow = window.open('', 'PRINT', 'height=590,width=842');
+
+                mywindow.document.write('<html><head><style>body {font-size:12px;}#tbl {border-collapse: collapse !important;width: 100%;font-size: 12px;}#tbl td, #tbl th {border: 1px solid black !important;padding: 1px !important;} .alignleft {float: left;text-align: left;width: 33.33333%;}.aligncenter {float: left;text-align: center;width: 33.33333%;}.alignright {float: left;text-align: right;width: 33.33333%;}</style><title></title>');
+                mywindow.document.write('</head><body >');
+                mywindow.document.write(document.getElementById(elem).innerHTML);
+                mywindow.document.write('</body></html>');
+
+                mywindow.document.close(); // necessary for IE >= 10
+                mywindow.focus(); // necessary for IE >= 10*/
+
+                mywindow.print();
+                mywindow.close();
+
+                return true;
+            }
+
+            $("#btnConvertWord").click(function (event) {
+                var now = new Date();
+                $(document).googoose({
+                    area: '#printDiv',
+                    filename: 'राजश्व बैंक नगदी' + now.getDate() + '/' + parseInt(now.getMonth() + 1) + '/' + now.getFullYear() + '.doc',
+                    size: '11.69in 8.27in',
+                    headermargin: '.01in',
+                    footermargin: '.01in'
+                });
+            });
+        });
+    </script>
+}

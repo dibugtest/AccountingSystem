@@ -1,0 +1,51 @@
+﻿@model IEnumerable<AccountingSystem.Models.rajaswoUpasirsak>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <h2 class="text-center">राजश्व उपशिर्षक विवरण</h2>
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <table class="table table-bordered table-responsive">
+            <tr>
+                <th>
+                    राजश्व शिर्षक
+                </th>
+                <th>
+                    राजश्व उपशिर्षक
+                </th>
+                <th>
+                    कैफियत
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.rajaswoSirsak.sirsak)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.upaSirsak)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.remarks)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ruId }) |
+                        @*@Html.ActionLink("Details", "Details", new { id = item.ruId }) |*@
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ruId })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <div class="col-md-3"></div>
+    <div class="col-md-12 text-center">
+        @Html.ActionLink("Create New", "Create", null, new {@class="btn btn-default" })
+    </div>
+</div>

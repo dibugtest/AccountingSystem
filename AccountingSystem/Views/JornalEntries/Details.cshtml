@@ -1,0 +1,114 @@
+﻿@model AccountingSystem.Models.jornalEntries
+
+@{
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>jornalEntries</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.baUSiNa.baUSirsak)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.baUSiNa.baUSirsak)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.jornalNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jornalNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.jornalType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jornalType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.month)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.month)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nepDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nepDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.note)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.note)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.debit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.debit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.credit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.credit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bibaran)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bibaran)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hisabNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hisabNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.khaPaNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.khaPaNo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sanketNo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sanketNo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.jornalEntriesId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

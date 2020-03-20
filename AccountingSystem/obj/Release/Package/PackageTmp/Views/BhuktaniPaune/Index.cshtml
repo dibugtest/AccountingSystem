@@ -1,0 +1,51 @@
+﻿@model IEnumerable<AccountingSystem.Models.bhuktaniPaune>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2 class="text-center">भूक्तानी पाउनेको विवरण</h2>
+
+
+<table class="table table-bordered table-responsive">
+    <tr>
+        <th>
+          पाउनेको नाम
+        </th>
+        <th>
+           कोड
+        </th>
+       
+        <th>
+         कैफियत 
+        </th>
+      
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.pauneKoNaam)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.code)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.remarks)
+        </td>
+       
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.bhuktaniPauneId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.bhuktaniPauneId })
+        </td>
+    </tr>
+}
+
+</table>
+<p class="text-center">
+    @Html.ActionLink("Create New", "Create",null, new { @class = "btn btn-primary" })
+</p>

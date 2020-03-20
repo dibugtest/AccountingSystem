@@ -1,0 +1,75 @@
+﻿@model AccountingSystem.Models.arthaBudget
+
+@{
+    ViewBag.Title = "Details Artha Budget";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>arthaBudget</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.month)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.month)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.employeeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.employeeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.khaSiNa3)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.khaSiNa3)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.khaSiNa4)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.khaSiNa4)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nepDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nepDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.monthIndex)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.monthIndex)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.arthaBudgetId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

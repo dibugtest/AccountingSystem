@@ -1,0 +1,46 @@
+﻿@model AccountingSystem.Models.fiscalYear
+
+@{
+    ViewBag.Title = "Delete FiscalYear";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+
+    <h2 >सम्बन्धित आर्थिक वर्ष हटाउन चाहनुहुन्छ ?</h2>
+
+<div class="col-md-12 ">
+    <dl class="dl-horizontal">
+        <dt>
+          नेपाली आर्थिक वर्ष 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nepFy)
+        </dd>
+
+        <dt>
+           इंग्लिश आर्थिक वर्ष
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.enFy)
+        </dd>
+
+        <dt>
+         स्टाटस
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.status)
+        </dd>
+    </dl>
+    </div>
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="col-md-12">
+            <input type="submit" value="Delete" class="btn btn-danger" /> 
+            @Html.ActionLink("Back to List", "Index", null, new {@class="btn btn-default" })
+        </div>
+    }
+</div>

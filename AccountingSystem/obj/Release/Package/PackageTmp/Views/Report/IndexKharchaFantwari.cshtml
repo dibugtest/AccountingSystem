@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <h2 class="text-center">खचको फाँटवारीको लागि वर्ष महिना छान्नुहोस्</h2>
+    @using (Html.BeginForm("reportKharchaFantwari", "Report", FormMethod.Get))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.ValidationSummary()
+        if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>वर्ष</label>
+                @Html.DropDownList("year", new SelectList(ViewBag.year, "value", "text"), new { @class = "form-control", id = "txtYear" })
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <label>महिना</label><label id="ValMonth"></label>
+                @Html.DropDownList("mn", EnumHelper.GetSelectList(typeof(AccountingSystem.Models.month)), new { @class = "form-control", id = "txtMonth", @data_val = "true", @data_val_required = "Month is Required" })
+            </div>
+        </div>
+        <div class="col-md-3"></div>
+
+        <div class="col-md-12 text-center">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+        </div>
+    }
+</div>  

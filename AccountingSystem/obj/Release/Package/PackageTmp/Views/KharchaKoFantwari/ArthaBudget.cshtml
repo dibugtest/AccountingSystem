@@ -1,0 +1,267 @@
+﻿@model List<AccountingSystem.Models.arthaBudget>
+@{
+    ViewBag.Title = "Artha Budget";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<style>
+    #tbl {
+        border-collapse: collapse;
+        width: 100%;
+        font-size: 12px;
+    }
+
+        #tbl td, #tbl th {
+            border: 1px solid black;
+            padding: 1px;
+        }
+
+    .alignleft {
+        float: left;
+        text-align: left;
+        width: 50%;
+    }
+
+    .alignright {
+        float: right;
+        text-align: left;
+        width: 50%;
+    }
+</style>
+
+@if(Request.HttpMethod.ToString()=="GET")
+{
+<div class="row">
+    <h2 class="text-center">अर्थ बजेटको लागि वर्ष र महिना छान्नुहोस्</h2>
+    @using (Html.BeginForm("ArthaBudget", "kharchaKoFantwari", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.ValidationSummary()
+        if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+        <div class="col-md-12">
+                <div class="form-group">
+                    <label>आ.ब.</label>
+                    @Html.DropDownList("fyId", null, new { @class = "form-control", id = "ddlFyId" })
+                </div>
+            </div>
+        <div class="col-md-12">
+                <div class="form-group">
+                    <label>महिना</label><label id="ValMonth"></label>
+                    @Html.DropDownList("mn", EnumHelper.GetSelectList(typeof(AccountingSystem.Models.month)), new { @class = "form-control", id = "txtMonth" })
+                </div>
+            </div>
+           
+        <div class="col-md-12 text-center">
+                <input type="submit" value="Submit" class="btn btn-primary" id="btnSubmit"/>
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    }
+</div>  
+}
+else if (Request.HttpMethod.ToString() == "POST")
+{
+<h2>अर्थ बजेट रिपोर्ट</h2>
+    <div class="row" id="printDiv" style="font-size:12px;width:845px;">
+        <div style="width:50%;">
+            <table id="tbl">
+                <tr><th colspan="4" style="text-align:center;">अर्थ बजेट तर्फ</th></tr>
+                <tr>
+                    <th>
+                        ब.उ.शि.नं.
+                    </th>
+                    <th>
+                        ६०१०१४३
+                    </th>
+                    <th>
+                        ६०१०१८३
+                    </th>
+                    <th>
+                        जम्मा
+                    </th>
+                </tr>
+                <tr>
+                    <th>ख.शि.नं.</th>
+                    <th>२७३१३</th>
+                    <th>२७३१४</th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.employeeName)
+            </td>
+            <td>
+                @CheckZero(item.khaSiNa3)
+            </td>
+            <td>
+                @CheckZero(item.khaSiNa4)
+            </td>
+            <td>
+                @CheckZero(item.khaSiNa3+item.khaSiNa4)
+            </td>
+        </tr>
+
+        }
+                <tr>
+                    <td>जम्मा</td>
+                    <td> @CheckZero(Model.Sum(m => m.khaSiNa3))</td>
+                    <td> @CheckZero(Model.Sum(m => m.khaSiNa4))</td>
+                    <td> @CheckZero(Model.Sum(m => (m.khaSiNa3+m.khaSiNa4)))</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td> @CheckZero(Model.Sum(m => (m.khaSiNa3+m.khaSiNa4)))</td>
+                </tr>
+            </table>
+        </div>
+</div>
+<br />
+<div class="col-md-12" style="padding-left:200px;">
+    <input type="submit" class="btn btn-primary" id="btnPrint" value="Print" />
+    <input type="submit" class="btn btn-primary" id="btnConvertWord" value="Download Word">
+</div>
+@helper StringToUnicode(string data)
+{
+    string uni = "";
+    foreach (char c in data)
+    {
+        var charCode = "U+" + ((int)c).ToString("X4");
+        switch (charCode)
+        {
+            case "U+0030":
+                uni += "०";
+                break;
+            case "U+0031":
+                uni += "१";
+                break;
+            case "U+0032":
+                uni += "२";
+                break;
+            case "U+0033":
+                uni += "३";
+                break;
+            case "U+0034":
+                uni += "४";
+                break;
+            case "U+0035":
+                uni += "५";
+                break;
+            case "U+0036":
+                uni += "६";
+                break;
+            case "U+0037":
+                uni += "७";
+                break;
+            case "U+0038":
+                uni += "८";
+                break;
+            case "U+0039":
+                uni += "९";
+                break;
+            default:
+                uni += c;
+                break;
+        }
+    }
+    @uni
+}
+@helper CheckZero(decimal data)
+{
+    if (data == 0)
+    {
+    @StringToUnicode("0.00")
+    }
+    else
+    {
+    @StringToUnicode(data.ToString())
+    }
+}
+
+}
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+<script src="~/Scripts/googoose.js"></script>
+    @*<script src="~/Scripts/NepaliUnicode.js"></script>*@
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            function checkArtha() {
+                var valid = false;
+                var fyId = $("#ddlFyId").val();
+                var monthIndex = $("#txtMonth").val();
+
+                $.ajax({
+                    async: false,
+                    url: RootUrl + 'KharchaKoFantwari/checkArtha/',
+                    type: "POST",
+                    dataType: "json",
+                    data: "{'fyId':'" + fyId + "','monthIndex':'" + monthIndex + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        if (data == "NotNull")
+                        {
+                            valid = true;
+                        }
+                    }
+                });
+                return valid;
+            }
+            $("#btnSubmit").click(function (e) {
+                if (checkArtha()==false) {
+                    alert("No Record Found for selected fiscal year and month");
+                    e.preventDefault();
+                }
+            });
+
+            $("#btnPrint").click(function (e) {
+                PrintElem("printDiv");
+            });
+
+
+            function PrintElem(elem) {
+                var mywindow = window.open('', 'PRINT', 'height=590,width=842');
+
+                mywindow.document.write('<html><head><style>body {font-size:10px;}#tbl {border-collapse: collapse !important;width: 100%;font-size: 10px;}#tbl td, #tbl th {border: 1px solid black !important;padding: 1px !important;} .alignleft {float: left;text-align: left;width: 33.33333%;}.aligncenter {float: left;text-align: center;width: 33.33333%;}.alignright {float: left;text-align: right;width: 33.33333%;}</style><title></title>');
+                mywindow.document.write('</head><body >');
+                mywindow.document.write(document.getElementById(elem).innerHTML);
+                mywindow.document.write('</body></html>');
+
+                mywindow.document.close(); // necessary for IE >= 10
+                mywindow.focus(); // necessary for IE >= 10*/
+
+                mywindow.print();
+                mywindow.close();
+
+                return true;
+            }
+
+            $("#btnConvertWord").click(function (event) {
+                var now = new Date();
+                $(document).googoose({
+                    area: '#printDiv',
+                    filename: "अर्थ बजेट" + now.getDate() + '/' + parseInt(now.getMonth() + 1) + '/' + now.getFullYear() + '.doc',
+                    size: '11.69in 8.26in',
+                    headermargin: '.01in',
+                    footermargin: '.01in'
+                });
+            });
+
+        });
+    </script>
+}

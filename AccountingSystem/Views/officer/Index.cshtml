@@ -1,0 +1,229 @@
+﻿@model IEnumerable<AccountingSystem.Models.officer>
+
+@{
+    ViewBag.Title = "Index Officer";
+}
+<div class="row">
+    <h2 class="text-center">कर्मचारीहरुको विवरण</h2>
+    @if (TempData["Message"] != null)
+    {
+        <div class="col-md-12">
+            <div class="alert alert-success">
+                @TempData["Message"]
+            </div>
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="col-md-12">
+            <div class="alert alert-danger">
+                @TempData["ErrorMessage"]
+            </div>
+        </div>
+    }
+
+    @{int i = 1;
+      int count = Model.Count()+ 1;}
+  
+    <br />
+   
+    <table class="table table-responsive table-bordered">
+        <tr>
+            <th>क्र.स.</th>
+            <th>
+                नाम
+            </th>
+            <th>
+                दर्जा
+            </th>
+            <th>
+                स्टाटस
+            </th>
+            <th>
+                किसिम
+            </th>
+            <th>
+                PIS
+            </th>
+            <th>
+                इमेल
+            </th>
+            <th>
+                मोबाइल
+            </th>
+            <th>
+                शुरु स्केल
+            </th>
+            <th>
+                बिमा
+            </th>
+            <th>ग्रेड रकम</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @i
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.darja)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.jobType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pisNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mobileNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.suruScale)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.bima)
+                </td>
+                <td>
+                    @(Math.Round(item.gradeDar*item.gradeSankhya,2))
+                </td>
+                <td>
+                    <a href="@Url.Action("Create", "Officer", new {serialNo=item.serialNo })" >
+                       
+                        <span>
+                            <strong>Add New </strong>
+                        </span>
+                    </a> |
+                    <strong> @Html.ActionLink("Edit", "Edit", new { id = item.officerId }) </strong>|
+                   <strong> @Html.ActionLink("Delete", "Delete", new { id = item.officerId }, new { onclick = "return confirm('सम्बन्धित कर्मचारी रेकर्डबाट हटाउन चाहनुहुन्छ?');" })</strong>
+ </td>
+            </tr>
+            i++;
+        }
+    </table>
+    <div>
+        <a href="@Url.Action("Create", "Officer", new {serialNo=count})" class="btn btn-primary">
+            Create New (at last)
+        </a>
+    </div>
+    </div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+
+            function StringToUnicode(data) {
+                var charCodeUni = "";
+                for (var i = 0; i < data.length; i++) {
+                    if (data.charCodeAt(i) >= 48 && data.charCodeAt(i) <= 57) {
+                        var charCode = data.charCodeAt(i);
+                        switch (charCode) {
+                            case 48:
+                                charCodeUni += "०";
+                                break;
+                            case 49:
+                                charCodeUni += "१";
+                                break;
+                            case 50:
+                                charCodeUni += "२";
+                                break;
+                            case 51:
+                                charCodeUni += "३";
+                                break;
+                            case 52:
+                                charCodeUni += "४";
+                                break;
+                            case 53:
+                                charCodeUni += "५";
+                                break;
+                            case 54:
+                                charCodeUni += "६";
+                                break;
+                            case 55:
+                                charCodeUni += "७";
+                                break;
+                            case 56:
+                                charCodeUni += "८";
+                                break;
+                            case 57:
+                                charCodeUni += "९";
+                        }
+                    }
+                    else {
+                        charCodeUni = charCodeUni + data.charAt(i);
+                    }
+                }
+                alert(charCodeUni);
+                $(this).html(charCodeUni);
+               // return charCodeUni;
+                // return String.fromCharCode(charCodeUni.replace(/^"(.*)"$/, '$1'));//regExp to remove the double quotes
+            }
+
+            function unicodeToString(data) {
+                var charCodeAsci = "";
+                for (var i = 0; i < data.length; i++) {
+                    if (data.charCodeAt(i) >= 2406 && data.charCodeAt(i) <= 2415) {
+                        var charCode = data.charCodeAt(i);
+                        switch (charCode) {
+                            case 2406:
+                                charCodeAsci += "0";
+                                break;
+                            case 2407:
+                                charCodeAsci += "1";
+                                break;
+                            case 2408:
+                                charCodeAsci += "2";
+                                break;
+                            case 2409:
+                                charCodeAsci += "3";
+                                break;
+                            case 2410:
+                                charCodeAsci += "4";
+                                break;
+                            case 2411:
+                                charCodeAsci += "5";
+                                break;
+                            case 2412:
+                                charCodeAsci += "6";
+                                break;
+                            case 2413:
+                                charCodeAsci += "7";
+                                break;
+                            case 2414:
+                                charCodeAsci += "8";
+                                break;
+                            case 2415:
+                                charCodeAsci += "9";
+                        }
+                    }
+                    else {
+                        charCodeAsci = charCodeAsci + data.charAt(i);
+                    }
+                }
+                return charCodeAsci;
+                //return String.fromCharCode(charCodeAsci.replace(/^"(.*)"$/, '$1'));//regExp to remove the double Quotes
+            }
+            function STOU() {
+                var val1 = StringToUnicode($("#txtBima").html());
+                $("#txtBima").html(val1);
+                var val2 = StringToUnicode($("#txtBhatta").html());
+                $("#txtBhatta").html(val2);
+                var val3 = StringToUnicode($("#txtTalab").html());
+                $("#txtTalab").html(val3);
+            }
+            STOU();
+        });
+
+    </script>
+}

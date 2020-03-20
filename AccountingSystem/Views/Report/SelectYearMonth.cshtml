@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Report";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <h2 class="text-center">खर्चको फाँटवारी रिपोर्टको लागि वर्ष र महिना छान्नुहोस्</h2>
+    @using (Html.BeginForm("Create", "Fantwari", FormMethod.Get))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.ValidationSummary()
+        if (TempData["ErrorMessage"] != null)
+        {
+            <div class="col-md-12 alert alert-danger">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+       
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>वर्ष</label>
+                @Html.TextBox("year", "", new { @class = "form-control", id = "txtYear" })
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label>महिना</label><label id="ValMonth"></label>
+                @Html.DropDownList("month", EnumHelper.GetSelectList(typeof(AccountingSystem.Models.month)), new { @class = "form-control", id = "txtMonth", @data_val = "true", @data_val_required = "Month is Required" })
+            </div>
+        </div>
+        
+        <div class="col-md-4"><div class="form-group">
+    <label>फाराम छान्नुहोस्</label><label id="ValMonth"></label>
+    @Html.DropDownList("reportType", new List<SelectListItem> {new SelectListItem{Value="",Text="--छान्नुहोस्--"}, new SelectListItem { Value = "Fantwari", Text = "खर्चको फाँटवारी" }, new SelectListItem { Value = "Bank", Text = "बैंक नगदी किताब" }, new SelectListItem { Value = "", Text = "" } }, new { @class = "form-control", id = "txtReportType", @data_val = "true", @data_val_required = "Month is Required" })
+</div></div>
+
+        <div class="col-md-12 text-center">
+            <input type="submit" value="Submit" class="btn btn-primary" />
+        </div>
+    }
+</div>  

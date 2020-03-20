@@ -1,0 +1,211 @@
+﻿@model IEnumerable<AccountingSystem.Models.jornalEntries>
+
+@{
+    ViewBag.Title = "Index Journal";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    <h2 class="text-center">गोश्वारा भौचरको विवरण</h2>
+    @if (TempData["Message"] != null)
+    { 
+       <div class="alert alert-success">@TempData["Message"]</div>  
+    }
+    @if (TempData["ErrorMessage"] != null)
+    { 
+     <div class="alert alert-danger">@TempData["ErrorMessage"]</div>  
+    }
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        
+        if (ViewBag.ErrorMessage != null)
+        { 
+            <div class="alert alert-danger text-center">@ViewBag.ErrorMessage</div>
+        }
+         
+        
+         <div class="col-md-2 col-sm-6" >
+                <div class="form-group">
+                    <label>ब.उ.शि.नं.</label>
+                    @Html.DropDownList("baUSiNaId",null,"--ब.उ.शि.नं.--", new { @class = "form-control", id = "txtBaUSiNa" })
+                </div>
+            </div>
+        <div class="col-md-2 col-sm-6">
+            <div class="form-group">
+                <label>गो.भौ.किसिम</label>
+                @Html.DropDownList("Type", null, "--छान्नुहोस्--", new { @class = "form-control", id = "ddlJornalType"})
+            </div>
+        </div>
+       <div class="col-md-2">
+		  
+        <div class="form-group">
+                <label>आ.ब.</label>
+                @Html.DropDownList("fyId", null, "--छान्नुहोस्--", new { @class = "form-control", id = "ddlFyId" })
+            </div>
+			
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+                <label>महिना</label>
+                @Html.DropDownList("month", null, "--छान्नुहोस्--", new { @class = "form-control", id = "txtMonth" })
+            </div>
+        </div>
+        <div class="col-md-2" style="padding-top:22px;"><input type="submit" value="Select" class="btn btn-primary" id="btnSubmit" /></div>
+      
+    }
+    <table class="table table-responsive table-bordered">
+        <tr>
+            <th>
+                गो.भौ.किसिम
+            </th>
+            <th>
+                ब.उ.शि.नं.
+            </th>
+            <th>
+                गो.भौ.नं.
+            </th>
+            @*<th>वर्ष</th>
+            <th>
+                महिना
+            </th>*@
+            <th>
+                मिति
+            </th>
+            <th>
+                संकेत नं.
+            </th>
+            <th>
+                विवरण
+            </th>
+            <th>
+                खाता पाना
+            </th>
+            <th>
+                हिसाब नं.
+
+            </th>
+            <th>
+                डेबिट
+            </th>
+            <th>
+                क्रेडिट
+            </th>
+            <th>
+                नोट
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.jornalType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.baUSiNa.baUSiNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.jornalNo)
+                </td>
+                @*<td>@Html.DisplayFor(modelItem => item.year)</td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.month)
+                </td>*@
+                <td>
+                    @item.nepDate.ToString("yyyy-MM-dd")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sanketNo)
+                </td>
+                <td>
+                @if (item.deCre == "debit")
+                { 
+                   @("डेबिट "+ item.bibaran)
+                }
+                else
+                { 
+                     @("क्रेडिट "+ item.bibaran)
+                }
+              </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.khaPaNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.hisabNo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.debit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.credit)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.note)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.jornalEntriesId })|
+                    @Html.ActionLink("Delete", "Delete", new { id = item.jornalEntriesId }, new { onclick = "return confirm('गो. भौ. नं. "+item.jornalNo+ " मा भएका सम्पूर्ण विवरण र सम्बन्धित भुक्तानी आदेश तथा आयकर विवरण हटाउन चाहनुहुन्छ?');" })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div class="col-md-12 text-center">
+        @Html.ActionLink("Create New(खर्च) ", "Createkharcha", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Create New(निकासा)", "nikasa", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Create New(कट्टी)", "CreateKatti", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+    <script src="~/Scripts/NepaliUnicode.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //var ele1 = $("#txtYear");
+            //AddUnicode(ele1);
+
+            
+
+
+
+            $("#btnSubmit").click(function (e) {
+                if (checkValidationTextBox() == false) {
+                    e.preventDefault();
+                }
+            });
+
+            function checkValidationTextBox() {
+
+                if ($("#txtBaUSiNa").val() == "" || $("#txtBaUSiNa").val() == null) {
+                    alert("Select one of the option from BaUSiNo.");
+                    return false;
+                }
+                if ($("#ddlJornalType").val() == "" || $("#ddlJornalType").val() == null) {
+                    alert("Select one of the option from Jornal Type.");
+                    return false;
+                }
+                //else if ($("#txtYear").val() == "" || $("#txtYear").val()==null) {
+                //    alert("Year is Required");
+                //    return false;
+                //}
+                else {
+                    return true;
+                }
+            }
+        });
+    </script>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script src="https://www.google.com/uds/?file=elements&amp;v=1&amp;packages=transliteration" type="text/javascript"></script>
+    <link href="https://www.google.com/uds/api/elements/1.0/7ded0ef8ee68924d96a6f6b19df266a8/transliteration.css" type="text/css" rel="stylesheet">
+    <script src="https://www.google.com/uds/api/elements/1.0/7ded0ef8ee68924d96a6f6b19df266a8/transliteration.I.js" type="text/javascript"></script>
+
+}

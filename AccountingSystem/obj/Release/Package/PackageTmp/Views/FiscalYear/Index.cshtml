@@ -1,0 +1,67 @@
+﻿@model IEnumerable<AccountingSystem.Models.fiscalYear>
+
+@{
+    ViewBag.Title = "Index FiscalYear";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+
+    <h2 class="text-center">आर्थिक वर्षको विवरण</h2>
+
+    <table class="table table-bordered table-responsive">
+        <tr>
+            <th>
+              नेपाली आ.ब.
+            </th>
+            <th>
+               अंग्रेजी आ.ब.
+            </th>
+            <th>
+              स्टाटस
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.nepFy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.enFy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.status)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "EditFisYear", new { id = item.fyId }) |
+                    @if (item.status == true)
+                    { 
+                    @Html.ActionLink("Delete", "Delete", new { id = item.fyId }, new { onclick = "return printMessage();" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Delete", "Delete", new { id = item.fyId })
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div class="col-md-12 text-center">
+        @Html.ActionLink("Create New", "CreateFisYear", null, new { @class = "btn btn-primary" })
+        @Html.ActionLink("Change FiscalYear", "SetFiscalYear", null, new { @class = "btn btn-primary" })
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        function printMessage()
+        {
+            alert("Cannot Delete a fiscal Year with status true");
+            return false;
+        }
+
+    </script>
+    }

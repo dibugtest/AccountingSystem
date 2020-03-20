@@ -1,0 +1,106 @@
+﻿@model AccountingSystem.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Log in";
+    Layout = null;
+}
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<br />
+<br /><br />
+<br />
+<div class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4 text-center" style="background:#f1f1f1;">
+        <br />
+        <br />
+        <br />
+        <label>नेपाल सरकार</label><br />
+        <label style="font-size:10px;">संस्कृति,पर्यटन तथा नागरिक उड्डयन मन्त्रालय</label><br />
+        <label> पुरातत्व विभाग</label><br />
+        <label style="font-size:18px;">राष्ट्रिय अभिलेखालय</label>
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            
+          <label class="text-danger">  @Html.ValidationSummary(true)</label>
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", id = "txtEmailPhone", placeholder = "Email/Phone" })
+                    @Html.ValidationMessageFor(m => m.UserName, null, new {@class="text-danger"})
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control", id = "txtPassword", placeholder = "Password" })
+                    @Html.ValidationMessageFor(m => m.Password, null, new {@class="text-danger" })
+                </div>
+            </div>
+           
+            <input type="submit" value="Log in" class="btn btn-primary" />
+          
+        }
+        <br />
+        <br />
+        <br />
+    </div>
+    <div class="col-md-3"></div>
+    </div>
+@section Scripts {
+@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>*@
+    @Scripts.Render("~/bundles/jqueryval")
+   
+}
+    @*<div class="col-md-8">
+        <section id="loginForm">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <h4>Use a local account to log in.</h4>
+                <hr />
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", id = "txtEmailPhone" })
+                        @Html.ValidationMessageFor(m => m.UserName)
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-10">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                      
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <div class="checkbox">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Log in" class="btn btn-default" />
+                    </div>
+                </div>
+                <p>
+                    @Html.ActionLink("Register", "Register") if you don't have a local account.
+                </p>
+            }
+        </section>
+    </div>
+    <div class="col-md-4">
+        <section id="socialLoginForm">
+            @Html.Partial("_ExternalLoginsListPartial", new { Action = "ExternalLogin", ReturnUrl = ViewBag.ReturnUrl })
+        </section>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+}*@

@@ -1,0 +1,87 @@
+﻿@model IEnumerable<AccountingSystem.Models.office>
+
+@{
+    ViewBag.Title = "Index Office";
+}
+<div class="row">
+    <h2 class="text-center"> कार्यालयको विवरण  </h2>
+    @if (TempData["Message"] != null)
+    {
+        <div class="col-md-12">
+            <div class="alert alert-success">
+                @TempData["Message"]
+            </div>
+        </div>
+    }
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="col-md-12">
+            <div class="alert alert-danger">
+                @TempData["ErrorMessage"]
+            </div>
+        </div>
+    }
+    <table class="table table-responsive table-bordered">
+        <tr>
+            <th>
+                मन्त्रालय
+            </th>
+            <th>
+                विभाग
+            </th>
+            <th>
+                कार्यालय
+            </th>
+            <th>
+                ठेगाना
+            </th>
+            <th>
+                फोन
+            </th>
+            <th>
+                url/वेब
+            </th>
+            <th>
+                इमेल
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mantralaye)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.bibhag)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.karyalaye)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.url_web)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.email)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.officeId }) |
+                    @*@Html.ActionLink("Details", "Details", new { id = item.officeId }) |*@
+                    @Html.ActionLink("Delete", "Delete", new { id = item.officeId }, new { onclick = "return confirm('सम्बन्धित कर्मचारी रेकर्डबाट हटाउन चाहनुहुन्छ?');" })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+    <div class="col-md-12 text-center">
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary" })
+    </div>
+</div>

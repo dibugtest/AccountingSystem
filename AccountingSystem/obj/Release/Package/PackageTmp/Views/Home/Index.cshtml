@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Account System";
+}
+<div class="row" style="font-size:medium;">
+    <h2 class="text-center">Welcome to home page</h2>
+    <div class="col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-body">
+                <label>गोश्वारा भौचर प्रविष्टि</label><br />
+                @Html.ActionLink("खर्च", "CreateKharcha", "jornalEntries", null, new { @class = "btn btn-link" })
+                @Html.ActionLink("निकासा", "nikasa", "jornalEntries", null, new { @class = "btn btn-link" })
+                @Html.ActionLink("कट्टी", "Createkatti", "jornalEntries", null, new { @class = "btn btn-link" })
+                @Html.ActionLink("पेश्की", "Createpeski", "jornalEntries", null, new { @class = "btn btn-link" })
+                @Html.ActionLink("धरौटी", "createJornal", "dharauti", null, new { @class = "btn btn-link" })
+                @Html.ActionLink("राजस्व", "createJornal", "Rajaswo", null, new { @class = "btn btn-link" })
+               <br />
+                <label>गोश्वारा भौचरहरु हेर्नुहोस्</label>
+                <br />
+                @Html.ActionLink("खर्च", "Index", "jornalEntries", null, new { @class = "btn btn-link" })
+                @Html.ActionLink("पेश्की", "IndexPeski", "jornalEntries", null, new { @class = "btn btn-link" })
+                @Html.ActionLink("धरौटी", "IndexJornal", "dharauti", null, new { @class = "btn btn-link" })
+                @Html.ActionLink("राजस्व", "IndexrajaswoJornal", "rajaswo", null, new { @class = "btn btn-link" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-primary">
+            <div class="panel-body" >
+                <label>तलबी भरपाई</label><br />   
+                @Html.ActionLink("तलबी भरपाई", "Create", "TalabiBharpai", null, new { @class = "btn btn-link" })
+                @Html.ActionLink("तलबी भरपाईहरु हेर्नुहोस्", "Index", "TalabiBharpai", null, new {@class="btn btn-link" })
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">  
+        <div class="panel panel-primary">
+            <div class="panel-body" >
+                <label> रिपोर्टहरु</label><br />
+                @Html.ActionLink("तलबी भरपाई", "indextalabiBharpai", "Report", null, new { @class = "btn btn-link" })
+                @Html.ActionLink("गोश्वारा भौचर", "indexJornal", "JornalEntries", null, new { @class = "btn btn-link" })
+                @Html.ActionLink("भुक्तानी आदेश", "BhuktaniAdeshBibaran", "BhuktaniAdesh", null, new { @class = "btn btn-link" })
+
+                @Html.ActionLink("खर्चको फाँटवारी", "Fantwari", "kharchaKoFantwari", null, new { @class = "btn btn-link" })
+
+                @Html.ActionLink("बैंक नगदी किताब", "Nagadi", "kharchaKoFantwari", null, new { @class = "btn btn-link" })
+                @Html.ActionLink("बजेट हिसाब", "Hisab", "kharchaKoFantwari", null, new { @class = "btn btn-link" })
+                @Html.ActionLink("अर्थ बजेट", "indexArthaBudget", "Report", null, new { @class = "btn btn-link" })
+                @Html.ActionLink("तलबी भुक्तानी आदेश", "TalabiBhuktani", "BhuktaniAdesh", null, new { @class = "btn btn-link" })
+            </div>
+
+        </div>
+    </div>
+</div>

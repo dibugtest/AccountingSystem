@@ -1,0 +1,165 @@
+﻿@{
+    ViewBag.Title = "IndexBhuktaniAdesh";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="row">
+    @if (Request.HttpMethod.ToString() == "POST")
+    {
+        <h2 class="text-center">भुक्तानी आदेश रिपोर्टहरु</h2>
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+           
+            <div class="panel panel-primary">
+                <div class="panel-heading text-center">
+                    <strong>रिपोर्टहरु</strong>
+                </div>
+                <div class="panel-body">
+                    <table class="table table-bordered text-center">
+                        <tr>
+                            <th class="text-center">
+                                वर्ष,महिना
+                            </th>
+                            <th>भुक्तानी आदेश नं.</th>
+                            <th>मिति</th>
+                            <th></th>
+                        </tr>
+                        @foreach (var item in ViewBag.bhuktaniAdesh)
+                        {
+                            <tr>
+                                <td>
+                                    @(item.year + "," + item.month)
+                                </td>
+                                <td>@item.bhuktaniAdeshNo</td>
+                                <td>@item.nepDate.ToString("yyyy-MM-dd")</td>
+                                <td>
+                                    <a href='@Url.Action("ReportBhuktaniAdesh", "Report", new { id = item.bhuktaniAdeshNo })'>
+                                        <i class="fa fa-download" style="font-size:15px;"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-4">  </div>
+    }
+    else
+    {
+        <h2 class="text-center">भुक्तानी आदेश रिपोर्टहरु</h2>
+        using (Html.BeginForm())
+        {
+             if (ViewBag.ErrorMessage != null)
+            { 
+             <div class="col-md-12">
+                <div class="alert alert-danger">@ViewBag.ErrorMessage</div>
+            </div> 
+            }
+            <div class="col-md-4">
+            </div>
+            <div class="col-md-4">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>आ.ब.</label>
+                        @Html.DropDownList("fyId", null, new { @class = "form-control", id = "ddlFyId" })
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>महिना</label>
+                        @Html.DropDownList("mn", EnumHelper.GetSelectList(typeof(AccountingSystem.Models.month)), new { @class = "form-control", id = "txtMonth" })
+                    </div>
+                </div>
+                <div class="col-md-12 text-center">
+                    <input type="submit" value="Submit" class="btn btn-primary" id="btnSubmit" />
+                </div>
+            </div>
+            <div class="col-md-4"></div>
+        }
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery.ui")
+    @Styles.Render("~/Content/css/jquery.ui")
+    @Scripts.Render("~/bundles/nepDate")
+    @*<script>
+        $(document).ready(function () {
+
+            var filBhuktaniList;
+
+            function filBhuktaniNo() {
+                var fisYear = $("#ddlFyId").val();
+                var monthIndex = $("#txtMonth").val();
+
+                $.ajax({
+                    url:RootUrl + 'Report/filBhuktaniNo/',
+                    type: "POST",
+                    dataType: "json",
+                    data: "{'fyId':" + JSON.stringify(fisYear) + "," + "'mn':" + JSON.stringify(monthIndex) + "}",// "fyId=" + fisYear + "&mn=" + monthIndex ,
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        filBhuktaniList = data;
+                        {
+                            var option = '';
+                            $("#ddlBhuktaniNo").empty();
+                            option += '<option value="">--छान्नुहोस्--</option>';
+                            try {
+                                for (var i = 0; i < filBhuktaniList.length; i++) {
+                                    option += '<option value="' + filBhuktaniList[i].bhuktaniAdeshNo + '">' + filBhuktaniList[i].bhuktaniAdeshNo + '</option>';
+                                }
+                            }
+                            catch (ex) {
+                                alert(ex);
+                            }
+                            $('#ddlBhuktaniNo').append(option);
+
+                        }
+                    },
+                    error: function (response) {
+                        alert("Something Went Wrong");
+                    }
+                });
+            }
+
+            $("#txtMonth").change(function (e) {
+                //e.preventDefault();
+                filBhuktaniNo();
+                //changeFunction();
+            });
+            $("#ddlFyId").change(function (e) {
+                //  e.preventDefault();
+                filBhuktaniNo();
+                // changeFunction();
+            });
+
+            function changeFunction() {
+                //filBhuktaniNo();
+                var option = '';
+                $("#ddlBhuktaniNo").empty();
+                option += '<option value="">--छान्नुहोस्--</option>';
+                try {
+                    for (var i = 0; i < filBhuktaniList.length; i++) {
+                        option += '<option value="' + filBhuktaniList[i].bhuktaniAdeshNo + '">' + filBhuktaniList[i].bhuktaniAdeshNo + '</option>';
+                    }
+                }
+                catch (ex) {
+                    alert(ex);
+                }
+                $('#ddlBhuktaniNo').append(option);
+            }
+
+
+
+            $("#btnSubmit").click(function (e) {
+                var BhuktaniNo = $("#ddlBhuktaniNo").val();
+                if (BhuktaniNo == 0 || BhuktaniNo == "" || BhuktaniNo == null) {
+                    alert("BhuktaniNo is Required");
+                    e.preventDefault();
+                }
+            });
+        });
+    </script>*@
+}
